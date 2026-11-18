@@ -1,7 +1,7 @@
 import {
-  "mizchi/tui",
-  "mizchi/tui/vnode",
-  "mizchi/tui/components" @ui,
+  "totto2727/tui",
+  "totto2727/tui/vnode",
+  "totto2727/tui/components" @ui,
   "mizchi/signals",
   "moonbitlang/async",
 }

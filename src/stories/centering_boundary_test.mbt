@@ -5,7 +5,7 @@ using @stories {render_overlay_plain}
 /// Boundary tests for center alignment under floating-point layout values.
 
 ///|
-fn abs_int(a : Int, b : Int) -> Int {
+fn abs_int(a : Int32, b : Int32) -> Int32 {
   if a >= b {
     a - b
   } else {
@@ -15,14 +15,14 @@ fn abs_int(a : Int, b : Int) -> Int {
 
 ///|
 fn assert_center_balance(
-  container_x : Int,
-  container_y : Int,
-  container_width : Int,
-  container_height : Int,
-  child_x : Int,
-  child_y : Int,
-  child_width : Int,
-  child_height : Int,
+  container_x : Int32,
+  container_y : Int32,
+  container_width : Int32,
+  container_height : Int32,
+  child_x : Int32,
+  child_y : Int32,
+  child_width : Int32,
+  child_height : Int32,
 ) -> Unit raise {
   let left = child_x - container_x
   let right = container_width - left - child_width
@@ -38,7 +38,7 @@ fn split_lines(s : String) -> Array[String] {
 }
 
 ///|
-fn leading_spaces(s : String) -> Int {
+fn leading_spaces(s : String) -> Int32 {
   let chars = s.to_array()
   let mut i = 0
   while i < chars.length() && chars[i] == ' ' {
@@ -48,7 +48,7 @@ fn leading_spaces(s : String) -> Int {
 }
 
 ///|
-fn content_width(s : String) -> Int {
+fn content_width(s : String) -> Int32 {
   let chars = s.to_array()
   let mut start = 0
   while start < chars.length() && chars[start] == ' ' {

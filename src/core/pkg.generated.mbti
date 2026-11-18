@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/core"
+package "totto2727/tui/core"
 
 import {
   "mizchi/crater-core",

@@ -6,7 +6,7 @@ pub(all) enum PopupPosition {
   Center
   Top
   Bottom
-  At(Int, Int)
+  At(Int32, Int32)
 }
 
 ///|

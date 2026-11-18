@@ -7,7 +7,7 @@ using @vnode {type TuiNode, type VNodeApp, view, row, text}
 
 ///|
 /// Render the simple counter UI
-fn render_simple_ui(width : Int, height : Int, count : Int) -> TuiNode {
+fn render_simple_ui(width : Int32, height : Int32, count : Int32) -> TuiNode {
   view(
     width=width.to_double(),
     height=height.to_double(),

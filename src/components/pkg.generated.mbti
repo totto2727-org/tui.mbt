@@ -1,11 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/components"
+package "totto2727/tui/components"
 
 import {
   "mizchi/signals/ui",
-  "mizchi/tui/headless",
-  "mizchi/tui/logics",
-  "mizchi/tui/vnode",
+  "totto2727/tui/headless",
+  "totto2727/tui/logics",
+  "totto2727/tui/vnode",
 }
 
 // Values

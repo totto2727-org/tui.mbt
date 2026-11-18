@@ -59,7 +59,7 @@ fn main {
     get_confirmed_text() + input.get()
   }
 
-  fn popup_metrics(matches : Array[String]) -> (Int, Int) {
+  fn popup_metrics(matches : Array[String]) -> (Int32, Int32) {
     @components.completion_popup_metrics(
       matches,
       fn(item) { item },
@@ -69,7 +69,7 @@ fn main {
     )
   }
 
-  fn render_popup(matches : Array[String], width : Int) -> @vnode.TuiNode {
+  fn render_popup(matches : Array[String], width : Int32) -> @vnode.TuiNode {
     @components.completion_popup_node(
       matches,
       fn(item) { item },
@@ -132,7 +132,7 @@ fn main {
   }
 
   // Track previous match count to detect popup visibility changes
-  let prev_match_count : Ref[Int] = Ref(0)
+  let prev_match_count : Ref[Int32] = Ref(0)
   fn do_render() -> Unit {
     let matches = get_matches()
     let show_popup = should_show_popup() && matches.length() > 0

@@ -11,7 +11,7 @@ priv struct RenderSegment {
 ///|
 fn truncate_spans(
   spans : Array[HighlightSpan],
-  max_width : Int,
+  max_width : Int32,
 ) -> Array[HighlightSpan] {
   if max_width <= 0 {
     return []
@@ -38,7 +38,7 @@ fn truncate_spans(
 }
 
 ///|
-fn take_display_width(text : String, max_width : Int) -> String {
+fn take_display_width(text : String, max_width : Int32) -> String {
   if max_width <= 0 {
     return ""
   }
@@ -56,7 +56,7 @@ fn take_display_width(text : String, max_width : Int) -> String {
 }
 
 ///|
-fn display_width_prefix(text : String, char_count : Int) -> Int {
+fn display_width_prefix(text : String, char_count : Int32) -> Int32 {
   if char_count <= 0 {
     return 0
   }
@@ -76,8 +76,8 @@ fn display_width_prefix(text : String, char_count : Int) -> Int {
 ///|
 fn apply_caret(
   spans : Array[HighlightSpan],
-  caret_col : Int,
-  line_length : Int,
+  caret_col : Int32,
+  line_length : Int32,
 ) -> Array[RenderSegment] {
   let result : Array[RenderSegment] = []
   let mut pos = 0
@@ -135,7 +135,7 @@ fn render_segments(
 }
 
 ///|
-fn pad_left(text_ : String, width : Int) -> String {
+fn pad_left(text_ : String, width : Int32) -> String {
   let len = text_.length()
   if len >= width {
     text_
@@ -146,13 +146,13 @@ fn pad_left(text_ : String, width : Int) -> String {
 
 ///|
 fn render_line(
-  line_idx : Int,
+  line_idx : Int32,
   line_text : String,
   spans : Array[HighlightSpan],
   caret : Position,
   theme : @syn_highlight.HighlightTheme,
-  gutter_width : Int,
-  content_width : Int,
+  gutter_width : Int32,
+  content_width : Int32,
 ) -> TuiNode {
   let truncated = truncate_spans(spans, content_width)
   let mut segments : Array[RenderSegment] = []
@@ -173,11 +173,11 @@ fn render_line(
 ///|
 pub fn render_editor(
   state : EditorState,
-  width : Int,
-  height : Int,
-  show_header? : Bool = true,
-  show_footer? : Bool = true,
-  title? : String = "",
+  width : Int32,
+  height : Int32,
+  show_header~ : Bool = true,
+  show_footer~ : Bool = true,
+  title~ : String = "",
 ) -> TuiNode {
   let header_height = if show_header { 1 } else { 0 }
   let footer_height = if show_footer { 1 } else { 0 }
@@ -245,11 +245,11 @@ pub fn render_editor(
 ///|
 pub fn editor_cursor_position(
   state : EditorState,
-  width : Int,
-  height : Int,
-  show_header? : Bool = true,
-  show_footer? : Bool = true,
-) -> (Int, Int) {
+  width : Int32,
+  height : Int32,
+  show_header~ : Bool = true,
+  show_footer~ : Bool = true,
+) -> (Int32, Int32) {
   let caret = state.selection.active
   editor_position_for(
     state,
@@ -265,13 +265,13 @@ pub fn editor_cursor_position(
 ///|
 pub fn editor_position_for(
   state : EditorState,
-  width : Int,
-  height : Int,
-  line : Int,
-  col : Int,
-  show_header? : Bool = true,
-  show_footer? : Bool = true,
-) -> (Int, Int) {
+  width : Int32,
+  height : Int32,
+  line : Int32,
+  col : Int32,
+  show_header~ : Bool = true,
+  show_footer~ : Bool = true,
+) -> (Int32, Int32) {
   let header_height = if show_header { 1 } else { 0 }
   let footer_height = if show_footer { 1 } else { 0 }
   let content_height = if height - header_height - footer_height > 0 {

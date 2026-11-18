@@ -15,25 +15,25 @@ pub(all) struct Tooltip {
 
 ///|
 pub(all) struct TooltipAnchor {
-  line : Int
-  col : Int
+  line : Int32
+  col : Int32
   prefer_below : Bool
 }
 
 ///|
 pub(all) struct TooltipRect {
-  row : Int
-  col : Int
+  row : Int32
+  col : Int32
 }
 
 ///|
 pub fn tooltip_position(
   state : EditorState,
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
   anchor : TooltipAnchor,
-  tooltip_width : Int,
-  tooltip_height : Int,
+  tooltip_width : Int32,
+  tooltip_height : Int32,
 ) -> TooltipRect {
   let (anchor_row, anchor_col) = editor_position_for(
     state,

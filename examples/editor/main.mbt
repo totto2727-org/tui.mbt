@@ -85,7 +85,7 @@ fn main {
   let completion_popup = @editor.CompletionPopup::new(completion_session)
   let suppress_popup : Ref[Bool] = Ref(false)
   let last_popup_rect : Ref[@editor.PopupRect?] = Ref(None)
-  let completion_request_id : Ref[Int] = Ref(0)
+  let completion_request_id : Ref[Int32] = Ref(0)
   fn render_ui() -> @vnode.TuiNode {
     @editor.render_editor(state, width, height, title~)
   }

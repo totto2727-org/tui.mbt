@@ -13,11 +13,11 @@ pub(all) enum MouseButton {
 /// TUI Event - passed to event handlers
 pub(all) enum TuiEvent {
   /// Mouse click event
-  Click(x~ : Int, y~ : Int, button~ : MouseButton)
+  Click(x~ : Int32, y~ : Int32, button~ : MouseButton)
   /// Mouse hover event
-  Hover(x~ : Int, y~ : Int, id~ : String)
+  Hover(x~ : Int32, y~ : Int32, id~ : String)
   /// Key press event
-  Key(key~ : String, modifiers~ : Int)
+  Key(key~ : String, modifiers~ : Int32)
 }
 
 ///|

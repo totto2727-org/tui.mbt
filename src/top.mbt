@@ -157,8 +157,8 @@ pub using @io {
 pub fn run(
   render_fn : () -> @core.Component,
   on_event : (@events.InputEvent) -> Bool,
-  mouse? : Bool = true,
-  on_hover? : ((String) -> Unit)? = None,
+  mouse~ : Bool = true,
+  on_hover~ : ((String) -> Unit)? = None,
 ) -> Unit {
   // Get terminal size
   let (cols, rows) = @io.get_terminal_size()

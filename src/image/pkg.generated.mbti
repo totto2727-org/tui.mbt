@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/image"
+package "totto2727/tui/image"
 
 import {
   "moonbitlang/core/debug",

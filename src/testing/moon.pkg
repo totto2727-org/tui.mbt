@@ -1,8 +1,8 @@
 import {
-  "mizchi/tui/render",
-  "mizchi/tui/core",
-  "mizchi/tui/events",
-  "mizchi/tui/vnode",
+  "totto2727/tui/render",
+  "totto2727/tui/core",
+  "totto2727/tui/events",
+  "totto2727/tui/vnode",
 }
 
 import {

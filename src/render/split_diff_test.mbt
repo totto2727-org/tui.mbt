@@ -35,7 +35,7 @@ fn strip_ansi_local(input : String) -> String {
 
 ///|
 /// Helper to count non-empty characters in a string (excluding ANSI codes)
-fn count_visible_chars(s : String) -> Int {
+fn count_visible_chars(s : String) -> Int32 {
   let plain = strip_ansi_local(s)
   let mut count = 0
   for c in plain {

@@ -1,13 +1,13 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/editor"
+package "totto2727/tui/editor"
 
 import {
   "mizchi/signals/ui",
-  "mizchi/syntree",
-  "mizchi/tui/completion",
-  "mizchi/tui/components",
-  "mizchi/tui/events",
-  "mizchi/tui/vnode",
+  "totto2727/syntree",
+  "totto2727/tui/completion",
+  "totto2727/tui/components",
+  "totto2727/tui/events",
+  "totto2727/tui/vnode",
   "moonbitlang/core/debug",
 }
 

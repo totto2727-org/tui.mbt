@@ -5,14 +5,14 @@
 /// Focusable element with its tab index and element id
 pub struct FocusableElement {
   id : String
-  tab_index : Int
+  tab_index : Int32
 }
 
 ///|
 /// Focus context for managing Tab navigation
 pub struct FocusContext {
   elements : Array[FocusableElement]
-  mut current_index : Int
+  mut current_index : Int32
 }
 
 ///|
@@ -27,7 +27,7 @@ pub fn FocusContext::new() -> FocusContext {
 pub fn FocusContext::register(
   self : FocusContext,
   id : String,
-  tab_index : Int,
+  tab_index : Int32,
 ) -> Unit {
   // Only register if tab_index >= 0 (-1 means not focusable)
   if tab_index >= 0 {
@@ -130,13 +130,13 @@ pub fn FocusContext::is_focusable(self : FocusContext, id : String) -> Bool {
 
 ///|
 /// Get the number of focusable elements
-pub fn FocusContext::count(self : FocusContext) -> Int {
+pub fn FocusContext::count(self : FocusContext) -> Int32 {
   self.elements.length()
 }
 
 ///|
 /// Extract tab_index from TuiAttrValue if present
-pub fn extract_tab_index(attrs : Array[(String, TuiAttr)]) -> Int? {
+pub fn extract_tab_index(attrs : Array[(String, TuiAttr)]) -> Int32? {
   for attr in attrs {
     let (key, value) = attr
     if key == "tab_index" {

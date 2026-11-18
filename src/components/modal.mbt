@@ -40,7 +40,7 @@ fn strip_ansi(s : String) -> String {
 }
 
 ///|
-fn estimate_node_inner_width(node : @vnode.TuiNode) -> Int {
+fn estimate_node_inner_width(node : @vnode.TuiNode) -> Int32 {
   let lines = @vnode.render_to_lines(node)
   let mut max_w = 0
   for line in lines {
@@ -82,8 +82,8 @@ fn resolve_modal_width(
 pub fn modal(
   title : String,
   content : Array[@vnode.TuiNode],
-  width? : Double = -1.0,
-  id? : String = "",
+  width~ : Double = -1.0,
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let resolved_width = resolve_modal_width(title, content, width)
   let separator_len = resolved_width.to_int() - 4
@@ -114,9 +114,9 @@ pub fn modal(
 /// Alert dialog
 pub fn alert_dialog(
   message : String,
-  title? : String = "Alert",
-  button_label? : String = "OK",
-  id? : String = "",
+  title~ : String = "Alert",
+  button_label~ : String = "OK",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   modal(
     title,
@@ -132,10 +132,10 @@ pub fn alert_dialog(
 /// Confirm dialog
 pub fn confirm_dialog(
   message : String,
-  title? : String = "Confirm",
-  confirm_label? : String = "Yes",
-  cancel_label? : String = "No",
-  id? : String = "",
+  title~ : String = "Confirm",
+  confirm_label~ : String = "Yes",
+  cancel_label~ : String = "No",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   modal(
     title,
@@ -155,9 +155,9 @@ pub fn confirm_dialog(
 /// Wrap any TuiNode as an overlay entry
 pub fn popup(
   content : @vnode.TuiNode,
-  backdrop? : Bool = true,
-  position? : @vnode.PopupPosition = Center,
-  shrink? : Bool = true,
+  backdrop~ : Bool = true,
+  position~ : @vnode.PopupPosition = Center,
+  shrink~ : Bool = true,
 ) -> @vnode.OverlayEntry {
   { node: content, position, backdrop, shrink, }
 }
@@ -167,11 +167,11 @@ pub fn popup(
 pub fn modal_popup(
   title : String,
   content : Array[@vnode.TuiNode],
-  width? : Double = -1.0,
-  backdrop? : Bool = true,
-  position? : @vnode.PopupPosition = Center,
-  shrink? : Bool = true,
-  id? : String = "",
+  width~ : Double = -1.0,
+  backdrop~ : Bool = true,
+  position~ : @vnode.PopupPosition = Center,
+  shrink~ : Bool = true,
+  id~ : String = "",
 ) -> @vnode.OverlayEntry {
   popup(modal(title, content, width~, id~), backdrop~, position~, shrink~)
 }
@@ -180,12 +180,12 @@ pub fn modal_popup(
 /// Create an alert overlay entry
 pub fn alert_popup(
   message : String,
-  title? : String = "Alert",
-  button_label? : String = "OK",
-  backdrop? : Bool = true,
-  position? : @vnode.PopupPosition = Center,
-  shrink? : Bool = true,
-  id? : String = "",
+  title~ : String = "Alert",
+  button_label~ : String = "OK",
+  backdrop~ : Bool = true,
+  position~ : @vnode.PopupPosition = Center,
+  shrink~ : Bool = true,
+  id~ : String = "",
 ) -> @vnode.OverlayEntry {
   popup(
     alert_dialog(message, title~, button_label~, id~),
@@ -199,13 +199,13 @@ pub fn alert_popup(
 /// Create a confirm overlay entry
 pub fn confirm_popup(
   message : String,
-  title? : String = "Confirm",
-  confirm_label? : String = "Yes",
-  cancel_label? : String = "No",
-  backdrop? : Bool = true,
-  position? : @vnode.PopupPosition = Center,
-  shrink? : Bool = true,
-  id? : String = "",
+  title~ : String = "Confirm",
+  confirm_label~ : String = "Yes",
+  cancel_label~ : String = "No",
+  backdrop~ : Bool = true,
+  position~ : @vnode.PopupPosition = Center,
+  shrink~ : Bool = true,
+  id~ : String = "",
 ) -> @vnode.OverlayEntry {
   popup(
     confirm_dialog(message, title~, confirm_label~, cancel_label~, id~),
@@ -219,8 +219,8 @@ pub fn confirm_popup(
 /// Card container
 pub fn card(
   content : Array[@vnode.TuiNode],
-  title? : String = "",
-  id? : String = "",
+  title~ : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let children : Array[@vnode.TuiNode] = if title.length() > 0 {
     [

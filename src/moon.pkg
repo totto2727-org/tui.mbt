@@ -1,10 +1,10 @@
 import {
-  "mizchi/tui/core",
-  "mizchi/tui/events",
-  "mizchi/tui/io",
-  "mizchi/tui/render",
-  "mizchi/tui/vnode",
-  "mizchi/tui/headless",
+  "totto2727/tui/core",
+  "totto2727/tui/events",
+  "totto2727/tui/io",
+  "totto2727/tui/render",
+  "totto2727/tui/vnode",
+  "totto2727/tui/headless",
 }
 
 supported_targets = "js+native"

@@ -1,6 +1,6 @@
 import {
-  "mizchi/tui",
-  "mizchi/tui/vnode",
+  "totto2727/tui",
+  "totto2727/tui/vnode",
 }
 
 supported_targets = "js"

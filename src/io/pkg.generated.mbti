@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/io"
+package "totto2727/tui/io"
 
 import {
   "moonbitlang/async/js_async",

@@ -248,7 +248,7 @@ let my_card = card("Title", "Card content here")
 
 ```moonbit nocheck
 ///|
-fn dashboard_layout(width : Int, height : Int) -> @vnode.TuiNode {
+fn dashboard_layout(width : Int32, height : Int32) -> @vnode.TuiNode {
   @vnode.grid(
     columns=[1.0, 3.0, 1.0],
     rows=[1.0, 1.0, 1.0, 1.0],

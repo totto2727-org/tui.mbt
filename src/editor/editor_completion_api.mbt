@@ -3,21 +3,21 @@
 
 ///|
 pub(all) struct CompletionAnchor {
-  line : Int
-  col : Int
+  line : Int32
+  col : Int32
 }
 
 ///|
 pub(all) struct CompletionRange {
-  start_col : Int
-  end_col : Int
+  start_col : Int32
+  end_col : Int32
 }
 
 ///|
 pub(all) struct CompletionRequest {
-  id : Int
-  line : Int
-  col : Int
+  id : Int32
+  line : Int32
+  col : Int32
   prefix : String
   line_text : String
   anchor : CompletionAnchor
@@ -34,7 +34,7 @@ pub(all) struct CompletionItem {
 
 ///|
 pub(all) struct CompletionResponse {
-  id : Int
+  id : Int32
   items : Array[CompletionItem]
   is_incomplete : Bool
 }
@@ -54,7 +54,7 @@ pub struct CompletionSession {
   mut items : Array[CompletionItem]
   mut anchor : CompletionAnchor
   mut replace : CompletionRange
-  mut request_id : Int
+  mut request_id : Int32
 }
 
 ///|
@@ -113,7 +113,7 @@ pub fn CompletionSession::get_selected_item(
 }
 
 ///|
-pub fn CompletionSession::get_selected_index(self : CompletionSession) -> Int {
+pub fn CompletionSession::get_selected_index(self : CompletionSession) -> Int32 {
   self.engine.get_selected_idx()
 }
 

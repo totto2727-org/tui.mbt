@@ -168,7 +168,7 @@ pub fn alt(c : Char) -> String {
 ///|
 /// Generate SGR mouse click at position
 /// button: 0=left, 1=middle, 2=right
-pub fn mouse_click(x : Int, y : Int, button? : Int = 0) -> String {
+pub fn mouse_click(x : Int32, y : Int32, button~ : Int32 = 0) -> String {
   "\u001b[<" +
   button.to_string() +
   ";" +
@@ -180,7 +180,7 @@ pub fn mouse_click(x : Int, y : Int, button? : Int = 0) -> String {
 
 ///|
 /// Generate SGR mouse release at position
-pub fn mouse_release(x : Int, y : Int, button? : Int = 0) -> String {
+pub fn mouse_release(x : Int32, y : Int32, button~ : Int32 = 0) -> String {
   "\u001b[<" +
   button.to_string() +
   ";" +
@@ -192,12 +192,12 @@ pub fn mouse_release(x : Int, y : Int, button? : Int = 0) -> String {
 
 ///|
 /// Generate scroll up event at position
-pub fn scroll_up(x : Int, y : Int) -> String {
+pub fn scroll_up(x : Int32, y : Int32) -> String {
   "\u001b[<64;" + x.to_string() + ";" + y.to_string() + "M"
 }
 
 ///|
 /// Generate scroll down event at position
-pub fn scroll_down(x : Int, y : Int) -> String {
+pub fn scroll_down(x : Int32, y : Int32) -> String {
   "\u001b[<65;" + x.to_string() + ";" + y.to_string() + "M"
 }

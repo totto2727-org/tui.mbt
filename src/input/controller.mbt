@@ -5,8 +5,8 @@
 /// Text input controller for handling text editing operations
 pub(all) struct TextInputController {
   mut buffer : Array[Char]
-  mut cursor_pos : Int
-  mut scroll_offset : Int
+  mut cursor_pos : Int32
+  mut scroll_offset : Int32
   mut config : TextInputConfig
 }
 
@@ -102,7 +102,7 @@ pub fn TextInputController::set_text(
 
 ///|
 /// Get cursor position
-pub fn TextInputController::get_cursor_pos(self : TextInputController) -> Int {
+pub fn TextInputController::get_cursor_pos(self : TextInputController) -> Int32 {
   self.cursor_pos
 }
 
@@ -110,7 +110,7 @@ pub fn TextInputController::get_cursor_pos(self : TextInputController) -> Int {
 /// Set cursor position
 pub fn TextInputController::set_cursor_pos(
   self : TextInputController,
-  pos : Int,
+  pos : Int32,
 ) -> Unit {
   self.cursor_pos = if pos < 0 {
     0
@@ -126,8 +126,8 @@ pub fn TextInputController::set_cursor_pos(
 /// Resize the input area
 pub fn TextInputController::resize(
   self : TextInputController,
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
 ) -> Unit {
   self.config.width = width
   self.config.height = height

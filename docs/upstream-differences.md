@@ -6,9 +6,10 @@ Upstream: [`mizchi/tui.mbt` at `d14b96ad732110f336cefdd77682a9d6ddb20877`](https
 
 ## Continuous integration
 
-The fork fixes the `actions/checkout` version to a commit SHA, gives CI read-only access to repository contents, and prevents the checkout step from retaining credentials.
-The workflow runs the same checks on Linux and Windows.
-This configuration does not change the library source or its output.
+The fork uses the [MoonBit repository template](https://github.com/totto2727-org/template-moonbit-simple) instead of the upstream workflows.
+CI uses the locked Nix toolchain to check formatting, check types, build, and run tests on Linux.
+Pushes to `main` publish `totto2727/tui` to Mooncakes when `MOONCAKES_TOKEN` is set.
+FlakeHub publication is disabled.
 
 ## MoonBit compatibility
 
@@ -18,3 +19,9 @@ This configuration does not change the library source or its output.
 - Black-box tests import their package APIs explicitly to preserve strict compiler checks.
 - Standalone applications use current module manifests and build against the library from the same checkout.
 - The API and terminal UI output do not change.
+
+## Mooncakes identity
+
+Use `totto2727/tui` for module dependencies and package imports.
+The editor uses `totto2727/syntree` for syntax highlighting.
+The terminal buffer and protocol retain their upstream module names.

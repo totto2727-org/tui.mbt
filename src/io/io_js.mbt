@@ -130,7 +130,7 @@ extern "js" fn js_enable_raw_mode() =
 
 ///|
 /// Get terminal columns
-extern "js" fn js_get_terminal_columns() -> Int =
+extern "js" fn js_get_terminal_columns() -> Int32 =
   #| () => {
   #|   if (typeof process === 'undefined') return 80;
   #|   return process.stdout.columns || 80;
@@ -138,7 +138,7 @@ extern "js" fn js_get_terminal_columns() -> Int =
 
 ///|
 /// Get terminal rows
-extern "js" fn js_get_terminal_rows() -> Int =
+extern "js" fn js_get_terminal_rows() -> Int32 =
   #| () => {
   #|   if (typeof process === 'undefined') return 24;
   #|   return process.stdout.rows || 24;
@@ -146,24 +146,24 @@ extern "js" fn js_get_terminal_rows() -> Int =
 
 ///|
 /// Sleep for milliseconds
-extern "js" fn js_sleep(ms : Int) -> @js_async.Promise[Unit] =
+extern "js" fn js_sleep(ms : Int32) -> @js_async.Promise[Unit] =
   #| (ms) => new Promise(r => setTimeout(r, ms))
 
 ///|
 /// Get current time in milliseconds
-extern "js" fn js_get_time_ms() -> Int =
+extern "js" fn js_get_time_ms() -> Int32 =
   #| () => Date.now()
 
 ///|
 /// Get current time in milliseconds (monotonic)
-pub fn get_time_ms() -> Int {
+pub fn get_time_ms() -> Int32 {
   js_get_time_ms()
 }
 
 ///|
 /// Keep the process alive without blocking (non-blocking)
 /// This schedules a timeout but doesn't wait - keeps event loop active
-extern "js" fn js_keep_alive_nonblocking(ms : Int) =
+extern "js" fn js_keep_alive_nonblocking(ms : Int32) =
   #| (ms) => {
   #|   // Simple timer keeps the process alive
   #|   setTimeout(() => {}, ms);
@@ -171,7 +171,7 @@ extern "js" fn js_keep_alive_nonblocking(ms : Int) =
 
 ///|
 /// Keep process alive without blocking the event loop
-pub fn keep_alive_nonblocking(ms : Int) -> Unit {
+pub fn keep_alive_nonblocking(ms : Int32) -> Unit {
   js_keep_alive_nonblocking(ms)
 }
 
@@ -274,17 +274,20 @@ pub fn stop_keypress_listener() -> Unit {
 
 ///|
 /// Start idle interval timer
-extern "js" fn js_start_idle_interval(handler : () -> Unit, ms : Int) -> Int =
+extern "js" fn js_start_idle_interval(
+  handler : () -> Unit,
+  ms : Int32,
+) -> Int32 =
   #| (handler, ms) => setInterval(() => handler(), ms)
 
 ///|
 /// Stop idle interval timer
-extern "js" fn js_stop_idle_interval(id : Int) =
+extern "js" fn js_stop_idle_interval(id : Int32) =
   #| (id) => clearInterval(id)
 
 ///|
 /// Idle interval ID storage
-let idle_interval_id : Ref[Int] = Ref(-1)
+let idle_interval_id : Ref[Int32] = Ref(-1)
 
 ///|
 /// Set idle handler (uses setInterval for JS)
@@ -830,10 +833,10 @@ extern "js" fn js_start_inline_input_cooked(
 extern "js" fn js_start_inline_input(
   label : String,
   initial : String,
-  start_row : Int,
-  start_col : Int,
-  max_width : Int,
-  max_height : Int,
+  start_row : Int32,
+  start_col : Int32,
+  max_width : Int32,
+  max_height : Int32,
   on_confirmed : (String) -> Unit,
   on_cancelled : () -> Unit,
   on_tab_next : (String) -> Unit,
@@ -1004,8 +1007,8 @@ pub fn start_inline_input_cooked(
   field_name : String,
   initial : String,
   on_result : (InputResult) -> Unit,
-  confirm_on_shift_enter? : Bool = false,
-  esc_cancels? : Bool = true,
+  confirm_on_shift_enter~ : Bool = false,
+  esc_cancels~ : Bool = true,
 ) -> Unit {
   js_start_inline_input_cooked(
     field_name,
@@ -1024,17 +1027,17 @@ pub fn start_inline_input_cooked(
 /// row/col are 1-indexed ANSI coordinates
 /// width is the max display width for the input
 pub fn start_inplace_input(
-  row : Int,
-  col : Int,
-  width : Int,
-  height : Int,
+  row : Int32,
+  col : Int32,
+  width : Int32,
+  height : Int32,
   multiline : Bool,
   initial : String,
   on_result : (InputResult) -> Unit,
-  confirm_on_shift_enter? : Bool = false,
-  esc_cancels? : Bool = true,
-  on_lines_change? : ((Int) -> Int)? = None,
-  on_completion? : ((String, Int) -> String?)? = None,
+  confirm_on_shift_enter~ : Bool = false,
+  esc_cancels~ : Bool = true,
+  on_lines_change~ : ((Int32) -> Int32)? = None,
+  on_completion~ : ((String, Int32) -> String?)? = None,
 ) -> Unit {
   // Create controller with configuration
   let config = @input.TextInputConfig::new(
@@ -1235,10 +1238,10 @@ pub fn start_inplace_input(
 pub fn start_inline_input(
   label : String,
   initial : String,
-  row : Int,
-  col : Int,
-  max_width : Int,
-  max_height : Int,
+  row : Int32,
+  col : Int32,
+  max_width : Int32,
+  max_height : Int32,
   on_result : (InputResult) -> Unit,
 ) -> Unit {
   js_start_inline_input(
@@ -1283,13 +1286,13 @@ pub fn enable_raw_mode() -> Unit {
 
 ///|
 /// Get terminal size (columns, rows)
-pub fn get_terminal_size() -> (Int, Int) {
+pub fn get_terminal_size() -> (Int32, Int32) {
   (js_get_terminal_columns(), js_get_terminal_rows())
 }
 
 ///|
 /// Sleep for milliseconds
-pub async fn sleep(ms : Int) -> Unit {
+pub async fn sleep(ms : Int32) -> Unit {
   @js_async.Promise::wait(js_sleep(ms))
 }
 
@@ -1334,8 +1337,8 @@ extern "js" fn js_start_input_session_callback(
 ///|
 /// Legacy Promise-based version (kept for reference, may not work properly)
 extern "js" fn js_start_input_session(
-  x : Int,
-  y : Int,
+  x : Int32,
+  y : Int32,
   initial : String,
 ) -> @js_async.Promise[String] =
   #| async (x, y, initial) => {
@@ -1362,12 +1365,15 @@ extern "js" fn js_abort_input_session() =
 
 ///|
 /// Start a render ticker (setInterval)
-extern "js" fn js_start_render_ticker(ms : Int, callback : () -> Unit) -> Int =
+extern "js" fn js_start_render_ticker(
+  ms : Int32,
+  callback : () -> Unit,
+) -> Int32 =
   #| (ms, cb) => setInterval(cb, ms)
 
 ///|
 /// Stop a render ticker
-extern "js" fn js_stop_render_ticker(ticker_id : Int) =
+extern "js" fn js_stop_render_ticker(ticker_id : Int32) =
   #| (id) => clearInterval(id)
 
 ///|
@@ -1432,8 +1438,8 @@ pub fn start_input_session_promise(
 /// WARNING: This uses Promise::wait which can block the Node.js event loop
 /// Use start_input_session_cb instead for reliable operation
 pub async fn start_input_session(
-  x : Int,
-  y : Int,
+  x : Int32,
+  y : Int32,
   initial : String,
 ) -> InputResult {
   // This version doesn't work properly after raw mode - returns cancelled immediately
@@ -1453,13 +1459,13 @@ pub fn abort_input_session() -> Unit {
 
 ///|
 /// Start a render ticker that calls the callback every `ms` milliseconds
-pub fn start_render_ticker(ms : Int, callback : () -> Unit) -> Int {
+pub fn start_render_ticker(ms : Int32, callback : () -> Unit) -> Int32 {
   js_start_render_ticker(ms, callback)
 }
 
 ///|
 /// Stop a render ticker
-pub fn stop_render_ticker(ticker_id : Int) -> Unit {
+pub fn stop_render_ticker(ticker_id : Int32) -> Unit {
   js_stop_render_ticker(ticker_id)
 }
 
@@ -1510,7 +1516,7 @@ pub fn poll_keypress() -> Bool {
 ///|
 /// Start a resize listener (event-driven)
 /// Callback receives (width, height) when terminal is resized
-extern "js" fn js_start_resize_listener(callback : (Int, Int) -> Unit) =
+extern "js" fn js_start_resize_listener(callback : (Int32, Int32) -> Unit) =
   #| async (callback) => {
   #|   const { stdout } = await import('node:process');
   #|
@@ -1539,7 +1545,7 @@ extern "js" fn js_stop_resize_listener() =
 ///|
 /// Start listening for terminal resize events
 /// Callback receives (width, height) when terminal is resized
-pub fn start_resize_listener(callback : (Int, Int) -> Unit) -> Unit {
+pub fn start_resize_listener(callback : (Int32, Int32) -> Unit) -> Unit {
   js_start_resize_listener(callback)
 }
 
@@ -1600,10 +1606,10 @@ pub fn is_headless() -> Bool {
 /// Render display state with scroll support (shared with native)
 fn render_display_state(
   state : @input.DisplayState,
-  start_row : Int,
-  start_col : Int,
-  max_width : Int,
-  max_height : Int,
+  start_row : Int32,
+  start_col : Int32,
+  max_width : Int32,
+  max_height : Int32,
 ) -> Unit {
   let mut output = ""
   // Clear area

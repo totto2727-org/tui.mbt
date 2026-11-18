@@ -1,19 +1,19 @@
 ///|
 /// TUI Color type (RGBA)
 pub(all) struct Color {
-  r : Int
-  g : Int
-  b : Int
+  r : Int32
+  g : Int32
+  b : Int32
   a : Double
 }
 
 ///|
-pub fn Color::rgb(r : Int, g : Int, b : Int) -> Color {
+pub fn Color::rgb(r : Int32, g : Int32, b : Int32) -> Color {
   { r, g, b, a: 1.0, }
 }
 
 ///|
-pub fn Color::rgba(r : Int, g : Int, b : Int, a : Double) -> Color {
+pub fn Color::rgba(r : Int32, g : Int32, b : Int32, a : Double) -> Color {
   { r, g, b, a, }
 }
 

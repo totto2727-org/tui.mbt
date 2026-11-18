@@ -6,7 +6,13 @@ using @render {type CharBuffer, type CharCell, type TextStyle}
 
 ///|
 /// Helper to extract a rectangular region as a string (for debugging)
-fn extract_rect(buf : CharBuffer, x : Int, y : Int, w : Int, h : Int) -> String {
+fn extract_rect(
+  buf : CharBuffer,
+  x : Int32,
+  y : Int32,
+  w : Int32,
+  h : Int32,
+) -> String {
   let sb = StringBuilder()
   for row = y; row < y + h; row = row + 1 {
     for col = x; col < x + w; col = col + 1 {
@@ -26,7 +32,7 @@ fn extract_rect(buf : CharBuffer, x : Int, y : Int, w : Int, h : Int) -> String 
 
 ///|
 /// Helper to count cells with a specific character
-fn count_char(buf : CharBuffer, c : Char) -> Int {
+fn count_char(buf : CharBuffer, c : Char) -> Int32 {
   let mut count = 0
   for y = 0; y < buf.height; y = y + 1 {
     for x = 0; x < buf.width; x = x + 1 {

@@ -1,5 +1,5 @@
 import {
-  "mizchi/tui/stories",
+  "totto2727/tui/stories",
 }
 
 supported_targets = "js"

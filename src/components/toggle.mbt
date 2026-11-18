@@ -10,9 +10,9 @@ pub using @headless {type ToggleState}
 pub fn checkbox(
   label : String,
   checked : Bool,
-  id? : String = "",
-  focused? : Bool = false,
-  disabled? : Bool = false,
+  id~ : String = "",
+  focused~ : Bool = false,
+  disabled~ : Bool = false,
 ) -> @vnode.TuiNode {
   let icon = if checked { "[x]" } else { "[ ]" }
   let fg = if disabled {
@@ -35,8 +35,8 @@ pub fn checkbox(
 pub fn radio(
   label : String,
   selected : Bool,
-  id? : String = "",
-  disabled? : Bool = false,
+  id~ : String = "",
+  disabled~ : Bool = false,
 ) -> @vnode.TuiNode {
   let icon = if selected { "(*)" } else { "( )" }
   let fg = if disabled {
@@ -57,8 +57,8 @@ pub fn radio(
 pub fn switch(
   on : Bool,
   label : String,
-  id? : String = "",
-  disabled? : Bool = false,
+  id~ : String = "",
+  disabled~ : Bool = false,
 ) -> @vnode.TuiNode {
   let track = if on { "[*--]" } else { "[--*]" }
   let track_color = if disabled {

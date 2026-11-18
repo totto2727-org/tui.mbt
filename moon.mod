@@ -1,4 +1,4 @@
-name = "mizchi/tui"
+name = "totto2727/tui"
 
 version = "0.10.2"
 
@@ -10,13 +10,13 @@ import {
   "mizchi/signals@0.6.5",
   "mizchi/tui-terminal-buffer@0.1.4",
   "moonbitlang/async@0.22.9",
-  "mizchi/syntree@0.2.4",
+  "totto2727/syntree@0.2.4",
   "moonbitlang/x@0.5.7",
 }
 
 readme = "README.md"
 
-repository = "https://github.com/mizchi/tui.mbt"
+repository = "https://github.com/totto2727-org/tui.mbt"
 
 license = "MIT"
 

@@ -1,0 +1,21 @@
+name: Publish
+
+# Keep this trigger when creating a project from the template.
+# Change it only for an explicit user request or a demonstrated project requirement.
+# Do not replace main-push publication with tag or release triggers.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: totto2727-org/monorepo/.github/actions/setup-nix@main
+      - uses: totto2727-org/monorepo/.github/actions/publish-moonbit@main
+        with:
+          token: ${{ secrets.MOONCAKES_TOKEN }}

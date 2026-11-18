@@ -20,7 +20,7 @@ using @vnode {
 
 ///|
 /// Dashboard layout with header, sidebar, main content, and footer
-fn render_dashboard(width : Int, height : Int) -> TuiNode {
+fn render_dashboard(width : Int32, height : Int32) -> TuiNode {
   let content_height = height - 4 // Header(1) + Footer(1) + borders(2)
   grid(
     columns=[1.0, 3.0, 1.0], // sidebar: 1fr, main: 3fr, right: 1fr
@@ -95,7 +95,7 @@ fn render_dashboard(width : Int, height : Int) -> TuiNode {
 
 ///|
 /// Calendar-like grid layout
-fn render_calendar(width : Int, height : Int) -> TuiNode {
+fn render_calendar(width : Int32, height : Int32) -> TuiNode {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   let header_items : Array[TuiNode] = days.map(fn(d) {
     row(justify="center", [text(d, fg="cyan", bold=true)])
@@ -132,7 +132,7 @@ fn render_calendar(width : Int, height : Int) -> TuiNode {
 
 ///|
 /// Positioned grid items demo
-fn render_positioned(width : Int, height : Int) -> TuiNode {
+fn render_positioned(width : Int32, height : Int32) -> TuiNode {
   view(
     border="rounded",
     border_color="rgb(80,80,100)",

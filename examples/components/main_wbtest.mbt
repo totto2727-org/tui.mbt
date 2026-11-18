@@ -36,7 +36,7 @@ fn test_menu_item(label : String, selected : Bool) -> @vnode.TuiNode {
 
 ///|
 /// Create dropdown column with fixed height
-fn test_dropdown(items : Array[String], selected : Int) -> @vnode.TuiNode {
+fn test_dropdown(items : Array[String], selected : Int32) -> @vnode.TuiNode {
   let item_nodes : Array[@vnode.TuiNode] = []
   for i, item in items {
     item_nodes.push(test_menu_item(item, selected == i))
@@ -52,7 +52,7 @@ fn test_dropdown(items : Array[String], selected : Int) -> @vnode.TuiNode {
 
 ///|
 /// Count newlines in a string
-fn count_lines(s : String) -> Int {
+fn count_lines(s : String) -> Int32 {
   let mut count = 0
   for c in s.iter() {
     if c == '\n' {
@@ -129,12 +129,15 @@ test "render dropdown and print output" {
 
 ///|
 /// Create full menubar demo layout for testing
-fn test_menubar_layout(open_menu : Int, selected_item : Int) -> @vnode.TuiNode {
+fn test_menubar_layout(
+  open_menu : Int32,
+  selected_item : Int32,
+) -> @vnode.TuiNode {
   let menus = ["File", "Edit", "View"]
   let file_items = ["New", "Open", "Save", "Exit"]
   let edit_items = ["Cut", "Copy", "Paste"]
   let view_items = ["Toolbar", "Status Bar", "Zoom In", "Zoom Out"]
-  fn get_items(idx : Int) -> Array[String] {
+  fn get_items(idx : Int32) -> Array[String] {
     match idx {
       0 => file_items
       1 => edit_items
@@ -190,8 +193,8 @@ fn test_menubar_layout(open_menu : Int, selected_item : Int) -> @vnode.TuiNode {
 
 ///|
 /// Extract row numbers from ANSI output (e.g., "[21;1H" -> 21)
-fn extract_row_positions(s : String) -> Array[Int] {
-  let rows : Array[Int] = []
+fn extract_row_positions(s : String) -> Array[Int32] {
+  let rows : Array[Int32] = []
   let mut i = 0
   let chars : Array[Char] = []
   for c in s.iter() {

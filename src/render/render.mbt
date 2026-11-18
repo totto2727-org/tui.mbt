@@ -8,8 +8,8 @@ pub fn render_layout(
   layout : @ccore.Layout,
   styles : @core.RenderStyleMap,
   texts : @core.TextContentMap,
-  offset_x : Int,
-  offset_y : Int,
+  offset_x : Int32,
+  offset_y : Int32,
 ) -> Unit {
   render_layout_f(
     buf,
@@ -94,10 +94,10 @@ fn render_layout_f(
 ///|
 fn draw_border(
   buf : CharBuffer,
-  x : Int,
-  y : Int,
-  w : Int,
-  h : Int,
+  x : Int32,
+  y : Int32,
+  w : Int32,
+  h : Int32,
   border : @core.BorderChars,
   fg : @core.Color,
 ) -> Unit {
@@ -150,8 +150,8 @@ pub fn render_to_ansi(
   layout : @ccore.Layout,
   styles : @core.RenderStyleMap,
   texts : @core.TextContentMap,
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
 ) -> String {
   let buf = CharBuffer::new(width, height)
   render_layout(buf, layout, styles, texts, 0, 0)

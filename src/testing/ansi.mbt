@@ -66,7 +66,7 @@ pub fn has_ansi(input : String) -> Bool {
 
 ///|
 /// Extract visible text length (excluding ANSI codes)
-pub fn visible_length(input : String) -> Int {
+pub fn visible_length(input : String) -> Int32 {
   strip_ansi(input).iter().count()
 }
 

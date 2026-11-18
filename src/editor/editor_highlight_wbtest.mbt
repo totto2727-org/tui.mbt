@@ -1,8 +1,8 @@
 ///|
 fn render_lines(
   state : EditorState,
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
 ) -> Array[String] {
   render_lines_plain(state, width, height)
 }
@@ -158,7 +158,7 @@ test "highlight update matches full after varied edits" {
   let line_count = base_doc.line_count()
   for line_idx in 0..<line_count {
     let line_len = base_doc.line_length(line_idx)
-    let cols : Array[Int] = [0, line_len / 2, line_len]
+    let cols : Array[Int32] = [0, line_len / 2, line_len]
     for col in cols {
       let doc = Document::from_text(text)
       let state = HighlightState::new(HighlightKind::TypeScript, doc)

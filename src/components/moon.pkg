@@ -1,8 +1,8 @@
 import {
-  "mizchi/tui/core",
-  "mizchi/tui/vnode",
-  "mizchi/tui/headless",
-  "mizchi/tui/logics",
+  "totto2727/tui/core",
+  "totto2727/tui/vnode",
+  "totto2727/tui/headless",
+  "totto2727/tui/logics",
 }
 
 supported_targets = "js+native"

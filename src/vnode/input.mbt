@@ -40,22 +40,22 @@ pub(all) enum InputState {
 /// Create an input component
 pub fn input(
   value : String,
-  id? : String = "",
-  placeholder? : String = "",
-  state? : InputState = InputState::Idle,
+  id~ : String = "",
+  placeholder~ : String = "",
+  state~ : InputState = InputState::Idle,
   // Style
-  fg? : String = "white",
-  bg? : String = "rgb(40,40,50)",
-  placeholder_fg? : String = "rgb(100,100,100)",
-  focus_border_color? : String = "cyan",
-  edit_border_color? : String = "green",
-  disabled_fg? : String = "rgb(80,80,80)",
-  disabled_bg? : String = "rgb(30,30,35)",
+  fg~ : String = "white",
+  bg~ : String = "rgb(40,40,50)",
+  placeholder_fg~ : String = "rgb(100,100,100)",
+  focus_border_color~ : String = "cyan",
+  edit_border_color~ : String = "green",
+  disabled_fg~ : String = "rgb(80,80,80)",
+  disabled_bg~ : String = "rgb(30,30,35)",
   // Size
-  width? : Double = 0.0,
-  min_width? : Double = 20.0,
-  padding_x? : Double = 1.0,
-  padding_y? : Double = 0.0,
+  width~ : Double = 0.0,
+  min_width~ : Double = 20.0,
+  padding_x~ : Double = 1.0,
+  padding_y~ : Double = 0.0,
 ) -> TuiNode {
   // Determine display text
   let display_text = if value.length() == 0 {
@@ -119,10 +119,10 @@ pub fn input(
 /// Create an input field without border (inline style)
 pub fn input_plain(
   value : String,
-  placeholder? : String = "",
-  state? : InputState = InputState::Idle,
-  fg? : String = "white",
-  placeholder_fg? : String = "rgb(100,100,100)",
+  placeholder~ : String = "",
+  state~ : InputState = InputState::Idle,
+  fg~ : String = "white",
+  placeholder_fg~ : String = "rgb(100,100,100)",
 ) -> TuiNode {
   let display_text = if value.length() == 0 {
     match state {
@@ -173,8 +173,8 @@ pub fn start_edit(
   config : EditConfig,
   current_value : String,
   on_complete : () -> Unit,
-  confirm_on_shift_enter? : Bool = false,
-  esc_cancels? : Bool = true,
+  confirm_on_shift_enter~ : Bool = false,
+  esc_cancels~ : Bool = true,
 ) -> Unit {
   // Call optional setup callback
   match config.on_edit_start {
@@ -222,16 +222,16 @@ pub fn start_edit(
 pub fn start_edit_inplace(
   config : EditConfig,
   current_value : String,
-  row : Int,
-  col : Int,
-  width : Int,
-  height : Int,
+  row : Int32,
+  col : Int32,
+  width : Int32,
+  height : Int32,
   multiline : Bool,
   on_complete : () -> Unit,
-  confirm_on_shift_enter? : Bool = false,
-  esc_cancels? : Bool = true,
-  on_lines_change? : ((Int) -> Int)? = None,
-  on_completion? : ((String, Int) -> String?)? = None,
+  confirm_on_shift_enter~ : Bool = false,
+  esc_cancels~ : Bool = true,
+  on_lines_change~ : ((Int32) -> Int32)? = None,
+  on_completion~ : ((String, Int32) -> String?)? = None,
 ) -> Unit {
   match config.on_edit_start {
     Some(f) => f()
@@ -273,8 +273,8 @@ pub fn start_edit_inplace(
 ///|
 fn bounds_to_inplace_area(
   bounds : @events.HitTestResult,
-  border : Int,
-) -> (Int, Int, Int, Int) {
+  border : Int32,
+) -> (Int32, Int32, Int32, Int32) {
   let border_size = if border < 0 { 0 } else { border }
   let row = bounds.y + 1 + border_size
   let col = bounds.x + 1 + border_size
@@ -293,11 +293,11 @@ pub fn start_edit_inplace_in_bounds(
   bounds : @events.HitTestResult,
   multiline : Bool,
   on_complete : () -> Unit,
-  confirm_on_shift_enter? : Bool = false,
-  esc_cancels? : Bool = true,
-  border? : Int = 1,
-  on_lines_change? : ((Int) -> Int)? = None,
-  on_completion? : ((String, Int) -> String?)? = None,
+  confirm_on_shift_enter~ : Bool = false,
+  esc_cancels~ : Bool = true,
+  border~ : Int32 = 1,
+  on_lines_change~ : ((Int32) -> Int32)? = None,
+  on_completion~ : ((String, Int32) -> String?)? = None,
 ) -> Unit {
   let (row, col, width, height) = bounds_to_inplace_area(bounds, border)
   start_edit_inplace(
@@ -321,9 +321,9 @@ pub fn start_edit_inplace_in_bounds(
 pub fn form_edit_config(
   field_name : String,
   signal : @signals.Signal[String],
-  on_edit_start? : (() -> Unit)? = None,
-  on_edit_end? : (() -> Unit)? = None,
-  on_force_quit? : (() -> Unit)? = None,
+  on_edit_start~ : (() -> Unit)? = None,
+  on_edit_end~ : (() -> Unit)? = None,
+  on_force_quit~ : (() -> Unit)? = None,
 ) -> EditConfig {
   {
     field_name,
@@ -342,20 +342,20 @@ pub fn form_edit_config(
 /// Create a textarea component (multi-line input)
 pub fn textarea(
   value : String,
-  id? : String = "",
-  placeholder? : String = "",
-  state? : InputState = InputState::Idle,
-  rows? : Int = 3,
+  id~ : String = "",
+  placeholder~ : String = "",
+  state~ : InputState = InputState::Idle,
+  rows~ : Int32 = 3,
   // Style
-  fg? : String = "white",
-  bg? : String = "rgb(40,40,50)",
-  placeholder_fg? : String = "rgb(100,100,100)",
-  focus_border_color? : String = "cyan",
-  edit_border_color? : String = "green",
+  fg~ : String = "white",
+  bg~ : String = "rgb(40,40,50)",
+  placeholder_fg~ : String = "rgb(100,100,100)",
+  focus_border_color~ : String = "cyan",
+  edit_border_color~ : String = "green",
   // Size
-  min_width? : Double = 20.0,
-  padding_x? : Double = 1.0,
-  padding_y? : Double = 0.0,
+  min_width~ : Double = 20.0,
+  padding_x~ : Double = 1.0,
+  padding_y~ : Double = 0.0,
 ) -> TuiNode {
   // Determine display text
   let display_text = if value.length() == 0 {

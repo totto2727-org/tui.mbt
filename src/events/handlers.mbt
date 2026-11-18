@@ -46,10 +46,10 @@ pub fn EventHandlers::get_click(
 /// Returns the deepest (most specific) node containing the point
 pub fn hit_test(
   layout : @ccore.Layout,
-  mouse_x : Int,
-  mouse_y : Int,
-  offset_x : Int,
-  offset_y : Int,
+  mouse_x : Int32,
+  mouse_y : Int32,
+  offset_x : Int32,
+  offset_y : Int32,
 ) -> HitTestResult? {
   hit_test_f(
     layout,
@@ -63,8 +63,8 @@ pub fn hit_test(
 ///|
 fn hit_test_f(
   layout : @ccore.Layout,
-  mouse_x : Int,
-  mouse_y : Int,
+  mouse_x : Int32,
+  mouse_y : Int32,
   offset_x : Double,
   offset_y : Double,
 ) -> HitTestResult? {
@@ -98,8 +98,8 @@ fn hit_test_f(
 /// Hit test from root (convenience function)
 pub fn hit_test_root(
   layout : @ccore.Layout,
-  mouse_x : Int,
-  mouse_y : Int,
+  mouse_x : Int32,
+  mouse_y : Int32,
 ) -> HitTestResult? {
   hit_test(layout, mouse_x, mouse_y, 0, 0)
 }
@@ -110,8 +110,8 @@ pub fn hit_test_root(
 pub fn handle_click(
   layout : @ccore.Layout,
   handlers : EventHandlers,
-  mouse_x : Int,
-  mouse_y : Int,
+  mouse_x : Int32,
+  mouse_y : Int32,
 ) -> Bool {
   match hit_test_root(layout, mouse_x, mouse_y) {
     Some(result) =>
@@ -132,8 +132,8 @@ pub fn handle_click(
 pub fn find_layout_by_id(
   layout : @ccore.Layout,
   target_id : String,
-  offset_x : Int,
-  offset_y : Int,
+  offset_x : Int32,
+  offset_y : Int32,
 ) -> HitTestResult? {
   find_layout_by_id_f(
     layout,
@@ -223,9 +223,9 @@ pub fn layout_rects_root(layout : @ccore.Layout) -> Array[HitTestResult] {
 /// Debug: dump layout tree structure
 pub fn dump_layout(
   layout : @ccore.Layout,
-  offset_x : Int,
-  offset_y : Int,
-  depth : Int,
+  offset_x : Int32,
+  offset_y : Int32,
+  depth : Int32,
 ) -> String {
   dump_layout_f(layout, offset_x.to_double(), offset_y.to_double(), depth)
 }
@@ -235,7 +235,7 @@ fn dump_layout_f(
   layout : @ccore.Layout,
   offset_x : Double,
   offset_y : Double,
-  depth : Int,
+  depth : Int32,
 ) -> String {
   let abs_x = offset_x + layout.x
   let abs_y = offset_y + layout.y

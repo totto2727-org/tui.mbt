@@ -186,8 +186,8 @@ fn parse_ss3_sequence(chars : Array[Char]) -> InputEvent {
 
 ///|
 /// Extract numeric parameters from CSI sequence
-fn extract_csi_params(chars : Array[Char]) -> Array[Int] {
-  let params : Array[Int] = []
+fn extract_csi_params(chars : Array[Char]) -> Array[Int32] {
+  let params : Array[Int32] = []
   let mut num = 0
   let mut has_num = false
   // Skip ESC[
@@ -306,8 +306,8 @@ fn parse_mouse_sgr(
 
 ///|
 /// Extract SGR parameters
-fn extract_sgr_params(chars : Array[Char], start : Int) -> Array[Int] {
-  let params : Array[Int] = []
+fn extract_sgr_params(chars : Array[Char], start : Int32) -> Array[Int32] {
+  let params : Array[Int32] = []
   let mut num = 0
   let mut has_num = false
   for i = start; i < chars.length() - 1; i = i + 1 {
@@ -332,7 +332,7 @@ fn extract_sgr_params(chars : Array[Char], start : Int) -> Array[Int] {
 
 ///|
 /// Parse mouse modifier from button code
-fn parse_mouse_modifier(cb : Int) -> KeyModifier {
+fn parse_mouse_modifier(cb : Int32) -> KeyModifier {
   let shift = (cb & 4) != 0
   let alt = (cb & 8) != 0
   let ctrl = (cb & 16) != 0
@@ -464,8 +464,8 @@ pub fn InputEvent::is_backtab(self : InputEvent) -> Bool {
       KeyEvent::Special(
         SpecialKey::Tab
         | SpecialKey::BackTab,
-        KeyModifier::Shift
-      )
+        KeyModifier::Shift,
+      ),
     ) => true
     InputEvent::Key(KeyEvent::Special(SpecialKey::BackTab, KeyModifier::None)) =>
       true
@@ -508,7 +508,7 @@ pub fn InputEvent::is_quit(self : InputEvent) -> Bool {
 pub fn InputEvent::is_left_click(self : InputEvent) -> MouseEvent? {
   match self {
     InputEvent::Mouse(
-      { button: MouseButton::Left, event_type: MouseEventType::Press, .. } as m
+      { button: MouseButton::Left, event_type: MouseEventType::Press, .. } as m,
     ) => Some(m)
     _ => None
   }
@@ -519,7 +519,7 @@ pub fn InputEvent::is_left_click(self : InputEvent) -> MouseEvent? {
 pub fn InputEvent::is_right_click(self : InputEvent) -> MouseEvent? {
   match self {
     InputEvent::Mouse(
-      { button: MouseButton::Right, event_type: MouseEventType::Press, .. } as m
+      { button: MouseButton::Right, event_type: MouseEventType::Press, .. } as m,
     ) => Some(m)
     _ => None
   }

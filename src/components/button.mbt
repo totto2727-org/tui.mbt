@@ -9,9 +9,9 @@ pub using @headless {type ButtonState}
 /// Styled button component
 pub fn button(
   label : String,
-  id? : String = "",
-  state? : @headless.ButtonState = @headless.ButtonState::Default,
-  min_width? : Double = 0.0,
+  id~ : String = "",
+  state~ : @headless.ButtonState = @headless.ButtonState::Default,
+  min_width~ : Double = 0.0,
 ) -> @vnode.TuiNode {
   let (fg, bg, border_color) = match state {
     Default => ("white", "", "cyan")
@@ -39,8 +39,8 @@ pub fn button(
 /// Icon button (smaller, no border)
 pub fn icon_button(
   icon : String,
-  id? : String = "",
-  state? : @headless.ButtonState = @headless.ButtonState::Default,
+  id~ : String = "",
+  state~ : @headless.ButtonState = @headless.ButtonState::Default,
 ) -> @vnode.TuiNode {
   let (fg, bg) = match state {
     Default => ("white", "")
@@ -56,8 +56,8 @@ pub fn icon_button(
 /// Text button (no background, just text)
 pub fn text_button(
   label : String,
-  id? : String = "",
-  state? : @headless.ButtonState = @headless.ButtonState::Default,
+  id~ : String = "",
+  state~ : @headless.ButtonState = @headless.ButtonState::Default,
 ) -> @vnode.TuiNode {
   let _ = id // ID reserved for future ARIA support
   let (fg, underline) = match state {

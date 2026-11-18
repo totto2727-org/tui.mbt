@@ -75,12 +75,12 @@ pub fn ansi_fg_gray() -> String {
 }
 
 ///|
-pub fn ansi_fg_256(color_idx : Int) -> String {
+pub fn ansi_fg_256(color_idx : Int32) -> String {
   @ansi.ansi_fg_256(color_idx)
 }
 
 ///|
-pub fn ansi_bg_256(color_idx : Int) -> String {
+pub fn ansi_bg_256(color_idx : Int32) -> String {
   @ansi.ansi_bg_256(color_idx)
 }
 
@@ -92,30 +92,30 @@ pub fn ansi_bg_reset() -> String {
 
 ///|
 /// Move cursor up by n lines
-pub fn ansi_move_up(n? : Int = 1) -> String {
+pub fn ansi_move_up(n~ : Int32 = 1) -> String {
   @ansi.ansi_move_up(n~)
 }
 
 ///|
 /// Move cursor down by n lines
-pub fn ansi_move_down(n? : Int = 1) -> String {
+pub fn ansi_move_down(n~ : Int32 = 1) -> String {
   @ansi.ansi_move_down(n~)
 }
 
 ///|
 /// Move cursor right by n columns
-pub fn ansi_move_right(n? : Int = 1) -> String {
+pub fn ansi_move_right(n~ : Int32 = 1) -> String {
   @ansi.ansi_move_right(n~)
 }
 
 ///|
 /// Move cursor left by n columns
-pub fn ansi_move_left(n? : Int = 1) -> String {
+pub fn ansi_move_left(n~ : Int32 = 1) -> String {
   @ansi.ansi_move_left(n~)
 }
 
 ///|
-pub fn ansi_move_to(row : Int, col : Int) -> String {
+pub fn ansi_move_to(row : Int32, col : Int32) -> String {
   @ansi.ansi_move_to(row, col)
 }
 
@@ -163,12 +163,12 @@ pub fn ansi_full_reset() -> String {
 
 ///|
 /// Convert RGB color to 256-color palette index
-pub fn rgb_to_256(r : Int, g : Int, b : Int) -> Int {
+pub fn rgb_to_256(r : Int32, g : Int32, b : Int32) -> Int32 {
   @ansi.rgb_to_256(r, g, b)
 }
 
 ///|
-pub fn color_to_256(color : @core.Color) -> Int {
+pub fn color_to_256(color : @core.Color) -> Int32 {
   rgb_to_256(color.r, color.g, color.b)
 }
 
@@ -254,8 +254,8 @@ pub fn CharBuffer::to_ansi(self : CharBuffer) -> String {
 /// Convert CharBuffer to ANSI-encoded string with an offset
 pub fn CharBuffer::to_ansi_offset(
   self : CharBuffer,
-  row_offset : Int,
-  col_offset : Int,
+  row_offset : Int32,
+  col_offset : Int32,
 ) -> String {
   let sb = StringBuilder()
   let mut last_fg = -1
@@ -400,8 +400,8 @@ pub fn CharBuffer::diff_to_ansi(self : CharBuffer, prev : CharBuffer) -> String 
 pub fn CharBuffer::diff_to_ansi_offset(
   self : CharBuffer,
   prev : CharBuffer,
-  row_offset : Int,
-  col_offset : Int,
+  row_offset : Int32,
+  col_offset : Int32,
 ) -> String {
   let sb = StringBuilder()
   let mut last_row = -1

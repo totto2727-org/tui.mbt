@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/events"
+package "totto2727/tui/events"
 
 import {
   "mizchi/crater-core",
-  "mizchi/tui/core",
+  "totto2727/tui/core",
   "moonbitlang/core/debug",
 }
 

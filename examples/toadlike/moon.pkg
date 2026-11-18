@@ -1,10 +1,10 @@
 import {
-  "mizchi/tui",
-  "mizchi/tui/vnode",
-  "mizchi/tui/components" @ui,
-  "mizchi/tui/logics",
-  "mizchi/tui/headless",
-  "mizchi/tui/render",
+  "totto2727/tui",
+  "totto2727/tui/vnode",
+  "totto2727/tui/components" @ui,
+  "totto2727/tui/logics",
+  "totto2727/tui/headless",
+  "totto2727/tui/render",
   "mizchi/signals",
   "moonbitlang/async",
 }

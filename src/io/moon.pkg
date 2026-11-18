@@ -1,8 +1,8 @@
 import {
-  "mizchi/tui/core",
-  "mizchi/tui/events",
-  "mizchi/tui/input",
-  "mizchi/tui/render",
+  "totto2727/tui/core",
+  "totto2727/tui/events",
+  "totto2727/tui/input",
+  "totto2727/tui/render",
   "moonbitlang/async",
   "moonbitlang/async/js_async",
   "moonbitlang/async/stdio",

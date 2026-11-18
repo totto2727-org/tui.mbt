@@ -38,9 +38,9 @@ pub fn[T] TreeNode::is_leaf(self : TreeNode[T]) -> Bool {
 pub fn[T] TreeNode::flatten(
   self : TreeNode[T],
   expanded_ids : Array[String],
-) -> Array[(Int, TreeNode[T])] {
-  let result : Array[(Int, TreeNode[T])] = []
-  fn walk(node : TreeNode[T], depth : Int) {
+) -> Array[(Int32, TreeNode[T])] {
+  let result : Array[(Int32, TreeNode[T])] = []
+  fn walk(node : TreeNode[T], depth : Int32) {
     result.push((depth, node))
     if node.children.length() > 0 && expanded_ids.contains(node.id) {
       for child in node.children {
@@ -58,8 +58,8 @@ pub fn[T] TreeNode::flatten(
 pub fn[T] flatten_forest(
   roots : Array[TreeNode[T]],
   expanded_ids : Array[String],
-) -> Array[(Int, TreeNode[T])] {
-  let result : Array[(Int, TreeNode[T])] = []
+) -> Array[(Int32, TreeNode[T])] {
+  let result : Array[(Int32, TreeNode[T])] = []
   for root in roots {
     let items = root.flatten(expanded_ids)
     for item in items {

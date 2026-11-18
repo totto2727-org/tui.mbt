@@ -47,7 +47,7 @@ pub fn text_measure_func(text : String) -> @ccore.MeasureFunc {
 }
 
 ///|
-fn calculate_wrapped_height(text : String, max_width : Int) -> Int {
+fn calculate_wrapped_height(text : String, max_width : Int32) -> Int32 {
   let mut lines = 1
   let mut current_width = 0
   for c in text {

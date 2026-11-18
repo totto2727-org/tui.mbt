@@ -1,4 +1,4 @@
-# mizchi/tui
+# totto2727/tui
 
 Terminal UI library for MoonBit with virtual DOM-based rendering.
 
@@ -17,21 +17,21 @@ Supported targets: `js`, `native`
 ## Installation
 
 ```
-moon add mizchi/tui
+moon add totto2727/tui
 ```
 
 Or add it to your `moon.mod` directly:
 
 ```
 import {
-  "mizchi/tui@0.10.2",
+  "totto2727/tui@0.10.2",
 }
 ```
 
 ## Package Structure
 
 ```
-mizchi/tui/
+totto2727/tui/
 ├── vnode/      # Virtual DOM primitives (row, column, view, grid, text)
 ├── components/ # Styled UI components (button, modal, table, etc.)
 ├── headless/   # State types (ButtonState, InputState, etc.)

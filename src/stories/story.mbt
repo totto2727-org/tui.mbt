@@ -12,9 +12,9 @@ pub(all) struct Story {
   /// Story name (e.g., "normal", "hover", "disabled")
   name : String
   /// Viewport width for rendering
-  width : Int
+  width : Int32
   /// Viewport height for rendering
-  height : Int
+  height : Int32
   /// Component factory function
   render : () -> @core.Component
 }
@@ -25,8 +25,8 @@ pub fn Story::new(
   category : String,
   name : String,
   render : () -> @core.Component,
-  width? : Int = 30,
-  height? : Int = 5,
+  width~ : Int32 = 30,
+  height~ : Int32 = 5,
 ) -> Story {
   { category, name, width, height, render, }
 }
@@ -134,9 +134,9 @@ pub(all) struct VNodeStory {
   /// Story name (e.g., "normal", "hover", "disabled")
   name : String
   /// Viewport width for rendering
-  width : Int
+  width : Int32
   /// Viewport height for rendering
-  height : Int
+  height : Int32
   /// VNode factory function
   render : () -> @vnode.TuiNode
 }
@@ -147,8 +147,8 @@ pub fn VNodeStory::new(
   category : String,
   name : String,
   render : () -> @vnode.TuiNode,
-  width? : Int = 30,
-  height? : Int = 5,
+  width~ : Int32 = 30,
+  height~ : Int32 = 5,
 ) -> VNodeStory {
   { category, name, width, height, render, }
 }

@@ -152,7 +152,7 @@ pub struct TypedRenderContext {
   texts : Map[String, String]
   handlers : Map[String, (TuiEvent) -> Unit]
   roles : Map[String, @core.Role]
-  mut id_counter : Int
+  mut id_counter : Int32
   // Stack of grid area maps (for nested grids) - mirrors RenderContext
   area_stack : Array[Map[String, GridAreaInfo]]
 }

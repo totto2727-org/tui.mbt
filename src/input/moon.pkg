@@ -1,4 +1,4 @@
 import {
-  "mizchi/tui/core",
-  "mizchi/tui/events",
+  "totto2727/tui/core",
+  "totto2727/tui/events",
 }

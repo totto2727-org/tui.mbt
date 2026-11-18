@@ -4,20 +4,24 @@
 ///|
 /// Character-based framebuffer
 pub struct CharBuffer {
-  width : Int
-  height : Int
+  width : Int32
+  height : Int32
   cells : Array[CharCell]
 }
 
 ///|
-pub fn CharBuffer::new(width : Int, height : Int) -> CharBuffer {
+pub fn CharBuffer::new(width : Int32, height : Int32) -> CharBuffer {
   let size = width * height
   let cells : Array[CharCell] = Array::make(size, CharCell::default())
   { width, height, cells, }
 }
 
 ///|
-pub fn CharBuffer::get_cell(self : CharBuffer, x : Int, y : Int) -> CharCell {
+pub fn CharBuffer::get_cell(
+  self : CharBuffer,
+  x : Int32,
+  y : Int32,
+) -> CharCell {
   if x >= 0 && x < self.width && y >= 0 && y < self.height {
     self.cells[y * self.width + x]
   } else {
@@ -28,8 +32,8 @@ pub fn CharBuffer::get_cell(self : CharBuffer, x : Int, y : Int) -> CharCell {
 ///|
 pub fn CharBuffer::set_cell(
   self : CharBuffer,
-  x : Int,
-  y : Int,
+  x : Int32,
+  y : Int32,
   cell : CharCell,
 ) -> Unit {
   if x >= 0 && x < self.width && y >= 0 && y < self.height {
@@ -40,10 +44,10 @@ pub fn CharBuffer::set_cell(
 ///|
 pub fn CharBuffer::fill_rect(
   self : CharBuffer,
-  x : Int,
-  y : Int,
-  w : Int,
-  h : Int,
+  x : Int32,
+  y : Int32,
+  w : Int32,
+  h : Int32,
   cell : CharCell,
 ) -> Unit {
   for row = y; row < y + h; row = row + 1 {
@@ -58,10 +62,10 @@ pub fn CharBuffer::fill_rect(
 /// This allows overlays to properly cover underlying content
 pub fn CharBuffer::fill_bg(
   self : CharBuffer,
-  x : Int,
-  y : Int,
-  w : Int,
-  h : Int,
+  x : Int32,
+  y : Int32,
+  w : Int32,
+  h : Int32,
   bg : @core.Color,
 ) -> Unit {
   for row = y; row < y + h; row = row + 1 {
@@ -84,12 +88,12 @@ pub fn CharBuffer::fill_bg(
 ///|
 pub fn CharBuffer::write_text(
   self : CharBuffer,
-  x : Int,
-  y : Int,
+  x : Int32,
+  y : Int32,
   text : String,
   style : TextStyle,
-  max_width : Int,
-) -> Int {
+  max_width : Int32,
+) -> Int32 {
   let mut cur_x = x
   let end_x = x + max_width
   for c in text {
@@ -141,13 +145,13 @@ pub fn CharBuffer::write_text(
 ///|
 pub fn CharBuffer::write_text_wrapped(
   self : CharBuffer,
-  x : Int,
-  y : Int,
+  x : Int32,
+  y : Int32,
   text : String,
   style : TextStyle,
-  max_width : Int,
-  max_height : Int,
-) -> Int {
+  max_width : Int32,
+  max_height : Int32,
+) -> Int32 {
   let mut cur_x = x
   let mut cur_y = y
   let end_x = x + max_width
