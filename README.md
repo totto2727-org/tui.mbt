@@ -172,6 +172,8 @@ Note: The chat example moved to `mizchi/vivebox`.
 
 See [docs/tutorial.mbt.md](docs/tutorial.mbt.md) for detailed API documentation.
 
+Fork maintainers: See [upstream differences](docs/upstream-differences.md).
+
 ## License
 
 MIT
