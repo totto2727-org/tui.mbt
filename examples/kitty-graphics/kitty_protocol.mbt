@@ -6,12 +6,13 @@ let kitty_suffix : String = "\u001b\\"
 
 ///|
 /// Crop rectangle in pixels.
+#derive(Debug, Eq)
 pub(all) struct CropRect {
   x : Int
   y : Int
   w : Int
   h : Int
-} derive(Debug, Eq)
+}
 
 ///|
 pub fn kitty_command(params : Array[String], payload? : String = "") -> String {

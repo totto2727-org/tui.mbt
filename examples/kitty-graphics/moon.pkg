@@ -10,7 +10,7 @@ import {
 
 import {
   "moonbitlang/core/encoding/utf8",
-} for "test"
+} for "wbtest"
 
 supported_targets = "js"
 

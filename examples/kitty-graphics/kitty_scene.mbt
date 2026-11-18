@@ -1,4 +1,5 @@
 ///|
+#derive(Debug, Eq)
 pub struct RectSprite {
   id : Int
   placement_id : Int
@@ -8,7 +9,7 @@ pub struct RectSprite {
   h : Int
   vx : Int
   vy : Int
-} derive(Debug, Eq)
+}
 
 ///|
 pub fn rect_sprite(
@@ -25,6 +26,7 @@ pub fn rect_sprite(
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct ImageSprite {
   id : Int
   placement_id : Int
@@ -35,7 +37,7 @@ pub struct ImageSprite {
   crop : @image.ImageRect?
   vx : Int
   vy : Int
-} derive(Debug, Eq)
+}
 
 ///|
 pub fn image_sprite(
