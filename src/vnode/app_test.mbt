@@ -1,4 +1,22 @@
 ///|
+using @vnode {
+  type TuiEvent,
+  type TuiNode,
+  type VNodeApp,
+  column,
+  component,
+  for_each,
+  hspace,
+  render_overlay_at,
+  render_to_lines,
+  render_vnode_once,
+  row,
+  show,
+  text,
+  text_dyn,
+}
+
+///|
 test "VNodeApp: simple render" {
   let app = VNodeApp::new(20, 5)
   let output = app.render(text("Hello"))

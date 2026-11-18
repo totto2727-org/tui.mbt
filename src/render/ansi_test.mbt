@@ -1,4 +1,22 @@
 ///|
+using @render {
+  ansi_bg_color,
+  ansi_bold,
+  ansi_clear_screen,
+  ansi_enter_alt_screen,
+  ansi_fg_color,
+  ansi_hide_cursor,
+  ansi_leave_alt_screen,
+  ansi_move_to,
+  ansi_reset,
+  ansi_show_cursor,
+  ansi_underline,
+  disable_mouse,
+  enable_mouse,
+  rgb_to_256,
+}
+
+///|
 /// Tests for ANSI escape sequence generation
 
 ///|

@@ -1,4 +1,7 @@
 ///|
+using @render {type CharBuffer, type CharCell, type TextStyle}
+
+///|
 /// Tests for basic rectangle operations on CharBuffer
 
 ///|

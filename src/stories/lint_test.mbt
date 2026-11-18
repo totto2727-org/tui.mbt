@@ -1,4 +1,7 @@
 ///|
+using @stories {type VNodeStory, all_stories, lint_all, lint_odd_dimensions}
+
+///|
 /// Tests for lint utilities
 
 ///|

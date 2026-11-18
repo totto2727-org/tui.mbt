@@ -1,4 +1,7 @@
 ///|
+using @testing {type VirtualTerminal}
+
+///|
 /// Tests for VirtualTerminal - headless terminal emulator
 
 // =============================================================================

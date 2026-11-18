@@ -1,4 +1,7 @@
 ///|
+using @io {get_terminal_size, is_raw_mode, is_tty}
+
+///|
 /// Tests for TTY detection and /dev/tty fallback functionality
 
 ///|

@@ -1,4 +1,7 @@
 ///|
+using @testing {type VNodeTestHarness}
+
+///|
 /// Tests for VNodeTestHarness
 
 ///|

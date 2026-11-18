@@ -1,4 +1,7 @@
 ///|
+using @stories {render_overlay_plain}
+
+///|
 /// Boundary tests for center alignment under floating-point layout values.
 
 ///|
