@@ -8,20 +8,21 @@
 
 ///|
 /// Button state enum
+#derive(Debug, Eq)
 pub(all) enum ButtonState {
   Default
   Hovered
   Focused
   Pressed
   Disabled
-} derive(Debug, Eq)
+}
 
 ///|
 pub impl Show for ButtonState with fn output(
   self : ButtonState,
   logger : &Logger,
 ) -> Unit {
-  Show::output(self.to_repr(), logger)
+  Show::output(@debug.Debug::to_repr(self), logger)
 }
 
 ///|
@@ -78,7 +79,7 @@ pub(all) struct ToggleState {
 
 ///|
 /// Create default toggle state
-pub fn ToggleState::new(checked? : Bool = false) -> ToggleState {
+pub fn ToggleState::new(checked~ : Bool = false) -> ToggleState {
   { checked, focused: false, disabled: false, }
 }
 
@@ -115,7 +116,7 @@ pub(all) struct SelectionState {
 
 ///|
 /// Create default selection state
-pub fn SelectionState::new(selected_id? : String = "") -> SelectionState {
+pub fn SelectionState::new(selected_id~ : String = "") -> SelectionState {
   { selected_id, focused_id: selected_id, open: false, }
 }
 
@@ -191,7 +192,7 @@ pub(all) struct AccordionState {
 
 ///|
 /// Create accordion state
-pub fn AccordionState::new(allow_multiple? : Bool = false) -> AccordionState {
+pub fn AccordionState::new(allow_multiple~ : Bool = false) -> AccordionState {
   { expanded_ids: [], allow_multiple, }
 }
 
@@ -246,7 +247,7 @@ pub(all) struct ToastState {
 /// Create a new toast state
 pub fn ToastState::new(
   message : String,
-  level? : ToastLevel = Info,
+  level~ : ToastLevel = Info,
 ) -> ToastState {
   { message, level, visible: true, }
 }
@@ -264,17 +265,17 @@ pub fn ToastState::dismiss(self : ToastState) -> ToastState {
 ///|
 /// 2D grid selection state
 pub(all) struct GridSelectState {
-  columns : Int
-  selected : Int
-  total : Int
+  columns : Int32
+  selected : Int32
+  total : Int32
 }
 
 ///|
 /// Create a new grid select state
 pub fn GridSelectState::new(
-  columns : Int,
-  total : Int,
-  selected? : Int = 0,
+  columns : Int32,
+  total : Int32,
+  selected~ : Int32 = 0,
 ) -> GridSelectState {
   { columns, total, selected, }
 }
@@ -324,7 +325,7 @@ pub fn GridSelectState::move_up(self : GridSelectState) -> GridSelectState {
 
 ///|
 /// Get row and column of current selection
-pub fn GridSelectState::position(self : GridSelectState) -> (Int, Int) {
+pub fn GridSelectState::position(self : GridSelectState) -> (Int32, Int32) {
   (self.selected / self.columns, self.selected % self.columns)
 }
 
@@ -385,7 +386,7 @@ pub fn TreeState::focus(self : TreeState, id : String) -> TreeState {
 /// Focus navigation helper for keyboard navigation
 pub(all) struct FocusNav {
   ids : Array[String]
-  current_index : Int
+  current_index : Int32
 }
 
 ///|
@@ -456,8 +457,8 @@ pub fn FocusNav::is_focused(self : FocusNav, id : String) -> Bool {
 pub fn resolve_button_state(
   id : String,
   hover_id : String,
-  focus? : FocusNav? = None,
-  disabled? : Bool = false,
+  focus~ : FocusNav? = None,
+  disabled~ : Bool = false,
 ) -> ButtonState {
   if disabled {
     return Disabled

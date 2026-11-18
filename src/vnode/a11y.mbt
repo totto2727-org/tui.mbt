@@ -2,12 +2,13 @@
 /// Accessibility tree extraction for vnode layouts
 
 ///|
+#derive(Debug)
 pub struct A11yRect {
-  x : Int
-  y : Int
-  width : Int
-  height : Int
-} derive(Debug)
+  x : Int32
+  y : Int32
+  width : Int32
+  height : Int32
+}
 
 ///|
 fn[T : Debug] show_debug(value : T, logger : &Logger) -> Unit {
@@ -20,13 +21,14 @@ pub impl Show for A11yRect with fn output(self : A11yRect, logger : &Logger) -> 
 }
 
 ///|
+#derive(Debug)
 pub struct A11yNode {
   id : String
   role : @core.Role
   name : String
   rect : A11yRect
   children : Array[A11yNode]
-} derive(Debug)
+}
 
 ///|
 pub impl Show for A11yNode with fn output(self : A11yNode, logger : &Logger) -> Unit {
@@ -126,9 +128,9 @@ pub fn build_a11y_tree(
 }
 
 ///|
-fn dump_a11y_node(node : A11yNode, depth : Int) -> String {
+fn dump_a11y_node(node : A11yNode, depth : Int32) -> String {
   let indent = "  ".repeat(depth)
-  let role = node.role.to_string()
+  let role = Show::to_string(node.role)
   let name = if node.name == "" { "" } else { " name=\"" + node.name + "\"" }
   let rect = " rect=(" +
     node.rect.x.to_string() +

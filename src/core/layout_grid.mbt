@@ -3,21 +3,22 @@
 /// Converts floating-point layout output into stable monospace cell rects.
 
 ///|
+#derive(Eq, Debug)
 pub struct GridRect {
-  x : Int
-  y : Int
-  width : Int
-  height : Int
-} derive(Eq, Debug)
+  x : Int32
+  y : Int32
+  width : Int32
+  height : Int32
+}
 
 ///|
 pub impl Show for GridRect with fn output(self : GridRect, logger : &Logger) -> Unit {
-  Show::output(self.to_repr(), logger)
+  Show::output(@debug.Debug::to_repr(self), logger)
 }
 
 ///|
 /// Snap a floating-point coordinate to the nearest terminal cell.
-pub fn snap_to_grid(value : Double) -> Int {
+pub fn snap_to_grid(value : Double) -> Int32 {
   if value >= 0.0 {
     (value + 0.5).to_int()
   } else {

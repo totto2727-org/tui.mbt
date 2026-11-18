@@ -5,6 +5,7 @@
 ///|
 /// ARIA role for accessibility
 /// Based on WAI-ARIA 1.2 roles
+#derive(Debug, Eq)
 pub(all) enum Role {
   // Widget roles
   Button
@@ -63,7 +64,7 @@ pub(all) enum Role {
   Dialog
   // Custom role
   Custom(String)
-} derive(Debug, Eq)
+}
 
 ///|
 fn[T : Debug] show_debug(value : T, logger : &Logger) -> Unit {

@@ -14,7 +14,7 @@ fn spans_signature(spans : Array[HighlightSpan]) -> String {
     if i > 0 {
       sb.write_char('|')
     }
-    sb.write_string(span.tag.to_string())
+    sb.write_string(Show::to_string(span.tag))
     sb.write_char(':')
     sb.write_string(span.text)
   }
@@ -73,8 +73,8 @@ fn strip_ansi(s : String) -> String {
 ///|
 fn render_lines_plain(
   state : EditorState,
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
 ) -> Array[String] {
   let node = render_editor(state, width, height)
   let plain = @vnode.render_to_lines(node).map(line => strip_ansi(line))
@@ -84,8 +84,8 @@ fn render_lines_plain(
 ///|
 fn render_lines_ansi(
   state : EditorState,
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
 ) -> Array[String] {
   let node = render_editor(state, width, height)
   @vnode.render_to_lines(node)
@@ -95,7 +95,7 @@ fn render_lines_ansi(
 fn restore_caret_in_lines(
   lines : Array[String],
   state : EditorState,
-  width : Int,
+  width : Int32,
 ) -> Array[String] {
   let header_height = 1
   let total_lines = state.doc.line_count()

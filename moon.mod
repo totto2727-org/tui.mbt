@@ -4,14 +4,14 @@ version = "0.10.2"
 
 import {
   "mizchi/layout@0.2.1",
-  "mizchi/crater-core@0.18.0",
-  "mizchi/crater-layout@0.18.0",
-  "mizchi/css@0.2.0",
+  "mizchi/crater-core@0.19.2",
+  "mizchi/crater-layout@0.19.2",
+  "mizchi/css@0.8.0",
   "mizchi/signals@0.6.5",
-  "mizchi/tui-terminal-buffer@0.1.3",
-  "moonbitlang/async@0.21.3",
+  "mizchi/tui-terminal-buffer@0.1.4",
+  "moonbitlang/async@0.22.9",
   "mizchi/syntree@0.2.4",
-  "moonbitlang/x@0.5.4",
+  "moonbitlang/x@0.5.7",
 }
 
 readme = "README.md"

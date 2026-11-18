@@ -867,7 +867,7 @@ fn parse_border_value(s : String) -> BorderValue {
 ///|
 fn parse_color_value(s : String) -> ColorValue {
   if s.has_prefix("rgb(") && s.has_suffix(")") && s.length() > 5 {
-    let inner = s.view(start_offset=4, end_offset=s.length() - 1)
+    let inner = s.exact_view(start=4, end=s.length() - 1)
     let parts = inner.split(",").collect()
     if parts.length() == 3 {
       return try {
@@ -887,7 +887,7 @@ fn parse_color_value(s : String) -> ColorValue {
 fn parse_role_value(s : String) -> @core.Role {
   let v = s.to_lower()
   if v.has_prefix("custom:") && v.length() > 7 {
-    return @core.Role::Custom(v.view(start_offset=7).to_owned())
+    return @core.Role::Custom(v.exact_view(start=7).to_owned())
   }
   match v {
     "button" => @core.Role::Button
