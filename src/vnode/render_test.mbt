@@ -1,4 +1,7 @@
 ///|
+using @vnode {type RenderContext, spacer, to_crater_node}
+
+///|
 test "to_crater_node: simple text" {
   let ctx = RenderContext::new()
   let node = text("Hello")

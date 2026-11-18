@@ -1,4 +1,22 @@
 ///|
+using @vnode {
+  type TuiEvent,
+  type TuiNode,
+  type VNodeApp,
+  column,
+  component,
+  for_each,
+  hspace,
+  render_overlay_at,
+  render_to_lines,
+  render_vnode_once,
+  row,
+  show,
+  text,
+  text_dyn,
+}
+
+///|
 test "VNodeApp: simple render" {
   let app = VNodeApp::new(20, 5)
   let output = app.render(text("Hello"))
@@ -145,7 +163,7 @@ test "VNodeApp: for_each" {
 ///|
 test "VNodeApp: text_dyn" {
   let app = VNodeApp::new(20, 5)
-  let counter : Ref[Int] = Ref(0)
+  let counter : Ref[Int32] = Ref(0)
   let node = text_dyn(fn() { "Count: " + counter.val.to_string() })
 
   // First render
@@ -217,7 +235,7 @@ test "VNodeApp: event handler registration" {
 ///|
 test "VNodeApp: handle_click dispatches event" {
   let app = VNodeApp::new(20, 5)
-  let click_count : Ref[Int] = Ref(0)
+  let click_count : Ref[Int32] = Ref(0)
 
   // Create a clickable button at a known position
   let node = column(width=20.0, height=5.0, [
@@ -261,7 +279,7 @@ test "completion popup: items in single lines" {
   let items = ["apple", "apricot", "avocado"]
   let selected = 1
   let query = "ap"
-  fn render_item(item : String, idx : Int) -> TuiNode {
+  fn render_item(item : String, idx : Int32) -> TuiNode {
     let is_selected = idx == selected
     let bg = if is_selected { "rgb(30,80,120)" } else { "rgb(60,60,60)" }
     let suffix = item.unsafe_substring(start=query.length(), end=item.length())
@@ -293,7 +311,7 @@ test "completion popup: render_to_lines" {
   let items = ["apple", "apricot", "avocado"]
   let selected = 1
   let query = "ap"
-  fn render_item(item : String, idx : Int) -> TuiNode {
+  fn render_item(item : String, idx : Int32) -> TuiNode {
     let is_selected = idx == selected
     let bg = if is_selected { "rgb(30,80,120)" } else { "rgb(60,60,60)" }
     let suffix = item.unsafe_substring(start=query.length(), end=item.length())

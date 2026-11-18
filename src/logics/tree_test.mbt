@@ -13,10 +13,11 @@ test "TreeNode leaf creation" {
 
 ///|
 test "TreeNode branch creation" {
-  let tree : @logics.TreeNode[Int] = @logics.TreeNode::branch("root", "Root", [
-    @logics.TreeNode::leaf("a", "A"),
-    @logics.TreeNode::leaf("b", "B"),
-  ])
+  let tree : @logics.TreeNode[Int32] = @logics.TreeNode::branch(
+    "root",
+    "Root",
+    [@logics.TreeNode::leaf("a", "A"), @logics.TreeNode::leaf("b", "B")],
+  )
   assert_eq(tree.id, "root")
   assert_false(tree.is_leaf())
   assert_eq(tree.children.length(), 2)
@@ -24,10 +25,11 @@ test "TreeNode branch creation" {
 
 ///|
 test "TreeNode flatten collapsed" {
-  let tree : @logics.TreeNode[Int] = @logics.TreeNode::branch("root", "Root", [
-    @logics.TreeNode::leaf("a", "A"),
-    @logics.TreeNode::leaf("b", "B"),
-  ])
+  let tree : @logics.TreeNode[Int32] = @logics.TreeNode::branch(
+    "root",
+    "Root",
+    [@logics.TreeNode::leaf("a", "A"), @logics.TreeNode::leaf("b", "B")],
+  )
   let flat = tree.flatten([])
   // Only root should be visible when collapsed
   assert_eq(flat.length(), 1)
@@ -37,10 +39,11 @@ test "TreeNode flatten collapsed" {
 
 ///|
 test "TreeNode flatten expanded" {
-  let tree : @logics.TreeNode[Int] = @logics.TreeNode::branch("root", "Root", [
-    @logics.TreeNode::leaf("a", "A"),
-    @logics.TreeNode::leaf("b", "B"),
-  ])
+  let tree : @logics.TreeNode[Int32] = @logics.TreeNode::branch(
+    "root",
+    "Root",
+    [@logics.TreeNode::leaf("a", "A"), @logics.TreeNode::leaf("b", "B")],
+  )
   let flat = tree.flatten(["root"])
   assert_eq(flat.length(), 3)
   assert_eq(flat[0].0, 0)
@@ -53,11 +56,15 @@ test "TreeNode flatten expanded" {
 
 ///|
 test "TreeNode flatten nested" {
-  let tree : @logics.TreeNode[Int] = @logics.TreeNode::branch("root", "Root", [
-    @logics.TreeNode::branch("sub", "Sub", [
-      @logics.TreeNode::leaf("leaf", "Leaf"),
-    ]),
-  ])
+  let tree : @logics.TreeNode[Int32] = @logics.TreeNode::branch(
+    "root",
+    "Root",
+    [
+      @logics.TreeNode::branch("sub", "Sub", [
+        @logics.TreeNode::leaf("leaf", "Leaf"),
+      ]),
+    ],
+  )
   // Expand root but not sub
   let flat1 = tree.flatten(["root"])
   assert_eq(flat1.length(), 2)
@@ -70,11 +77,15 @@ test "TreeNode flatten nested" {
 
 ///|
 test "TreeNode find" {
-  let tree : @logics.TreeNode[Int] = @logics.TreeNode::branch("root", "Root", [
-    @logics.TreeNode::branch("sub", "Sub", [
-      @logics.TreeNode::leaf("leaf", "Leaf"),
-    ]),
-  ])
+  let tree : @logics.TreeNode[Int32] = @logics.TreeNode::branch(
+    "root",
+    "Root",
+    [
+      @logics.TreeNode::branch("sub", "Sub", [
+        @logics.TreeNode::leaf("leaf", "Leaf"),
+      ]),
+    ],
+  )
   assert_eq(tree.find("leaf").unwrap().label, "Leaf")
   assert_eq(tree.find("root").unwrap().label, "Root")
   assert_true(tree.find("nonexistent") is None)
@@ -82,11 +93,15 @@ test "TreeNode find" {
 
 ///|
 test "TreeNode ancestors" {
-  let tree : @logics.TreeNode[Int] = @logics.TreeNode::branch("root", "Root", [
-    @logics.TreeNode::branch("sub", "Sub", [
-      @logics.TreeNode::leaf("leaf", "Leaf"),
-    ]),
-  ])
+  let tree : @logics.TreeNode[Int32] = @logics.TreeNode::branch(
+    "root",
+    "Root",
+    [
+      @logics.TreeNode::branch("sub", "Sub", [
+        @logics.TreeNode::leaf("leaf", "Leaf"),
+      ]),
+    ],
+  )
   let path = tree.ancestors("leaf")
   @debug.assert_eq(path, Some(["root", "sub"]))
   let root_path = tree.ancestors("root")
@@ -95,7 +110,7 @@ test "TreeNode ancestors" {
 
 ///|
 test "flatten_forest" {
-  let roots : Array[@logics.TreeNode[Int]] = [
+  let roots : Array[@logics.TreeNode[Int32]] = [
     @logics.TreeNode::branch("r1", "Root1", [@logics.TreeNode::leaf("a", "A")]),
     @logics.TreeNode::leaf("r2", "Root2"),
   ]

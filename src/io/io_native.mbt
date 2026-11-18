@@ -5,44 +5,44 @@
 // --- C FFI declarations ---
 
 ///|
-extern "C" fn tui_enable_raw_mode() -> Int = "tui_enable_raw_mode"
+extern "C" fn tui_enable_raw_mode() -> Int32 = "tui_enable_raw_mode"
 
 ///|
-extern "C" fn tui_disable_raw_mode() -> Int = "tui_disable_raw_mode"
+extern "C" fn tui_disable_raw_mode() -> Int32 = "tui_disable_raw_mode"
 
 ///|
-extern "C" fn tui_is_raw_mode() -> Int = "tui_is_raw_mode"
+extern "C" fn tui_is_raw_mode() -> Int32 = "tui_is_raw_mode"
 
 ///|
-extern "C" fn tui_get_terminal_cols() -> Int = "tui_get_terminal_cols"
+extern "C" fn tui_get_terminal_cols() -> Int32 = "tui_get_terminal_cols"
 
 ///|
-extern "C" fn tui_get_terminal_rows() -> Int = "tui_get_terminal_rows"
+extern "C" fn tui_get_terminal_rows() -> Int32 = "tui_get_terminal_rows"
 
 ///|
-extern "C" fn tui_read_byte() -> Int = "tui_read_byte"
+extern "C" fn tui_read_byte() -> Int32 = "tui_read_byte"
 
 ///|
 #borrow(buf)
-extern "C" fn tui_write_bytes_ffi(buf : FixedArray[Byte], len : Int) = "tui_write_bytes"
+extern "C" fn tui_write_bytes_ffi(buf : FixedArray[Byte], len : Int32) = "tui_write_bytes"
 
 ///|
 extern "C" fn tui_flush() = "tui_flush"
 
 ///|
-extern "C" fn tui_is_tty() -> Int = "tui_is_tty"
+extern "C" fn tui_is_tty() -> Int32 = "tui_is_tty"
 
 ///|
-extern "C" fn tui_sleep_ms(ms : Int) = "tui_sleep_ms"
+extern "C" fn tui_sleep_ms(ms : Int32) = "tui_sleep_ms"
 
 ///|
-extern "C" fn tui_get_time_ms() -> Int = "tui_get_time_ms"
+extern "C" fn tui_get_time_ms() -> Int32 = "tui_get_time_ms"
 
 // --- Helper functions ---
 
 ///|
 /// Decode UTF-8 bytes to a MoonBit String (UTF-16)
-fn bytes_to_string(buf : FixedArray[Byte], len : Int) -> String {
+fn bytes_to_string(buf : FixedArray[Byte], len : Int32) -> String {
   let chars : Array[Char] = []
   let mut i = 0
   while i < len {
@@ -112,7 +112,7 @@ pub fn is_raw_mode() -> Bool {
 
 ///|
 /// Get terminal size (columns, rows)
-pub fn get_terminal_size() -> (Int, Int) {
+pub fn get_terminal_size() -> (Int32, Int32) {
   let cols = tui_get_terminal_cols()
   let rows = tui_get_terminal_rows()
   (cols, rows)
@@ -179,7 +179,7 @@ pub fn read_key() -> String {
 
     // Helper to read a continuation byte with retry
     // Returns the byte value, or -1 if still not available after retries
-    fn read_continuation_byte() -> Int {
+    fn read_continuation_byte() -> Int32 {
       // First try without delay
       let b = tui_read_byte()
       if b >= 0 {
@@ -335,12 +335,12 @@ fn parse_raw_key_to_event(key : String) -> @events.KeyEvent {
       return @events.KeyEvent::Char('u', @events.KeyModifier::Ctrl)
     } else if code >= 32 {
       // Printable character
-      let c = Int::unsafe_to_char(code)
+      let c = Int32::unsafe_to_char(code)
       return @events.KeyEvent::Char(c, @events.KeyModifier::None)
     } else {
       // Other control character
       return @events.KeyEvent::Char(
-        Int::unsafe_to_char(code),
+        Int32::unsafe_to_char(code),
         @events.KeyModifier::Ctrl,
       )
     }
@@ -356,7 +356,7 @@ fn parse_raw_key_to_event(key : String) -> @events.KeyEvent {
 
 ///|
 /// Encode a Unicode code point to UTF-8 bytes
-fn encode_utf8(code : Int, buf : FixedArray[Byte], pos : Int) -> Int {
+fn encode_utf8(code : Int32, buf : FixedArray[Byte], pos : Int32) -> Int32 {
   if code < 0x80 {
     buf[pos] = code.to_byte()
     1
@@ -413,13 +413,13 @@ pub fn print_raw(s : String) -> Unit {
 
 ///|
 /// Sleep for milliseconds
-pub fn sleep(ms : Int) -> Unit {
+pub fn sleep(ms : Int32) -> Unit {
   tui_sleep_ms(ms)
 }
 
 ///|
 /// Get current time in milliseconds (monotonic)
-pub fn get_time_ms() -> Int {
+pub fn get_time_ms() -> Int32 {
   tui_get_time_ms()
 }
 
@@ -466,7 +466,7 @@ pub async fn print_raw_async(s : String) -> Unit {
 
 ///|
 /// Sleep for milliseconds (async version)
-pub async fn sleep_async(ms : Int) -> Unit {
+pub async fn sleep_async(ms : Int32) -> Unit {
   @async.sleep(ms)
 }
 
@@ -547,10 +547,10 @@ pub fn poll_keypress() -> Bool {
 /// Render display state with scroll support
 fn render_display_state(
   state : @input.DisplayState,
-  start_row : Int,
-  start_col : Int,
-  max_width : Int,
-  max_height : Int,
+  start_row : Int32,
+  start_col : Int32,
+  max_width : Int32,
+  max_height : Int32,
 ) -> Unit {
   let mut output = ""
   // Clear area
@@ -624,17 +624,17 @@ fn buf_to_string(buf : Array[Char]) -> String {
 /// on_completion: Optional callback (text, cursor_pos) -> completion_suffix
 ///                If provided and returns Some, Tab inserts the completion
 pub fn start_inplace_input(
-  row : Int,
-  col : Int,
-  width : Int,
-  height : Int,
+  row : Int32,
+  col : Int32,
+  width : Int32,
+  height : Int32,
   multiline : Bool,
   initial : String,
   on_result : (InputResult) -> Unit,
-  confirm_on_shift_enter? : Bool = false,
-  esc_cancels? : Bool = true,
-  on_lines_change? : ((Int) -> Int)? = None,
-  on_completion? : ((String, Int) -> String?)? = None,
+  confirm_on_shift_enter~ : Bool = false,
+  esc_cancels~ : Bool = true,
+  on_lines_change~ : ((Int32) -> Int32)? = None,
+  on_completion~ : ((String, Int32) -> String?)? = None,
 ) -> Unit {
   // Ensure raw mode is enabled
   let was_raw = is_raw_mode()
@@ -839,8 +839,8 @@ pub fn start_inline_input_cooked(
   field_name : String,
   initial : String,
   on_result : (InputResult) -> Unit,
-  confirm_on_shift_enter? : Bool = false,
-  esc_cancels? : Bool = true,
+  confirm_on_shift_enter~ : Bool = false,
+  esc_cancels~ : Bool = true,
 ) -> Unit {
   // Ensure raw mode is enabled for predictable key handling
   let was_raw = is_raw_mode()
@@ -856,7 +856,7 @@ pub fn start_inline_input_cooked(
   let mut max_rows = 1
   let mut max_cols = 1
   let reserve_rows = 1
-  fn parse_cursor_pos(resp : String) -> (Int, Int)? {
+  fn parse_cursor_pos(resp : String) -> (Int32, Int32)? {
     if !resp.has_prefix("\u001b[") || !resp.has_suffix("R") {
       return None
     }
@@ -893,7 +893,7 @@ pub fn start_inline_input_cooked(
 
   // Buffer to store any user input that was read while getting cursor position
   let pending_input : Array[String] = []
-  fn read_cursor_pos_fn() -> (Int, Int)? {
+  fn read_cursor_pos_fn() -> (Int32, Int32)? {
     print_raw("\u001b[6n")
     // Try to read cursor position response, but save any user input
     for attempt = 0; attempt < 10; attempt = attempt + 1 {
@@ -1103,17 +1103,17 @@ pub fn start_inline_input_cooked(
 
 ///|
 /// Keep alive non-blocking (no-op for native, used in JS for event loop)
-pub fn keep_alive_nonblocking(_ms : Int) -> Unit {
+pub fn keep_alive_nonblocking(_ms : Int32) -> Unit {
   // No-op for native - native uses blocking loop
 }
 
 ///|
 /// Start inline input (same as inplace input for native)
 pub fn start_inline_input(
-  row : Int,
-  col : Int,
-  width : Int,
-  height : Int,
+  row : Int32,
+  col : Int32,
+  width : Int32,
+  height : Int32,
   multiline : Bool,
   initial : String,
   on_result : (InputResult) -> Unit,
@@ -1123,20 +1123,20 @@ pub fn start_inline_input(
 
 ///|
 /// Start render ticker (stub - native uses polling loop instead)
-pub fn start_render_ticker(_ms : Int, _callback : () -> Unit) -> Int {
+pub fn start_render_ticker(_ms : Int32, _callback : () -> Unit) -> Int32 {
   // Native doesn't need a render ticker - it uses a polling loop
   0
 }
 
 ///|
 /// Stop render ticker (stub)
-pub fn stop_render_ticker(_ticker_id : Int) -> Unit {
+pub fn stop_render_ticker(_ticker_id : Int32) -> Unit {
   // No-op for native
 }
 
 ///|
 /// Start resize listener (stub - native does not emit resize events)
-pub fn start_resize_listener(_callback : (Int, Int) -> Unit) -> Unit {
+pub fn start_resize_listener(_callback : (Int32, Int32) -> Unit) -> Unit {
   // No-op for native
 }
 
@@ -1149,10 +1149,10 @@ pub fn stop_resize_listener() -> Unit {
 ///|
 /// Start input session with callback (wrapper for start_inplace_input)
 pub fn start_input_session_cb(
-  row : Int,
-  col : Int,
-  width : Int,
-  height : Int,
+  row : Int32,
+  col : Int32,
+  width : Int32,
+  height : Int32,
   multiline : Bool,
   initial : String,
   on_result : (InputResult) -> Unit,

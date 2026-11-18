@@ -1,4 +1,7 @@
 ///|
+using @stories {modal_stories}
+
+///|
 /// Snapshot tests for modal stories centering
 
 ///|

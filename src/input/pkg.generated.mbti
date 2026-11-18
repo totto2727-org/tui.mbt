@@ -1,8 +1,8 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/input"
+package "totto2727/tui/input"
 
 import {
-  "mizchi/tui/events",
+  "totto2727/tui/events",
   "moonbitlang/core/debug",
 }
 

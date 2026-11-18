@@ -1,4 +1,7 @@
 ///|
+using @vnode {type FocusContext}
+
+///|
 /// Tests for focus management
 test "FocusContext basic registration" {
   let ctx = FocusContext::new()

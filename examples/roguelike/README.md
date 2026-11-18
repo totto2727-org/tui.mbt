@@ -1,6 +1,6 @@
 # Roguelike (tui.mbt example)
 
-Small terminal roguelike prototype built on `mizchi/tui` + `mizchi/signals`.
+Small terminal roguelike prototype built on `totto2727/tui` + `mizchi/signals`.
 
 ## Implemented
 
@@ -25,7 +25,7 @@ Small terminal roguelike prototype built on `mizchi/tui` + `mizchi/signals`.
 ## Run
 
 ```bash
-cd /Users/mz/ghq/github.com/mizchi/tui.mbt/examples/roguelike
+cd /Users/mz/ghq/github.com/totto2727-org/tui.mbt/examples/roguelike
 moon run
 ```
 

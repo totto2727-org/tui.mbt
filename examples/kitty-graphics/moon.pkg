@@ -1,7 +1,7 @@
 import {
-  "mizchi/tui",
-  "mizchi/tui/io",
-  "mizchi/tui/image",
+  "totto2727/tui",
+  "totto2727/tui/io",
+  "totto2727/tui/image",
   "moonbitlang/async",
   "moonbitlang/core/env",
   "moonbitlang/core/math",
@@ -10,7 +10,7 @@ import {
 
 import {
   "moonbitlang/core/encoding/utf8",
-} for "test"
+} for "wbtest"
 
 supported_targets = "js"
 

@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/logics"
+package "totto2727/tui/logics"
 
 // Values
 pub fn diff_lines(Array[String], Array[String]) -> Array[DiffOp]

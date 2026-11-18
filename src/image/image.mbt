@@ -1,9 +1,10 @@
 ///|
 /// Image payload format.
+#derive(Debug, Eq)
 pub enum ImageFormat {
   Png
   Rgb
-} derive(Debug, Eq)
+}
 
 ///|
 fn[T : Debug] show_debug(value : T, logger : &Logger) -> Unit {
@@ -20,12 +21,13 @@ pub impl Show for ImageFormat with fn output(
 
 ///|
 /// Base64 payload image with explicit dimensions.
+#derive(Debug)
 pub struct ImageAsset {
-  width : Int
-  height : Int
+  width : Int32
+  height : Int32
   format : ImageFormat
   payload_base64 : String
-} derive(Debug)
+}
 
 ///|
 pub impl Show for ImageAsset with fn output(self : ImageAsset, logger : &Logger) -> Unit {
@@ -34,12 +36,13 @@ pub impl Show for ImageAsset with fn output(self : ImageAsset, logger : &Logger)
 
 ///|
 /// Rectangle in pixels.
+#derive(Debug, Eq)
 pub struct ImageRect {
-  x : Int
-  y : Int
-  w : Int
-  h : Int
-} derive(Debug, Eq)
+  x : Int32
+  y : Int32
+  w : Int32
+  h : Int32
+}
 
 ///|
 pub impl Show for ImageRect with fn output(self : ImageRect, logger : &Logger) -> Unit {
@@ -48,7 +51,7 @@ pub impl Show for ImageRect with fn output(self : ImageRect, logger : &Logger) -
 
 ///|
 /// Construct a rectangle.
-pub fn image_rect(x : Int, y : Int, w : Int, h : Int) -> ImageRect {
+pub fn image_rect(x : Int32, y : Int32, w : Int32, h : Int32) -> ImageRect {
   ImageRect::{ x, y, w, h, }
 }
 
@@ -56,7 +59,7 @@ pub fn image_rect(x : Int, y : Int, w : Int, h : Int) -> ImageRect {
 let base64_table : Array[Char] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".to_array()
 
 ///|
-fn clamp_int(value : Int, min_value : Int, max_value : Int) -> Int {
+fn clamp_int(value : Int32, min_value : Int32, max_value : Int32) -> Int32 {
   if value < min_value {
     min_value
   } else if value > max_value {
@@ -67,7 +70,7 @@ fn clamp_int(value : Int, min_value : Int, max_value : Int) -> Int {
 }
 
 ///|
-fn normalize_dim(value : Int) -> Int {
+fn normalize_dim(value : Int32) -> Int32 {
   if value <= 0 {
     1
   } else {
@@ -82,7 +85,7 @@ pub fn base64_encode(bytes : BytesView) -> String {
   if len == 0 {
     return ""
   }
-  let sb = StringBuilder(size_hint=(len + 2) / 3 * 4)
+  let sb = StringBuilder(capacity=(len + 2) / 3 * 4)
   let mut i = 0
   while i < len {
     let b0 = bytes[i].to_int()
@@ -113,8 +116,8 @@ pub fn base64_encode(bytes : BytesView) -> String {
 ///|
 /// Build a raw RGB image asset (payload is base64 encoded).
 pub fn image_asset_rgb(
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
   bytes : BytesView,
 ) -> ImageAsset {
   let w = normalize_dim(width)
@@ -130,8 +133,8 @@ pub fn image_asset_rgb(
 ///|
 /// Build a PNG image asset (payload is base64 encoded).
 pub fn image_asset_png(
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
   bytes : BytesView,
 ) -> ImageAsset {
   let w = normalize_dim(width)
@@ -146,7 +149,11 @@ pub fn image_asset_png(
 
 ///|
 /// Read a PNG file and return an image asset.
-pub fn read_png_asset(path : String, width : Int, height : Int) -> ImageAsset? {
+pub fn read_png_asset(
+  path : String,
+  width : Int32,
+  height : Int32,
+) -> ImageAsset? {
   try @fs.read_file_to_bytes(path) catch {
     _ => None
   } noraise {
@@ -156,7 +163,7 @@ pub fn read_png_asset(path : String, width : Int, height : Int) -> ImageAsset? {
 
 ///|
 /// Clamp a rectangle within image bounds.
-pub fn clamp_rect(width : Int, height : Int, rect : ImageRect) -> ImageRect {
+pub fn clamp_rect(width : Int32, height : Int32, rect : ImageRect) -> ImageRect {
   let w = clamp_int(rect.w, 1, normalize_dim(width))
   let h = clamp_int(rect.h, 1, normalize_dim(height))
   let max_x = if width <= w { 0 } else { width - w }
@@ -169,10 +176,10 @@ pub fn clamp_rect(width : Int, height : Int, rect : ImageRect) -> ImageRect {
 ///|
 /// Center a rectangle within image bounds.
 pub fn center_rect(
-  width : Int,
-  height : Int,
-  rect_w : Int,
-  rect_h : Int,
+  width : Int32,
+  height : Int32,
+  rect_w : Int32,
+  rect_h : Int32,
 ) -> ImageRect {
   let w = clamp_int(rect_w, 1, normalize_dim(width))
   let h = clamp_int(rect_h, 1, normalize_dim(height))

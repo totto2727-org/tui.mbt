@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/term"
+package "totto2727/tui/term"
 
 import {
-  "mizchi/tui/events",
-  "mizchi/tui/io",
+  "totto2727/tui/events",
+  "totto2727/tui/io",
 }
 
 // Values

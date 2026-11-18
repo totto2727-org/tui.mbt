@@ -42,7 +42,7 @@ fn main {
   let app = VNodeApp::new(width, height)
 
   // Get input state based on focus and editing
-  fn get_input_state(index : Int) -> InputState {
+  fn get_input_state(index : Int32) -> InputState {
     if editing.get() && focus_index.get() == index {
       InputState::Editing
     } else if focus_index.get() == index {

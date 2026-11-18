@@ -8,7 +8,7 @@ pub using @headless {type TreeState}
 ///|
 /// Build a single line string for a tree node
 fn tree_line(
-  depth : Int,
+  depth : Int32,
   node : @logics.TreeNode[String],
   state : @headless.TreeState,
 ) -> String {
@@ -32,7 +32,7 @@ fn tree_line(
 pub fn tree_view(
   root : @logics.TreeNode[String],
   state : @headless.TreeState,
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let flat = root.flatten(state.expanded_ids)
   let mut content = ""
@@ -50,7 +50,7 @@ pub fn tree_view(
 pub fn tree_view_forest(
   roots : Array[@logics.TreeNode[String]],
   state : @headless.TreeState,
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let flat = @logics.flatten_forest(roots, state.expanded_ids)
   let mut content = ""

@@ -57,7 +57,7 @@ fn highlight_theme() -> @syn_highlight.HighlightTheme {
 }
 
 ///|
-fn hex_value(c : Char) -> Int? {
+fn hex_value(c : Char) -> Int32? {
   if c.is_ascii_digit() {
     Some(c.to_int() - '0'.to_int())
   } else if c.is_ascii_lowercase() {
@@ -70,7 +70,7 @@ fn hex_value(c : Char) -> Int? {
 }
 
 ///|
-fn hex_pair(a : Char, b : Char) -> Int? {
+fn hex_pair(a : Char, b : Char) -> Int32? {
   match (hex_value(a), hex_value(b)) {
     (Some(hi), Some(lo)) => Some(hi * 16 + lo)
     _ => None
@@ -152,7 +152,7 @@ fn HighlightState::new(kind : HighlightKind, doc : Document) -> HighlightState {
 ///|
 fn HighlightState::line_spans(
   self : HighlightState,
-  line : Int,
+  line : Int32,
 ) -> Array[HighlightSpan] {
   if line >= 0 && line < self.spans.length() {
     self.spans[line]
@@ -165,7 +165,7 @@ fn HighlightState::line_spans(
 fn HighlightState::update(
   self : HighlightState,
   doc : Document,
-  edit_line : Int,
+  edit_line : Int32,
 ) -> Unit {
   match get_highlighter(self.kind) {
     Some(highlighter) =>
@@ -206,8 +206,8 @@ fn build_plain_spans(doc : Document) -> Array[Array[HighlightSpan]] {
 }
 
 ///|
-fn compute_line_starts(lines : Array[String]) -> Array[Int] {
-  let starts : Array[Int] = []
+fn compute_line_starts(lines : Array[String]) -> Array[Int32] {
+  let starts : Array[Int32] = []
   let mut offset = 0
   for i, line in lines {
     starts.push(offset)
@@ -220,8 +220,8 @@ fn compute_line_starts(lines : Array[String]) -> Array[Int] {
 }
 
 ///|
-fn build_char_offsets(text : String) -> Array[Int] {
-  let offsets : Array[Int] = []
+fn build_char_offsets(text : String) -> Array[Int32] {
+  let offsets : Array[Int32] = []
   let mut pos = 0
   offsets.push(0)
   for c in text {
@@ -232,7 +232,11 @@ fn build_char_offsets(text : String) -> Array[Int] {
 }
 
 ///|
-fn to_utf16_offset(offsets : Array[Int], pos : Int, text_len : Int) -> Int {
+fn to_utf16_offset(
+  offsets : Array[Int32],
+  pos : Int32,
+  text_len : Int32,
+) -> Int32 {
   if pos <= 0 {
     0
   } else if pos >= offsets.length() {

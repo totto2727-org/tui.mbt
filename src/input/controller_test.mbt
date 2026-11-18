@@ -1,4 +1,7 @@
 ///|
+using @input {type TextInputConfig, type TextInputController, interpret_key}
+
+///|
 /// Tests for TextInputController
 
 // ===== TextInputController tests =====

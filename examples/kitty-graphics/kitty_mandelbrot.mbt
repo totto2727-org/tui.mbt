@@ -1,10 +1,11 @@
 ///|
+#derive(Debug)
 pub struct MandelState {
   center_x : Double
   center_y : Double
   mut scale : Double
   mut phase : Double
-} derive(Debug)
+}
 
 ///|
 /// Create an animation state centred on the classic Mandelbrot view.
@@ -62,7 +63,7 @@ fn palette(iter : Int, max_iter : Int, phase : Double) -> (Byte, Byte, Byte) {
   if iter >= max_iter {
     return (Int::to_byte(0), Int::to_byte(0), Int::to_byte(0))
   }
-  let t = Double::from_int(iter) / Double::from_int(max_iter)
+  let t = iter.to_double() / max_iter.to_double()
   let shift = 0.15 * @math.sin(phase)
   let t1 = clamp_double(t + shift, 0.0, 1.0)
   let t2 = t1 * t1
@@ -83,16 +84,16 @@ pub fn mandelbrot_frame(
 ) -> Bytes {
   let w = if width <= 1 { 1 } else { width }
   let h = if height <= 1 { 1 } else { height }
-  let aspect = Double::from_int(w) / Double::from_int(h)
-  let buf = Buffer(size_hint=w * h * 3)
+  let aspect = w.to_double() / h.to_double()
+  let buf = Buffer(capacity=w * h * 3)
   let scale = state.scale
   let center_x = state.center_x + 0.2 * scale * @math.cos(state.phase)
   let center_y = state.center_y + 0.1 * scale * @math.sin(state.phase * 0.7)
   for y in 0..<h {
-    let ny = (Double::from_int(y) / Double::from_int(h) - 0.5) * 2.0
+    let ny = (y.to_double() / h.to_double() - 0.5) * 2.0
     let cy = center_y + ny * scale
     for x in 0..<w {
-      let nx = (Double::from_int(x) / Double::from_int(w) - 0.5) * 2.0
+      let nx = (x.to_double() / w.to_double() - 0.5) * 2.0
       let cx = center_x + nx * scale * aspect
       let iter = mandelbrot_escape(cx, cy, max_iter)
       let (r, g, b) = palette(iter, max_iter, state.phase)

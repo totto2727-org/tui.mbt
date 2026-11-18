@@ -4,10 +4,10 @@
 ///|
 /// Grid area placement info (package-visible for render_typed.mbt)
 pub(all) struct GridAreaInfo {
-  column : Int
-  row : Int
-  column_span : Int
-  row_span : Int
+  column : Int32
+  row : Int32
+  column_span : Int32
+  row_span : Int32
 }
 
 ///|
@@ -17,7 +17,7 @@ pub struct RenderContext {
   texts : Map[String, String]
   handlers : Map[String, (TuiEvent) -> Unit]
   roles : Map[String, @core.Role]
-  mut id_counter : Int
+  mut id_counter : Int32
   // Stack of grid area maps (for nested grids)
   area_stack : Array[Map[String, GridAreaInfo]]
 }

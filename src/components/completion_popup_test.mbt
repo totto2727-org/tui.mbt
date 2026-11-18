@@ -1,4 +1,14 @@
 ///|
+using @components {
+  type PopupDirection,
+  completion_popup_list_nodes,
+  completion_popup_metrics,
+  completion_popup_node,
+  completion_popup_rect,
+  completion_popup_rect_directed,
+}
+
+///|
 fn lines_contain(lines : Array[String], needle : String) -> Bool {
   for line in lines {
     if line.contains(needle) {

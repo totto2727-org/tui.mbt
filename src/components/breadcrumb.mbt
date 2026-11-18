@@ -5,10 +5,10 @@
 /// Breadcrumb component showing navigation path
 pub fn breadcrumb(
   items : Array[String],
-  separator? : String = " > ",
-  id? : String = "",
-  active_fg? : String = "cyan",
-  inactive_fg? : String = "rgb(150,150,150)",
+  separator~ : String = " > ",
+  id~ : String = "",
+  active_fg~ : String = "cyan",
+  inactive_fg~ : String = "rgb(150,150,150)",
 ) -> @vnode.TuiNode {
   let nodes : Array[@vnode.TuiNode] = []
   for i, item in items {
@@ -26,9 +26,9 @@ pub fn breadcrumb(
 /// Condensed path breadcrumb - shortens middle segments when path is long
 pub fn condensed_breadcrumb(
   path : String,
-  max_segments? : Int = 5,
-  separator? : String = "/",
-  id? : String = "",
+  max_segments~ : Int32 = 5,
+  separator~ : String = "/",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let parts_raw = path.split(separator).collect()
   let parts : Array[String] = parts_raw.map(fn(sv) { sv.to_owned() })

@@ -7,7 +7,7 @@ pub using @headless {type ToastLevel, type ToastState}
 
 ///|
 /// Toast notification component
-pub fn toast(state : @headless.ToastState, id? : String = "") -> @vnode.TuiNode {
+pub fn toast(state : @headless.ToastState, id~ : String = "") -> @vnode.TuiNode {
   if !state.visible {
     return @vnode.fragment([])
   }

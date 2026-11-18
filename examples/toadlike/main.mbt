@@ -8,22 +8,22 @@ using @vnode {type TuiNode, type VNodeApp, column, row, text, vspace, spacer}
 // Demo indices
 
 ///|
-let demo_toast : Int = 0
+let demo_toast : Int32 = 0
 
 ///|
-let demo_breadcrumb : Int = 1
+let demo_breadcrumb : Int32 = 1
 
 ///|
-let demo_grid : Int = 2
+let demo_grid : Int32 = 2
 
 ///|
-let demo_diff : Int = 3
+let demo_diff : Int32 = 3
 
 ///|
-let demo_tree : Int = 4
+let demo_tree : Int32 = 4
 
 ///|
-let demo_fuzzy : Int = 5
+let demo_fuzzy : Int32 = 5
 
 ///|
 async fn main {
@@ -261,7 +261,7 @@ async fn main {
     let results = if query.length() > 0 {
       @logics.fuzzy_sort(query, fuzzy_items)
     } else {
-      let all : Array[(Int, @logics.FuzzyMatch)] = []
+      let all : Array[(Int32, @logics.FuzzyMatch)] = []
       for i, _item in fuzzy_items {
         all.push((i, @logics.FuzzyMatch::{ score: 0, positions: [], }))
       }
@@ -394,7 +394,7 @@ async fn main {
     flat.map(fn(item) { item.1.id })
   }
 
-  fn tree_move_focus(delta : Int) -> Unit {
+  fn tree_move_focus(delta : Int32) -> Unit {
     let ids = get_tree_visible_ids()
     if ids.length() == 0 {
       return

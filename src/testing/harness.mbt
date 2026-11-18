@@ -4,12 +4,12 @@
 
 ///|
 /// Default small viewport size for tests
-pub fn test_width() -> Int {
+pub fn test_width() -> Int32 {
   40
 }
 
 ///|
-pub fn test_height() -> Int {
+pub fn test_height() -> Int32 {
   10
 }
 
@@ -17,15 +17,18 @@ pub fn test_height() -> Int {
 /// Test harness for capturing TUI renders
 pub(all) struct TestHarness {
   app : @render.App
-  width : Int
-  height : Int
+  width : Int32
+  height : Int32
   // Captured output history
   frames : Array[String]
 }
 
 ///|
 /// Create a new test harness with default small viewport
-pub fn TestHarness::new(width? : Int = 40, height? : Int = 10) -> TestHarness {
+pub fn TestHarness::new(
+  width~ : Int32 = 40,
+  height~ : Int32 = 10,
+) -> TestHarness {
   { app: @render.App::new(width, height), width, height, frames: [], }
 }
 
@@ -58,7 +61,7 @@ pub fn TestHarness::last_frame_plain(self : TestHarness) -> String {
 
 ///|
 /// Get frame count
-pub fn TestHarness::frame_count(self : TestHarness) -> Int {
+pub fn TestHarness::frame_count(self : TestHarness) -> Int32 {
   self.frames.length()
 }
 
@@ -72,8 +75,8 @@ pub fn TestHarness::clear_frames(self : TestHarness) -> Unit {
 /// Hit test at coordinates
 pub fn TestHarness::hit_test(
   self : TestHarness,
-  x : Int,
-  y : Int,
+  x : Int32,
+  y : Int32,
 ) -> @events.HitTestResult? {
   self.app.hit_test(x, y)
 }
@@ -107,7 +110,7 @@ pub fn TestHarness::contains(self : TestHarness, text : String) -> Bool {
 /// Check if frame contains text at specific line (0-indexed)
 pub fn TestHarness::line_contains(
   self : TestHarness,
-  line : Int,
+  line : Int32,
   text : String,
 ) -> Bool {
   let plain = self.last_frame_plain()
@@ -124,7 +127,7 @@ pub fn TestHarness::line_contains(
 
 ///|
 /// Get specific line from plain output (0-indexed)
-pub fn TestHarness::get_line(self : TestHarness, line : Int) -> String {
+pub fn TestHarness::get_line(self : TestHarness, line : Int32) -> String {
   let plain = self.last_frame_plain()
   let lines : Array[String] = plain
     .split("\n")
@@ -152,8 +155,8 @@ pub fn TestHarness::get_lines(self : TestHarness) -> Array[String] {
 /// Test harness for VNode-based components
 pub(all) struct VNodeTestHarness {
   app : @vnode.VNodeApp
-  width : Int
-  height : Int
+  width : Int32
+  height : Int32
   // Captured output history
   frames : Array[String]
 }
@@ -161,8 +164,8 @@ pub(all) struct VNodeTestHarness {
 ///|
 /// Create a new vnode test harness with default small viewport
 pub fn VNodeTestHarness::new(
-  width? : Int = 40,
-  height? : Int = 10,
+  width~ : Int32 = 40,
+  height~ : Int32 = 10,
 ) -> VNodeTestHarness {
   { app: @vnode.VNodeApp::new(width, height), width, height, frames: [], }
 }
@@ -196,7 +199,7 @@ pub fn VNodeTestHarness::last_frame_plain(self : VNodeTestHarness) -> String {
 
 ///|
 /// Get frame count
-pub fn VNodeTestHarness::frame_count(self : VNodeTestHarness) -> Int {
+pub fn VNodeTestHarness::frame_count(self : VNodeTestHarness) -> Int32 {
   self.frames.length()
 }
 
@@ -210,8 +213,8 @@ pub fn VNodeTestHarness::clear_frames(self : VNodeTestHarness) -> Unit {
 /// Hit test at coordinates
 pub fn VNodeTestHarness::hit_test(
   self : VNodeTestHarness,
-  x : Int,
-  y : Int,
+  x : Int32,
+  y : Int32,
 ) -> @events.HitTestResult? {
   self.app.hit_test(x, y)
 }
@@ -238,7 +241,7 @@ pub fn VNodeTestHarness::contains(
 /// Check if frame contains text at specific line (0-indexed)
 pub fn VNodeTestHarness::line_contains(
   self : VNodeTestHarness,
-  line : Int,
+  line : Int32,
   text : String,
 ) -> Bool {
   let plain = self.last_frame_plain()
@@ -254,7 +257,7 @@ pub fn VNodeTestHarness::line_contains(
 /// Get specific line from plain output (0-indexed)
 pub fn VNodeTestHarness::get_line(
   self : VNodeTestHarness,
-  line : Int,
+  line : Int32,
 ) -> String {
   let plain = self.last_frame_plain()
   let lines = split_lines_plain(plain)

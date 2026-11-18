@@ -3,7 +3,7 @@ pub struct EditorState {
   mut doc : Document
   mut selection : Selection
   viewport : Viewport
-  mut preferred_col : Int
+  mut preferred_col : Int32
   highlight : HighlightState
   mut dirty : Bool
 }
@@ -20,7 +20,7 @@ fn is_word_char(c : Char) -> Bool {
 }
 
 ///|
-fn word_bounds(line_text : String, col : Int) -> (Int, Int) {
+fn word_bounds(line_text : String, col : Int32) -> (Int32, Int32) {
   let chars = line_text.to_array()
   let len = chars.length()
   let idx = if col < 0 { 0 } else if col > len { len } else { col }
@@ -36,7 +36,7 @@ fn word_bounds(line_text : String, col : Int) -> (Int, Int) {
 }
 
 ///|
-fn slice_chars(chars : Array[Char], start : Int, end : Int) -> String {
+fn slice_chars(chars : Array[Char], start : Int32, end : Int32) -> String {
   let sb = StringBuilder()
   let s = if start < 0 { 0 } else { start }
   let e = if end < s {
@@ -53,14 +53,14 @@ fn slice_chars(chars : Array[Char], start : Int, end : Int) -> String {
 }
 
 ///|
-pub fn EditorState::new(text : String, height : Int) -> EditorState {
+pub fn EditorState::new(text : String, height : Int32) -> EditorState {
   EditorState::new_with_kind(text, height, HighlightKind::TypeScript)
 }
 
 ///|
 pub fn EditorState::new_with_kind(
   text : String,
-  height : Int,
+  height : Int32,
   kind : HighlightKind,
 ) -> EditorState {
   let doc = Document::from_text(text)
@@ -74,7 +74,7 @@ pub fn EditorState::new_with_kind(
 ///|
 pub fn EditorState::new_with_filename(
   text : String,
-  height : Int,
+  height : Int32,
   filename : String,
 ) -> EditorState {
   let kind = HighlightKind::from_filename(filename)
@@ -87,7 +87,7 @@ fn EditorState::caret(self : EditorState) -> Position {
 }
 
 ///|
-pub fn EditorState::set_height(self : EditorState, height : Int) -> Unit {
+pub fn EditorState::set_height(self : EditorState, height : Int32) -> Unit {
   self.viewport.set_height(height)
   let caret = self.caret()
   self.viewport.ensure_visible(caret.line, self.doc.line_count())
@@ -117,12 +117,12 @@ pub fn EditorState::set_text(self : EditorState, text : String) -> Unit {
 }
 
 ///|
-pub fn EditorState::caret_line(self : EditorState) -> Int {
+pub fn EditorState::caret_line(self : EditorState) -> Int32 {
   self.caret().line
 }
 
 ///|
-pub fn EditorState::caret_col(self : EditorState) -> Int {
+pub fn EditorState::caret_col(self : EditorState) -> Int32 {
   self.caret().col
 }
 
@@ -136,7 +136,7 @@ pub fn EditorState::current_word_prefix(self : EditorState) -> String {
 }
 
 ///|
-pub fn EditorState::current_word_bounds(self : EditorState) -> (Int, Int) {
+pub fn EditorState::current_word_bounds(self : EditorState) -> (Int32, Int32) {
   let caret = self.caret()
   let line_text = self.doc.line(caret.line)
   word_bounds(line_text, caret.col)
@@ -145,7 +145,7 @@ pub fn EditorState::current_word_bounds(self : EditorState) -> (Int, Int) {
 ///|
 pub fn EditorState::completion_request(
   self : EditorState,
-  request_id : Int,
+  request_id : Int32,
 ) -> CompletionRequest {
   let caret = self.caret()
   let line_text = self.doc.line(caret.line)
@@ -373,6 +373,6 @@ fn EditorState::move_page_down(
 }
 
 ///|
-pub fn EditorState::scroll_view(self : EditorState, delta : Int) -> Unit {
+pub fn EditorState::scroll_view(self : EditorState, delta : Int32) -> Unit {
   self.viewport.scroll(delta, self.doc.line_count())
 }

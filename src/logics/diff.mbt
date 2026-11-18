@@ -55,9 +55,9 @@ pub fn diff_lines(
   // Myers diff algorithm
   let max = n + m
   // v[k + max] = x position for diagonal k
-  let v : Array[Int] = Array::make(2 * max + 1, 0)
+  let v : Array[Int32] = Array::make(2 * max + 1, 0)
   // Store trace for backtracking
-  let trace : Array[Array[Int]] = []
+  let trace : Array[Array[Int32]] = []
   let mut found = false
   for d = 0; d <= max; d = d + 1 {
     if found {

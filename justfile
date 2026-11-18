@@ -6,7 +6,8 @@
 target := "js"
 
 # Modules outside the moon.work workspace (own moon.mod, checked separately)
-standalone := "terminal_buffer terminal_protocol examples/kitty-graphics examples/roguelike experiments/eval_ui"
+standalone := "terminal_buffer terminal_protocol"
+standalone_apps := "examples/kitty-graphics examples/roguelike experiments/eval_ui"
 
 # Default task: check and test
 default: check test
@@ -30,6 +31,10 @@ check-standalone:
     for dir in {{standalone}}; do
       echo "==> $dir"
       (cd "$dir" && moon check --deny-warn --target {{target}} && moon test --target {{target}})
+    done
+    for dir in {{standalone_apps}}; do
+      echo "==> $dir"
+      (cd "$dir" && moon check . --deny-warn --target {{target}} && moon test . --target {{target}})
     done
 
 # Check everything

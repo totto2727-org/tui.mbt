@@ -1,6 +1,6 @@
 import {
-  "mizchi/tui/io",
-  "mizchi/tui/events",
+  "totto2727/tui/io",
+  "totto2727/tui/events",
 }
 
 supported_targets = "js+native"

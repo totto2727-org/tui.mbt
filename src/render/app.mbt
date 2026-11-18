@@ -5,15 +5,15 @@
 ///|
 /// App manages the render loop and diff-based updates
 pub struct App {
-  width : Int
-  height : Int
+  width : Int32
+  height : Int32
   mut prev_buffer : CharBuffer?
   mut last_layout : @ccore.Layout?
   handlers : @events.EventHandlers
 }
 
 ///|
-pub fn App::new(width : Int, height : Int) -> App {
+pub fn App::new(width : Int32, height : Int32) -> App {
   {
     width,
     height,
@@ -62,8 +62,8 @@ pub fn App::render(self : App, component : @core.Component) -> String {
 pub fn App::render_with_offset(
   self : App,
   component : @core.Component,
-  row_offset? : Int = 0,
-  col_offset? : Int = 0,
+  row_offset~ : Int32 = 0,
+  col_offset~ : Int32 = 0,
 ) -> String {
   let layout = compute_layout(component.get_node(), self.width, self.height)
   self.last_layout = Some(layout)
@@ -120,8 +120,8 @@ pub fn App::restore_terminal() -> String {
 ///|
 /// Full-screen app helper: sets up alt screen and handles cleanup
 pub fn run_app(
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
   render_fn : () -> @core.Component,
   output_fn : (String) -> Unit,
 ) -> () -> Unit {
@@ -143,8 +143,8 @@ pub fn run_app(
 ///|
 /// Simple render function for one-shot rendering (no reactivity)
 pub fn render_once(
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
   component : @core.Component,
 ) -> String {
   let app = App::new(width, height)
@@ -178,7 +178,11 @@ pub fn App::handle_mouse(self : App, event : @events.MouseEvent) -> Bool {
 
 ///|
 /// Perform hit test at coordinates
-pub fn App::hit_test(self : App, x : Int, y : Int) -> @events.HitTestResult? {
+pub fn App::hit_test(
+  self : App,
+  x : Int32,
+  y : Int32,
+) -> @events.HitTestResult? {
   match self.last_layout {
     Some(layout) => @events.hit_test_root(layout, x, y)
     None => None

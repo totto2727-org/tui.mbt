@@ -17,7 +17,7 @@ let sparkline_chars : Array[String] = [
 
 ///|
 /// Build sparkline string from data values
-pub fn build_sparkline(values : Array[Double], width? : Int = 0) -> String {
+pub fn build_sparkline(values : Array[Double], width~ : Int32 = 0) -> String {
   if values.is_empty() {
     return ""
   }
@@ -61,8 +61,8 @@ pub fn build_sparkline(values : Array[Double], width? : Int = 0) -> String {
 /// Sparkline component
 pub fn sparkline(
   values : Array[Double],
-  width? : Int = 0,
-  fg? : String = "cyan",
+  width~ : Int32 = 0,
+  fg~ : String = "cyan",
 ) -> @vnode.TuiNode {
   let line = build_sparkline(values, width~)
   @vnode.text(line, fg~)
@@ -80,8 +80,8 @@ pub(all) enum GaugeStyle {
 /// Build gauge bar string
 pub fn build_gauge(
   ratio : Double,
-  width : Int,
-  style? : GaugeStyle = Bar,
+  width : Int32,
+  style~ : GaugeStyle = Bar,
 ) -> String {
   let clamped = if ratio < 0.0 {
     0.0
@@ -109,8 +109,8 @@ pub fn build_gauge(
 pub fn gauge(
   label : String,
   ratio : Double,
-  bar_width? : Int = 15,
-  show_percent? : Bool = true,
+  bar_width~ : Int32 = 15,
+  show_percent~ : Bool = true,
 ) -> @vnode.TuiNode {
   let bar = build_gauge(ratio, bar_width)
   let percent_str = if show_percent {
@@ -145,7 +145,7 @@ pub fn gauge(
 pub fn stat(
   label : String,
   value : String,
-  label_width? : Int = 0,
+  label_width~ : Int32 = 0,
 ) -> @vnode.TuiNode {
   let padded_label = if label_width > 0 && label.length() < label_width {
     label + " ".repeat(label_width - label.length())
@@ -163,8 +163,8 @@ pub fn stat(
 pub fn meter(
   label : String,
   ratio : Double,
-  width? : Int = 30,
-  label_width? : Int = 3,
+  width~ : Int32 = 30,
+  label_width~ : Int32 = 3,
 ) -> @vnode.TuiNode {
   let clamped = if ratio < 0.0 {
     0.0
@@ -208,7 +208,7 @@ pub fn meter(
 }
 
 ///|
-fn truncate_string(s : String, max_len : Int) -> String {
+fn truncate_string(s : String, max_len : Int32) -> String {
   if s.length() <= max_len {
     return s
   }
@@ -236,7 +236,7 @@ pub(all) enum ColumnAlign {
 /// Table column definition
 pub(all) struct TableColumn {
   header : String
-  width : Int
+  width : Int32
   align : ColumnAlign
 }
 
@@ -244,15 +244,15 @@ pub(all) struct TableColumn {
 /// Create a table column
 pub fn TableColumn::new(
   header : String,
-  width? : Int = 0,
-  align? : ColumnAlign = Left,
+  width~ : Int32 = 0,
+  align~ : ColumnAlign = Left,
 ) -> TableColumn {
   let actual_width = if width > 0 { width } else { header.length() }
   { header, width: actual_width, align, }
 }
 
 ///|
-fn align_text_column(s : String, width : Int, align : ColumnAlign) -> String {
+fn align_text_column(s : String, width : Int32, align : ColumnAlign) -> String {
   let len = s.length()
   if len >= width {
     return truncate_string(s, width)
@@ -273,7 +273,7 @@ fn align_text_column(s : String, width : Int, align : ColumnAlign) -> String {
 /// Table header row
 pub fn table_header(
   columns : Array[TableColumn],
-  separator? : String = " ",
+  separator~ : String = " ",
 ) -> @vnode.TuiNode {
   let parts : Array[@vnode.TuiNode] = []
   for i, col in columns {
@@ -291,8 +291,8 @@ pub fn table_header(
 pub fn table_row(
   columns : Array[TableColumn],
   values : Array[String],
-  separator? : String = " ",
-  selected? : Bool = false,
+  separator~ : String = " ",
+  selected~ : Bool = false,
 ) -> @vnode.TuiNode {
   let parts : Array[@vnode.TuiNode] = []
   let fg = if selected { "black" } else { "white" }
@@ -313,8 +313,8 @@ pub fn table_row(
 pub fn table(
   columns : Array[TableColumn],
   rows : Array[Array[String]],
-  separator? : String = " ",
-  selected_row? : Int = -1,
+  separator~ : String = " ",
+  selected_row~ : Int32 = -1,
 ) -> @vnode.TuiNode {
   let children : Array[@vnode.TuiNode] = []
   children.push(table_header(columns, separator~))

@@ -1,8 +1,9 @@
 ///|
+#derive(Debug, Eq)
 struct Position {
-  line : Int
-  col : Int
-} derive(Debug, Eq)
+  line : Int32
+  col : Int32
+}
 
 ///|
 struct Document {
@@ -25,12 +26,12 @@ fn Document::from_text(text : String) -> Document {
 }
 
 ///|
-fn Document::line_count(self : Document) -> Int {
+fn Document::line_count(self : Document) -> Int32 {
   self.lines.length()
 }
 
 ///|
-fn Document::line(self : Document, line : Int) -> String {
+fn Document::line(self : Document, line : Int32) -> String {
   if line >= 0 && line < self.lines.length() {
     self.lines[line]
   } else {
@@ -39,7 +40,7 @@ fn Document::line(self : Document, line : Int) -> String {
 }
 
 ///|
-fn Document::line_length(self : Document, line : Int) -> Int {
+fn Document::line_length(self : Document, line : Int32) -> Int32 {
   self.line(line).length()
 }
 

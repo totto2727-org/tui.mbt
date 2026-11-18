@@ -24,26 +24,26 @@ fn trim_trailing_spaces(s : String) -> String {
 ///|
 /// Virtual terminal state
 pub(all) struct VirtualTerminal {
-  width : Int
-  height : Int
+  width : Int32
+  height : Int32
   buffer : @render.CharBuffer
-  mut cursor_x : Int
-  mut cursor_y : Int
+  mut cursor_x : Int32
+  mut cursor_y : Int32
   mut current_fg : @core.Color
   mut current_bg : @core.Color
   mut current_bold : Bool
   mut current_underline : Bool
-  mut saved_cursor_x : Int
-  mut saved_cursor_y : Int
+  mut saved_cursor_x : Int32
+  mut saved_cursor_y : Int32
   // Input queue for simulating user input
   input_queue : Array[String]
   // History of cursor positions for debugging
-  cursor_history : Array[(Int, Int)]
+  cursor_history : Array[(Int32, Int32)]
 }
 
 ///|
 /// Create a new virtual terminal
-pub fn VirtualTerminal::new(width : Int, height : Int) -> VirtualTerminal {
+pub fn VirtualTerminal::new(width : Int32, height : Int32) -> VirtualTerminal {
   {
     width,
     height,
@@ -144,11 +144,11 @@ pub fn VirtualTerminal::write(self : VirtualTerminal, data : String) -> Unit {
 fn VirtualTerminal::parse_csi(
   self : VirtualTerminal,
   chars : Array[Char],
-  start : Int,
-) -> Int {
+  start : Int32,
+) -> Int32 {
   let len = chars.length()
   let mut i = start
-  let params : Array[Int] = []
+  let params : Array[Int32] = []
   let mut current_param = 0
   let mut has_param = false
   let mut private_mode = false
@@ -193,7 +193,7 @@ fn VirtualTerminal::parse_csi(
 fn VirtualTerminal::execute_csi(
   self : VirtualTerminal,
   cmd : Char,
-  params : Array[Int],
+  params : Array[Int32],
   private_mode : Bool,
 ) -> Unit {
   let p0 = if params.length() > 0 { params[0] } else { 0 }
@@ -321,7 +321,7 @@ fn VirtualTerminal::execute_csi(
 /// Process SGR (color/style) parameters
 fn VirtualTerminal::process_sgr(
   self : VirtualTerminal,
-  params : Array[Int],
+  params : Array[Int32],
 ) -> Unit {
   if params.length() == 0 {
     // Reset all attributes
@@ -538,7 +538,7 @@ fn VirtualTerminal::clear_entire_line(self : VirtualTerminal) -> Unit {
 
 ///|
 /// Convert 256-color index to RGB
-fn color_from_256(idx : Int) -> @core.Color {
+fn color_from_256(idx : Int32) -> @core.Color {
   if idx < 16 {
     // Standard colors
     match idx {
@@ -616,7 +616,7 @@ pub fn VirtualTerminal::get_screen(self : VirtualTerminal) -> String {
 
 ///|
 /// Get a specific line (0-indexed)
-pub fn VirtualTerminal::get_line(self : VirtualTerminal, y : Int) -> String {
+pub fn VirtualTerminal::get_line(self : VirtualTerminal, y : Int32) -> String {
   if y < 0 || y >= self.height {
     return ""
   }
@@ -635,15 +635,15 @@ pub fn VirtualTerminal::get_line(self : VirtualTerminal, y : Int) -> String {
 /// Get cell at position
 pub fn VirtualTerminal::get_cell(
   self : VirtualTerminal,
-  x : Int,
-  y : Int,
+  x : Int32,
+  y : Int32,
 ) -> @render.CharCell {
   self.buffer.get_cell(x, y)
 }
 
 ///|
 /// Get current cursor position
-pub fn VirtualTerminal::get_cursor(self : VirtualTerminal) -> (Int, Int) {
+pub fn VirtualTerminal::get_cursor(self : VirtualTerminal) -> (Int32, Int32) {
   (self.cursor_x, self.cursor_y)
 }
 
@@ -657,7 +657,7 @@ pub fn VirtualTerminal::contains(self : VirtualTerminal, text : String) -> Bool 
 /// Check if specific line contains text
 pub fn VirtualTerminal::line_contains(
   self : VirtualTerminal,
-  y : Int,
+  y : Int32,
   text : String,
 ) -> Bool {
   self.get_line(y).contains(text)
@@ -709,7 +709,7 @@ pub fn VirtualTerminal::get_buffer(
 /// Get trimmed line (without trailing spaces)
 pub fn VirtualTerminal::get_line_trimmed(
   self : VirtualTerminal,
-  y : Int,
+  y : Int32,
 ) -> String {
   trim_trailing_spaces(self.get_line(y))
 }

@@ -102,7 +102,7 @@ pub struct BoxProps {
   border : BorderValue
   border_color : ColorValue?
   bg : ColorValue?
-  tab_index : Int
+  tab_index : Int32
   role : @core.Role?
 }
 
@@ -294,7 +294,7 @@ fn build_box_attrs(
   border_color : String,
   bg : String,
   role : String,
-  tab_index : Int,
+  tab_index : Int32,
   on_click : ((TuiEvent) -> Unit)?,
 ) -> Array[(String, TuiAttr)] {
   let attrs : Array[(String, TuiAttr)] = [
@@ -396,27 +396,27 @@ fn build_box_attrs(
 ///|
 /// Row container (horizontal flex)
 pub fn row(
-  id? : String = "",
-  gap? : Double = 0.0,
-  margin? : Double = 0.0,
-  margin_x? : Double = 0.0,
-  margin_y? : Double = 0.0,
-  padding? : Double = 0.0,
-  padding_x? : Double = 0.0,
-  padding_y? : Double = 0.0,
-  width? : Double = -1.0,
-  height? : Double = -1.0,
-  min_width? : Double = -1.0,
-  min_height? : Double = -1.0,
-  flex_grow? : Double = 0.0,
-  justify? : String = "",
-  align? : String = "",
-  border? : String = "",
-  border_color? : String = "",
-  bg? : String = "",
-  role? : String = "",
-  tab_index? : Int = -1,
-  on_click? : ((TuiEvent) -> Unit)? = None,
+  id~ : String = "",
+  gap~ : Double = 0.0,
+  margin~ : Double = 0.0,
+  margin_x~ : Double = 0.0,
+  margin_y~ : Double = 0.0,
+  padding~ : Double = 0.0,
+  padding_x~ : Double = 0.0,
+  padding_y~ : Double = 0.0,
+  width~ : Double = -1.0,
+  height~ : Double = -1.0,
+  min_width~ : Double = -1.0,
+  min_height~ : Double = -1.0,
+  flex_grow~ : Double = 0.0,
+  justify~ : String = "",
+  align~ : String = "",
+  border~ : String = "",
+  border_color~ : String = "",
+  bg~ : String = "",
+  role~ : String = "",
+  tab_index~ : Int32 = -1,
+  on_click~ : ((TuiEvent) -> Unit)? = None,
   children : Array[TuiNode],
 ) -> TuiNode {
   let attrs = build_box_attrs(
@@ -449,27 +449,27 @@ pub fn row(
 ///|
 /// Column container (vertical flex)
 pub fn column(
-  id? : String = "",
-  gap? : Double = 0.0,
-  margin? : Double = 0.0,
-  margin_x? : Double = 0.0,
-  margin_y? : Double = 0.0,
-  padding? : Double = 0.0,
-  padding_x? : Double = 0.0,
-  padding_y? : Double = 0.0,
-  width? : Double = -1.0,
-  height? : Double = -1.0,
-  min_width? : Double = -1.0,
-  min_height? : Double = -1.0,
-  flex_grow? : Double = 0.0,
-  justify? : String = "",
-  align? : String = "",
-  border? : String = "",
-  border_color? : String = "",
-  bg? : String = "",
-  role? : String = "",
-  tab_index? : Int = -1,
-  on_click? : ((TuiEvent) -> Unit)? = None,
+  id~ : String = "",
+  gap~ : Double = 0.0,
+  margin~ : Double = 0.0,
+  margin_x~ : Double = 0.0,
+  margin_y~ : Double = 0.0,
+  padding~ : Double = 0.0,
+  padding_x~ : Double = 0.0,
+  padding_y~ : Double = 0.0,
+  width~ : Double = -1.0,
+  height~ : Double = -1.0,
+  min_width~ : Double = -1.0,
+  min_height~ : Double = -1.0,
+  flex_grow~ : Double = 0.0,
+  justify~ : String = "",
+  align~ : String = "",
+  border~ : String = "",
+  border_color~ : String = "",
+  bg~ : String = "",
+  role~ : String = "",
+  tab_index~ : Int32 = -1,
+  on_click~ : ((TuiEvent) -> Unit)? = None,
   children : Array[TuiNode],
 ) -> TuiNode {
   let attrs = build_box_attrs(
@@ -503,28 +503,28 @@ pub fn column(
 /// Generic view container (flex layout with configurable direction)
 /// Default direction is column (React Native style)
 pub fn view(
-  direction? : String = "column",
-  id? : String = "",
-  gap? : Double = 0.0,
-  margin? : Double = 0.0,
-  margin_x? : Double = 0.0,
-  margin_y? : Double = 0.0,
-  padding? : Double = 0.0,
-  padding_x? : Double = 0.0,
-  padding_y? : Double = 0.0,
-  width? : Double = -1.0,
-  height? : Double = -1.0,
-  min_width? : Double = -1.0,
-  min_height? : Double = -1.0,
-  flex_grow? : Double = 0.0,
-  justify? : String = "",
-  align? : String = "",
-  border? : String = "",
-  border_color? : String = "",
-  bg? : String = "",
-  role? : String = "",
-  tab_index? : Int = -1,
-  on_click? : ((TuiEvent) -> Unit)? = None,
+  direction~ : String = "column",
+  id~ : String = "",
+  gap~ : Double = 0.0,
+  margin~ : Double = 0.0,
+  margin_x~ : Double = 0.0,
+  margin_y~ : Double = 0.0,
+  padding~ : Double = 0.0,
+  padding_x~ : Double = 0.0,
+  padding_y~ : Double = 0.0,
+  width~ : Double = -1.0,
+  height~ : Double = -1.0,
+  min_width~ : Double = -1.0,
+  min_height~ : Double = -1.0,
+  flex_grow~ : Double = 0.0,
+  justify~ : String = "",
+  align~ : String = "",
+  border~ : String = "",
+  border_color~ : String = "",
+  bg~ : String = "",
+  role~ : String = "",
+  tab_index~ : Int32 = -1,
+  on_click~ : ((TuiEvent) -> Unit)? = None,
   children : Array[TuiNode],
 ) -> TuiNode {
   let dir = if direction == "row" {
@@ -544,22 +544,22 @@ pub fn view(
 /// Grid container with CSS Grid layout
 /// Supports both explicit columns/rows and named areas
 pub fn grid(
-  columns? : Array[Double] = [],
-  rows? : Array[Double] = [],
-  areas? : Array[String] = [],
-  auto_flow? : String = "row",
-  id? : String = "",
-  gap? : Double = 0.0,
-  padding? : Double = 0.0,
-  padding_x? : Double = 0.0,
-  padding_y? : Double = 0.0,
-  width? : Double = -1.0,
-  height? : Double = -1.0,
-  border? : String = "",
-  border_color? : String = "",
-  bg? : String = "",
-  role? : String = "",
-  tab_index? : Int = -1,
+  columns~ : Array[Double] = [],
+  rows~ : Array[Double] = [],
+  areas~ : Array[String] = [],
+  auto_flow~ : String = "row",
+  id~ : String = "",
+  gap~ : Double = 0.0,
+  padding~ : Double = 0.0,
+  padding_x~ : Double = 0.0,
+  padding_y~ : Double = 0.0,
+  width~ : Double = -1.0,
+  height~ : Double = -1.0,
+  border~ : String = "",
+  border_color~ : String = "",
+  bg~ : String = "",
+  role~ : String = "",
+  tab_index~ : Int32 = -1,
   children : Array[TuiNode],
 ) -> TuiNode {
   let attrs : Array[(String, TuiAttr)] = [
@@ -673,11 +673,11 @@ pub fn grid(
 ///|
 /// Grid item with placement control (explicit column/row positioning)
 pub fn grid_item(
-  column? : Int = 0,
-  row? : Int = 0,
-  column_span? : Int = 1,
-  row_span? : Int = 1,
-  tab_index? : Int = -1,
+  column~ : Int32 = 0,
+  row~ : Int32 = 0,
+  column_span~ : Int32 = 1,
+  row_span~ : Int32 = 1,
+  tab_index~ : Int32 = -1,
   child~ : TuiNode,
 ) -> TuiNode {
   let attrs : Array[(String, TuiAttr)] = []
@@ -720,10 +720,10 @@ pub fn grid_area(name : String, child : TuiNode) -> TuiNode {
 /// Static text node
 pub fn text(
   content : String,
-  fg? : String = "",
-  bold? : Bool = false,
-  underline? : Bool = false,
-  role? : String = "",
+  fg~ : String = "",
+  bold~ : Bool = false,
+  underline~ : Bool = false,
+  role~ : String = "",
 ) -> TuiNode {
   if fg.length() > 0 || bold || underline || role.length() > 0 {
     let attrs : Array[(String, TuiAttr)] = []
@@ -749,10 +749,10 @@ pub fn text(
 /// Dynamic text node
 pub fn text_dyn(
   getter : () -> String,
-  fg? : String = "",
-  bold? : Bool = false,
-  underline? : Bool = false,
-  role? : String = "",
+  fg~ : String = "",
+  bold~ : Bool = false,
+  underline~ : Bool = false,
+  role~ : String = "",
 ) -> TuiNode {
   if fg.length() > 0 || bold || underline || role.length() > 0 {
     let attrs : Array[(String, TuiAttr)] = []
@@ -867,7 +867,7 @@ fn parse_border_value(s : String) -> BorderValue {
 ///|
 fn parse_color_value(s : String) -> ColorValue {
   if s.has_prefix("rgb(") && s.has_suffix(")") && s.length() > 5 {
-    let inner = s.view(start_offset=4, end_offset=s.length() - 1)
+    let inner = s.exact_view(start=4, end=s.length() - 1)
     let parts = inner.split(",").collect()
     if parts.length() == 3 {
       return try {
@@ -887,7 +887,7 @@ fn parse_color_value(s : String) -> ColorValue {
 fn parse_role_value(s : String) -> @core.Role {
   let v = s.to_lower()
   if v.has_prefix("custom:") && v.length() > 7 {
-    return @core.Role::Custom(v.view(start_offset=7).to_owned())
+    return @core.Role::Custom(v.exact_view(start=7).to_owned())
   }
   match v {
     "button" => @core.Role::Button

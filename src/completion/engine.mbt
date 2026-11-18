@@ -11,7 +11,7 @@
 pub(all) struct CompletionResult {
   items : Array[String]
   /// Version of the request that produced this result
-  request_version : Int
+  request_version : Int32
 }
 
 ///|
@@ -20,13 +20,13 @@ pub(all) struct CompletionEngine {
   /// Current input being completed
   input : @signals.Signal[String]
   /// Current request version (incremented on each input change)
-  request_version : @signals.Signal[Int]
+  request_version : @signals.Signal[Int32]
   /// Filtered completion items
   items : @signals.Signal[Array[String]]
   /// Whether a request is in flight
   loading : @signals.Signal[Bool]
   /// Selected index
-  selected_idx : @signals.Signal[Int]
+  selected_idx : @signals.Signal[Int32]
   /// Popup visibility
   visible : @signals.Signal[Bool]
 }
@@ -49,7 +49,7 @@ pub fn CompletionEngine::new() -> CompletionEngine {
 pub fn CompletionEngine::set_input(
   self : CompletionEngine,
   input : String,
-) -> Int {
+) -> Int32 {
   self.input.set(input)
   let new_version = self.request_version.get() + 1
   self.request_version.set(new_version)
@@ -59,7 +59,7 @@ pub fn CompletionEngine::set_input(
 
 ///|
 /// Get current request version
-pub fn CompletionEngine::get_version(self : CompletionEngine) -> Int {
+pub fn CompletionEngine::get_version(self : CompletionEngine) -> Int32 {
   self.request_version.get()
 }
 
@@ -126,7 +126,7 @@ pub fn CompletionEngine::set_items(
 
 ///|
 /// Get selected index
-pub fn CompletionEngine::get_selected_idx(self : CompletionEngine) -> Int {
+pub fn CompletionEngine::get_selected_idx(self : CompletionEngine) -> Int32 {
   self.selected_idx.get()
 }
 
@@ -134,7 +134,7 @@ pub fn CompletionEngine::get_selected_idx(self : CompletionEngine) -> Int {
 /// Set selected index
 pub fn CompletionEngine::set_selected_idx(
   self : CompletionEngine,
-  idx : Int,
+  idx : Int32,
 ) -> Unit {
   let items = self.items.get()
   if idx >= 0 && idx < items.length() {
@@ -206,8 +206,8 @@ pub fn CompletionEngine::clear(self : CompletionEngine) -> Unit {
 ///|
 /// Pending async completion request
 pub(all) struct PendingRequest {
-  version : Int
-  target_time : Int
+  version : Int32
+  target_time : Int32
   query : String
 }
 
@@ -216,19 +216,19 @@ pub(all) struct PendingRequest {
 pub(all) struct AsyncCompletionManager {
   engine : CompletionEngine
   pending : @signals.Signal[PendingRequest?]
-  delay_ms : Int
+  delay_ms : Int32
   /// Filter function: (query) -> items
   filter_fn : (String) -> Array[String]
   /// Time function: () -> current_time_ms
-  time_fn : () -> Int
+  time_fn : () -> Int32
 }
 
 ///|
 /// Create a new async completion manager
 pub fn AsyncCompletionManager::new(
-  delay_ms : Int,
+  delay_ms : Int32,
   filter_fn : (String) -> Array[String],
-  time_fn : () -> Int,
+  time_fn : () -> Int32,
 ) -> AsyncCompletionManager {
   {
     engine: CompletionEngine::new(),

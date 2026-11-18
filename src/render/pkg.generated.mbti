@@ -1,11 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/render"
+package "totto2727/tui/render"
 
 import {
   "mizchi/crater-core",
   "mizchi/crater-core/node",
-  "mizchi/tui/core",
-  "mizchi/tui/events",
+  "totto2727/tui/core",
+  "totto2727/tui/events",
 }
 
 // Values

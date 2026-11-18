@@ -197,7 +197,7 @@ pub fn BorderValue::to_border_chars(self : BorderValue) -> @core.BorderChars? {
 pub(all) enum ColorValue {
   Transparent
   Named(String)
-  Rgb(Int, Int, Int)
+  Rgb(Int32, Int32, Int32)
 }
 
 ///|
@@ -241,10 +241,10 @@ pub(all) enum TuiAttrValue {
   GridTemplateRows(Array[@values.TrackSizingFunction])
   GridAutoFlow(GridAutoFlowValue)
   // Grid item
-  GridColumn(Int) // Column position (1-indexed)
-  GridRow(Int) // Row position (1-indexed)
-  GridColumnSpan(Int) // Column span
-  GridRowSpan(Int) // Row span
+  GridColumn(Int32) // Column position (1-indexed)
+  GridRow(Int32) // Row position (1-indexed)
+  GridColumnSpan(Int32) // Column span
+  GridRowSpan(Int32) // Row span
   // Grid template areas (for named area layout)
   GridTemplateAreas(Array[String]) // e.g., ["header header", "sidebar main"]
   GridArea(String) // Named area for grid item placement
@@ -268,6 +268,6 @@ pub(all) enum TuiAttrValue {
   // Identity
   Id(String)
   // Accessibility
-  TabIndex(Int) // Tab order for focus management (-1 = not focusable, 0+ = tab order)
+  TabIndex(Int32) // Tab order for focus management (-1 = not focusable, 0+ = tab order)
   Role(@core.Role)
 }

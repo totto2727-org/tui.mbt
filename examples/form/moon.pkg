@@ -1,8 +1,8 @@
 import {
-  "mizchi/tui",
-  "mizchi/tui/vnode",
-  "mizchi/tui/render",
-  "mizchi/tui/io",
+  "totto2727/tui",
+  "totto2727/tui/vnode",
+  "totto2727/tui/render",
+  "totto2727/tui/io",
   "mizchi/signals",
 }
 

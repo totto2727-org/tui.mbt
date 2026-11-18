@@ -6,7 +6,7 @@
 pub fn menubar_item(
   label : String,
   open : Bool,
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let bg = if open { "rgb(60,80,120)" } else { "" }
   @vnode.row(id~, bg~, padding_x=0.5, [
@@ -19,8 +19,8 @@ pub fn menubar_item(
 pub fn menu_item(
   label : String,
   selected : Bool,
-  id? : String = "",
-  disabled? : Bool = false,
+  id~ : String = "",
+  disabled~ : Bool = false,
 ) -> @vnode.TuiNode {
   let bg = if selected && !disabled {
     "rgb(40,80,120)"

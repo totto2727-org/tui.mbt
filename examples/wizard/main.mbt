@@ -16,7 +16,7 @@ fn show_cursor() -> String {
 }
 
 ///|
-fn move_up(n : Int) -> String {
+fn move_up(n : Int32) -> String {
   let mut s = ""
   for _ in 0..<n {
     s = s + @render.ansi_move_up()
@@ -44,7 +44,7 @@ fn prln(s : String) -> Unit {
 fn render_select_prompt(
   question : String,
   options : Array[String],
-  cursor : Int,
+  cursor : Int32,
   selected_value : String,
 ) -> Array[String] {
   let node : TuiNode = if selected_value.length() > 0 {
@@ -81,7 +81,7 @@ fn render_select_prompt(
 /// Render a confirm prompt
 fn render_confirm_prompt(
   question : String,
-  cursor : Int,
+  cursor : Int32,
   confirmed : Bool?,
 ) -> Array[String] {
   let node : TuiNode = match confirmed {
@@ -114,7 +114,7 @@ fn render_confirm_prompt(
 
 ///|
 /// Print lines and return count
-fn print_lines(lines : Array[String]) -> Int {
+fn print_lines(lines : Array[String]) -> Int32 {
   for line in lines {
     prln(line)
   }
@@ -123,7 +123,7 @@ fn print_lines(lines : Array[String]) -> Int {
 
 ///|
 /// Clear lines by moving up and clearing
-fn clear_lines(n : Int) -> Unit {
+fn clear_lines(n : Int32) -> Unit {
   for _ in 0..<n {
     pr(move_up(1) + "\r" + clear_line())
   }
@@ -156,7 +156,7 @@ async fn main {
   prln("")
 
   // Render function
-  fn render() -> Int {
+  fn render() -> Int32 {
     let current_step = step.get()
     let cur = cursor.get()
     let lines = match current_step {

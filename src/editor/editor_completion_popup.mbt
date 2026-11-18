@@ -11,7 +11,7 @@ pub using @components {
 ///|
 pub struct CompletionPopup {
   session : CompletionSession
-  max_items : Int
+  max_items : Int32
   style : CompletionPopupStyle
   direction : @components.PopupDirection
 }
@@ -19,9 +19,9 @@ pub struct CompletionPopup {
 ///|
 pub fn CompletionPopup::new(
   session : CompletionSession,
-  max_items? : Int = 6,
-  style? : CompletionPopupStyle = CompletionPopupStyle::default(),
-  direction? : @components.PopupDirection = Auto,
+  max_items~ : Int32 = 6,
+  style~ : CompletionPopupStyle = CompletionPopupStyle::default(),
+  direction~ : @components.PopupDirection = Auto,
 ) -> CompletionPopup {
   { session, max_items, style, direction, }
 }
@@ -30,10 +30,10 @@ pub fn CompletionPopup::new(
 /// Calculate popup position based on anchor and viewport
 pub fn CompletionPopup::calculate_rect(
   self : CompletionPopup,
-  anchor_row : Int,
-  anchor_col : Int,
-  viewport_width : Int,
-  viewport_height : Int,
+  anchor_row : Int32,
+  anchor_col : Int32,
+  viewport_width : Int32,
+  viewport_height : Int32,
 ) -> PopupRect? {
   let items = self.session.get_items()
   if items.length() == 0 || !self.session.is_visible() {
@@ -71,8 +71,8 @@ pub fn CompletionPopup::calculate_rect(
 pub fn CompletionPopup::render(
   self : CompletionPopup,
   state : EditorState,
-  viewport_width : Int,
-  viewport_height : Int,
+  viewport_width : Int32,
+  viewport_height : Int32,
 ) -> (@vnode.TuiNode, PopupRect)? {
   if !self.session.is_visible() {
     return None
@@ -115,8 +115,8 @@ pub fn CompletionPopup::render(
 pub fn CompletionPopup::render_overlay(
   self : CompletionPopup,
   state : EditorState,
-  viewport_width : Int,
-  viewport_height : Int,
+  viewport_width : Int32,
+  viewport_height : Int32,
 ) -> (String, PopupRect)? {
   match self.render(state, viewport_width, viewport_height) {
     Some((node, rect)) => {

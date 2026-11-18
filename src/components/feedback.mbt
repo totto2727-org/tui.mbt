@@ -5,8 +5,8 @@
 /// Progress bar component
 pub fn progress_bar(
   ratio : Double,
-  width? : Int = 20,
-  show_percent? : Bool = true,
+  width~ : Int32 = 20,
+  show_percent~ : Bool = true,
 ) -> @vnode.TuiNode {
   let clamped = if ratio < 0.0 {
     0.0
@@ -44,13 +44,13 @@ let spinner_frames : Array[String] = ["|", "/", "-", "\\"]
 
 ///|
 /// Get spinner frame by tick
-pub fn get_spinner_frame(tick : Int) -> String {
+pub fn get_spinner_frame(tick : Int32) -> String {
   spinner_frames[tick % 4]
 }
 
 ///|
 /// Spinner component
-pub fn spinner(tick : Int, label? : String = "") -> @vnode.TuiNode {
+pub fn spinner(tick : Int32, label~ : String = "") -> @vnode.TuiNode {
   let frame = get_spinner_frame(tick)
   if label.length() > 0 {
     @vnode.row([
@@ -66,9 +66,9 @@ pub fn spinner(tick : Int, label? : String = "") -> @vnode.TuiNode {
 ///|
 /// Divider (horizontal line)
 pub fn divider(
-  width? : Int = 20,
-  char? : String = "─",
-  fg? : String = "rgb(60,60,60)",
+  width~ : Int32 = 20,
+  char~ : String = "─",
+  fg~ : String = "rgb(60,60,60)",
 ) -> @vnode.TuiNode {
   @vnode.text(char.repeat(width), fg~)
 }

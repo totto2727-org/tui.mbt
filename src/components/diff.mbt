@@ -18,7 +18,7 @@ fn diff_line(op : @logics.DiffOp) -> @vnode.TuiNode {
 pub fn diff_view(
   old_lines : Array[String],
   new_lines : Array[String],
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let ops = @logics.diff_lines(old_lines, new_lines)
   let nodes : Array[@vnode.TuiNode] = []
@@ -32,7 +32,7 @@ pub fn diff_view(
 /// Diff view from pre-computed diff operations
 pub fn diff_view_from_ops(
   ops : Array[@logics.DiffOp],
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let nodes : Array[@vnode.TuiNode] = []
   for op in ops {

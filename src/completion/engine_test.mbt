@@ -3,7 +3,7 @@
 
 ///|
 test "CompletionEngine::new creates empty state" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   inspect(engine.get_input(), content="")
   inspect(engine.get_version(), content="0")
   inspect(engine.get_items().length(), content="0")
@@ -14,7 +14,7 @@ test "CompletionEngine::new creates empty state" {
 
 ///|
 test "CompletionEngine::set_input updates input and increments version" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   let v1 = engine.set_input("hello")
   inspect(engine.get_input(), content="hello")
   inspect(v1, content="1")
@@ -27,7 +27,7 @@ test "CompletionEngine::set_input updates input and increments version" {
 
 ///|
 test "CompletionEngine::set_loading and is_loading" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   inspect(engine.is_loading(), content="false")
   engine.set_loading(true)
   inspect(engine.is_loading(), content="true")
@@ -37,10 +37,10 @@ test "CompletionEngine::set_loading and is_loading" {
 
 ///|
 test "CompletionEngine::apply_result with matching version" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   let version = engine.set_input("test")
   engine.set_loading(true)
-  let result : CompletionResult = {
+  let result : @completion.CompletionResult = {
     items: ["item1", "item2"],
     request_version: version,
   }
@@ -53,10 +53,10 @@ test "CompletionEngine::apply_result with matching version" {
 
 ///|
 test "CompletionEngine::apply_result with stale version is ignored" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   let old_version = engine.set_input("old")
   let _ = engine.set_input("new") // version is now 2
-  let result : CompletionResult = {
+  let result : @completion.CompletionResult = {
     items: ["stale"],
     request_version: old_version,
   }
@@ -67,9 +67,12 @@ test "CompletionEngine::apply_result with stale version is ignored" {
 
 ///|
 test "CompletionEngine::apply_result with empty items hides popup" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   let version = engine.set_input("test")
-  let result : CompletionResult = { items: [], request_version: version, }
+  let result : @completion.CompletionResult = {
+    items: [],
+    request_version: version,
+  }
   let applied = engine.apply_result(result)
   inspect(applied, content="true")
   inspect(engine.is_visible(), content="false")
@@ -77,9 +80,9 @@ test "CompletionEngine::apply_result with empty items hides popup" {
 
 ///|
 test "CompletionEngine selection navigation" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   let version = engine.set_input("test")
-  let result : CompletionResult = {
+  let result : @completion.CompletionResult = {
     items: ["a", "b", "c"],
     request_version: version,
   }
@@ -105,7 +108,7 @@ test "CompletionEngine selection navigation" {
 
 ///|
 test "CompletionEngine::select_next and select_prev with empty items" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   // With empty items, selection should not change
   engine.select_next()
   inspect(engine.get_selected_idx(), content="0")
@@ -115,9 +118,9 @@ test "CompletionEngine::select_next and select_prev with empty items" {
 
 ///|
 test "CompletionEngine::set_selected_idx validates bounds" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   let version = engine.set_input("test")
-  let result : CompletionResult = {
+  let result : @completion.CompletionResult = {
     items: ["a", "b"],
     request_version: version,
   }
@@ -135,16 +138,19 @@ test "CompletionEngine::set_selected_idx validates bounds" {
 
 ///|
 test "CompletionEngine::get_selected_item with invalid index returns None" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   // Empty items
   debug_inspect(engine.get_selected_item(), content="None")
 }
 
 ///|
 test "CompletionEngine::hide and clear" {
-  let engine = CompletionEngine::new()
+  let engine = @completion.CompletionEngine::new()
   let version = engine.set_input("test")
-  let result : CompletionResult = { items: ["a"], request_version: version, }
+  let result : @completion.CompletionResult = {
+    items: ["a"],
+    request_version: version,
+  }
   let _ = engine.apply_result(result)
   inspect(engine.is_visible(), content="true")
   // Hide
@@ -167,8 +173,8 @@ test "AsyncCompletionManager basic workflow" {
       []
     }
   }
-  let time_fn = fn() -> Int { current_time.val }
-  let manager = AsyncCompletionManager::new(100, filter_fn, time_fn)
+  let time_fn = fn() -> Int32 { current_time.val }
+  let manager = @completion.AsyncCompletionManager::new(100, filter_fn, time_fn)
   // Request completion
   manager.request("test")
   inspect(manager.has_pending(), content="true")
@@ -187,8 +193,8 @@ test "AsyncCompletionManager basic workflow" {
 ///|
 test "AsyncCompletionManager empty input clears state" {
   let filter_fn = fn(_query : String) -> Array[String] { ["item"] }
-  let time_fn = fn() -> Int { 0 }
-  let manager = AsyncCompletionManager::new(100, filter_fn, time_fn)
+  let time_fn = fn() -> Int32 { 0 }
+  let manager = @completion.AsyncCompletionManager::new(100, filter_fn, time_fn)
   // Request with empty input
   manager.request("")
   inspect(manager.has_pending(), content="false")
@@ -198,8 +204,8 @@ test "AsyncCompletionManager empty input clears state" {
 ///|
 test "AsyncCompletionManager::clear_pending" {
   let filter_fn = fn(_query : String) -> Array[String] { [] }
-  let time_fn = fn() -> Int { 0 }
-  let manager = AsyncCompletionManager::new(100, filter_fn, time_fn)
+  let time_fn = fn() -> Int32 { 0 }
+  let manager = @completion.AsyncCompletionManager::new(100, filter_fn, time_fn)
   manager.request("test")
   inspect(manager.has_pending(), content="true")
   manager.clear_pending()
@@ -209,8 +215,8 @@ test "AsyncCompletionManager::clear_pending" {
 ///|
 test "AsyncCompletionManager::get_pending returns request info" {
   let filter_fn = fn(_query : String) -> Array[String] { [] }
-  let time_fn = fn() -> Int { 50 }
-  let manager = AsyncCompletionManager::new(100, filter_fn, time_fn)
+  let time_fn = fn() -> Int32 { 50 }
+  let manager = @completion.AsyncCompletionManager::new(100, filter_fn, time_fn)
   inspect(manager.has_pending(), content="false")
   manager.request("hello")
   match manager.get_pending() {
@@ -224,7 +230,7 @@ test "AsyncCompletionManager::get_pending returns request info" {
 
 ///|
 test "WordInputState basic operations" {
-  let state = WordInputState::new()
+  let state = @completion.WordInputState::new()
   inspect(state.get_confirmed(), content="")
   inspect(state.get_current(), content="")
   inspect(state.get_full_text(), content="")
@@ -239,7 +245,7 @@ test "WordInputState basic operations" {
 
 ///|
 test "WordInputState::delete_char" {
-  let state = WordInputState::new()
+  let state = @completion.WordInputState::new()
   // Delete from empty returns false
   inspect(state.delete_char(), content="false")
   // Delete from non-empty
@@ -255,7 +261,7 @@ test "WordInputState::delete_char" {
 
 ///|
 test "WordInputState::confirm_word" {
-  let state = WordInputState::new()
+  let state = @completion.WordInputState::new()
   state.set_current("hello")
   state.confirm_word("hello", " ")
   inspect(state.get_confirmed(), content="hello ")
@@ -267,7 +273,7 @@ test "WordInputState::confirm_word" {
 
 ///|
 test "WordInputState::restore_previous_word" {
-  let state = WordInputState::new()
+  let state = @completion.WordInputState::new()
   // Empty confirmed returns false
   inspect(state.restore_previous_word(), content="false")
   // With confirmed text
@@ -288,7 +294,7 @@ test "WordInputState::restore_previous_word" {
 
 ///|
 test "WordInputState::clear" {
-  let state = WordInputState::new()
+  let state = @completion.WordInputState::new()
   state.confirm_word("hello", " ")
   state.set_current("world")
   state.clear()

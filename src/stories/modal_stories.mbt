@@ -4,8 +4,8 @@
 ///|
 /// Render main content with overlays to plain text for testing
 pub fn render_overlay_plain(
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
   main : @vnode.TuiNode,
   overlays : Array[@vnode.OverlayEntry],
 ) -> String {

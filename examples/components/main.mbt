@@ -8,28 +8,28 @@ using @vnode {type TuiNode, type VNodeApp, column, row, text, vspace, spacer}
 // Demo indices
 
 ///|
-let demo_tabs : Int = 0
+let demo_tabs : Int32 = 0
 
 ///|
-let demo_accordion : Int = 1
+let demo_accordion : Int32 = 1
 
 ///|
-let demo_radio : Int = 2
+let demo_radio : Int32 = 2
 
 ///|
-let demo_switch : Int = 3
+let demo_switch : Int32 = 3
 
 ///|
-let demo_listbox : Int = 4
+let demo_listbox : Int32 = 4
 
 ///|
-let demo_combobox : Int = 5
+let demo_combobox : Int32 = 5
 
 ///|
-let demo_splitter : Int = 6
+let demo_splitter : Int32 = 6
 
 ///|
-let demo_menubar : Int = 7
+let demo_menubar : Int32 = 7
 
 ///|
 async fn main {
@@ -285,7 +285,7 @@ async fn main {
     let selected_item = menubar_item.get()
 
     // Helper to get menu items
-    fn get_menu_items(idx : Int) -> Array[String] {
+    fn get_menu_items(idx : Int32) -> Array[String] {
       match idx {
         0 => file_items
         1 => edit_items
@@ -419,7 +419,7 @@ async fn main {
   // ==========================================================================
 
   // Parse ID string like "radio-2" into (prefix, index)
-  fn parse_id_index(id : String) -> (String, Int)? {
+  fn parse_id_index(id : String) -> (String, Int32)? {
     let chars : Array[Char] = id.to_array()
     let len = chars.length()
     let mut last_dash = -1

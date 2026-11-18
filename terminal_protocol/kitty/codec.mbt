@@ -177,7 +177,7 @@ fn to_kitty_uniform(
   pixel_count : Int,
   triplet : String,
 ) -> String {
-  let buf = StringBuilder(size_hint=pixel_count * 4)
+  let buf = StringBuilder(capacity=pixel_count * 4)
   let full_chunk_payload = triplet.repeat(kitty_pixels_per_chunk)
   let mut first_chunk = true
   let mut pixel_index = 0
@@ -258,7 +258,7 @@ pub fn encode_indexed_pixels_to_kitty(
       )
     None => ()
   }
-  let buf = StringBuilder(size_hint=pixel_count * 4)
+  let buf = StringBuilder(capacity=pixel_count * 4)
   let mut first_chunk = true
   let mut pixel_index = 0
   while pixel_index < pixel_count {
@@ -350,7 +350,7 @@ pub fn encode_indexed_pixels_to_kitty_cells(
     return ""
   }
   let triplets = build_kitty_palette_triplets(colors)
-  let buf = StringBuilder(size_hint=pixel_count * 4)
+  let buf = StringBuilder(capacity=pixel_count * 4)
   let mut chunk = StringBuilder()
   let mut chunk_len = 0
   let mut first_chunk = true

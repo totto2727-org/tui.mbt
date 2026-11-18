@@ -1,12 +1,12 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/testing"
+package "totto2727/tui/testing"
 
 import {
   "mizchi/signals/ui",
-  "mizchi/tui/core",
-  "mizchi/tui/events",
-  "mizchi/tui/render",
-  "mizchi/tui/vnode",
+  "totto2727/tui/core",
+  "totto2727/tui/events",
+  "totto2727/tui/render",
+  "totto2727/tui/vnode",
 }
 
 // Values

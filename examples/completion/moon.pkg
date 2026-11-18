@@ -1,10 +1,10 @@
 import {
-  "mizchi/tui",
-  "mizchi/tui/components",
-  "mizchi/tui/core",
-  "mizchi/tui/render",
-  "mizchi/tui/vnode",
-  "mizchi/tui/io",
+  "totto2727/tui",
+  "totto2727/tui/components",
+  "totto2727/tui/core",
+  "totto2727/tui/render",
+  "totto2727/tui/vnode",
+  "totto2727/tui/io",
   "mizchi/signals",
 }
 

@@ -1,8 +1,9 @@
 ///|
+#derive(Debug, Eq)
 pub(all) struct MotionStep {
   pos : Int
   vel : Int
-} derive(Debug, Eq)
+}
 
 ///|
 /// Advance a position by velocity with boundary bounce.

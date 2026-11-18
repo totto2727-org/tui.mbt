@@ -10,7 +10,7 @@ pub using @headless {type SelectionState}
 pub fn tab(
   label : String,
   selected : Bool,
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let fg = if selected { "black" } else { "white" }
   let bg = if selected { "cyan" } else { "rgb(60,60,70)" }
@@ -35,7 +35,7 @@ pub fn tab_bar(
 pub fn listbox_item(
   label : String,
   selected : Bool,
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let prefix = if selected { "> " } else { "  " }
   let fg = if selected { "cyan" } else { "white" }
@@ -50,7 +50,7 @@ pub fn listbox_item(
 pub fn listbox(
   items : Array[(String, String)],
   selected_id : String,
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let nodes : Array[@vnode.TuiNode] = []
   for item in items {
@@ -64,7 +64,7 @@ pub fn listbox(
 pub fn combobox_trigger(
   label : String,
   open : Bool,
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let arrow = if open { "^" } else { "v" }
   @vnode.row(
@@ -81,7 +81,7 @@ pub fn combobox_trigger(
 pub fn combobox_item(
   label : String,
   selected : Bool,
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let bg = if selected { "rgb(40,80,120)" } else { "rgb(40,40,50)" }
   let fg = if selected { "cyan" } else { "white" }

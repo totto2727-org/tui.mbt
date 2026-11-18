@@ -28,8 +28,8 @@ enum PopupMode {
 
 ///|
 fn render_background(
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
   last_action : String,
 ) -> TuiNode {
   view(

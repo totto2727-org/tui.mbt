@@ -5,8 +5,8 @@
 ///|
 /// VNodeApp manages the vnode render loop with diff-based updates
 pub struct VNodeApp {
-  mut width : Int
-  mut height : Int
+  mut width : Int32
+  mut height : Int32
   mut prev_buffer : @render.CharBuffer?
   mut last_layout : @ccore.Layout?
   mut overlay_layouts : Array[@ccore.Layout]
@@ -14,7 +14,7 @@ pub struct VNodeApp {
 }
 
 ///|
-pub fn VNodeApp::new(width : Int, height : Int) -> VNodeApp {
+pub fn VNodeApp::new(width : Int32, height : Int32) -> VNodeApp {
   {
     width,
     height,
@@ -241,8 +241,8 @@ pub fn VNodeApp::restore_terminal() -> String {
 /// Checks overlays first (top-most layer) before main layout
 pub fn VNodeApp::hit_test(
   self : VNodeApp,
-  x : Int,
-  y : Int,
+  x : Int32,
+  y : Int32,
 ) -> @events.HitTestResult? {
   // Check overlays in reverse order (top-most first)
   let len = self.overlay_layouts.length()
@@ -353,7 +353,7 @@ pub fn VNodeApp::clear_prev_buffer(self : VNodeApp) -> Unit {
 
 ///|
 /// Resize the render target and force a full redraw on next render.
-pub fn VNodeApp::resize(self : VNodeApp, width : Int, height : Int) -> Unit {
+pub fn VNodeApp::resize(self : VNodeApp, width : Int32, height : Int32) -> Unit {
   self.width = width
   self.height = height
   self.clear_prev_buffer()
@@ -362,8 +362,8 @@ pub fn VNodeApp::resize(self : VNodeApp, width : Int, height : Int) -> Unit {
 ///|
 /// Full-screen vnode app helper: sets up alt screen and handles cleanup
 pub fn run_vnode_app(
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
   render_fn : () -> TuiNode,
   output_fn : (String) -> Unit,
 ) -> () -> Unit {
@@ -385,11 +385,11 @@ pub fn run_vnode_app(
 ///|
 /// Initialize a VNodeApp with terminal setup and return a cleanup function.
 pub fn init_vnode_terminal(
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
   output_fn : (String) -> Unit,
-  mouse? : Bool = false,
-  raw_mode? : Bool = true,
+  mouse~ : Bool = false,
+  raw_mode~ : Bool = true,
 ) -> (VNodeApp, () -> Unit) {
   let app = VNodeApp::new(width, height)
 
@@ -416,7 +416,11 @@ pub fn init_vnode_terminal(
 
 ///|
 /// Simple render function for one-shot rendering (no reactivity)
-pub fn render_vnode_once(width : Int, height : Int, root : TuiNode) -> String {
+pub fn render_vnode_once(
+  width : Int32,
+  height : Int32,
+  root : TuiNode,
+) -> String {
   let app = VNodeApp::new(width, height)
   app.render(root)
 }

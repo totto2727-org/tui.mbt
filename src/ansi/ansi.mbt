@@ -74,12 +74,12 @@ pub fn ansi_fg_gray() -> String {
 }
 
 ///|
-pub fn ansi_fg_256(color_idx : Int) -> String {
+pub fn ansi_fg_256(color_idx : Int32) -> String {
   "\u001b[38;5;" + color_idx.to_string() + "m"
 }
 
 ///|
-pub fn ansi_bg_256(color_idx : Int) -> String {
+pub fn ansi_bg_256(color_idx : Int32) -> String {
   "\u001b[48;5;" + color_idx.to_string() + "m"
 }
 
@@ -89,28 +89,28 @@ pub fn ansi_bg_reset() -> String {
 }
 
 ///|
-pub fn ansi_move_up(n? : Int = 1) -> String {
+pub fn ansi_move_up(n~ : Int32 = 1) -> String {
   "\u001b[" + n.to_string() + "A"
 }
 
 ///|
-pub fn ansi_move_down(n? : Int = 1) -> String {
+pub fn ansi_move_down(n~ : Int32 = 1) -> String {
   "\u001b[" + n.to_string() + "B"
 }
 
 ///|
-pub fn ansi_move_right(n? : Int = 1) -> String {
+pub fn ansi_move_right(n~ : Int32 = 1) -> String {
   "\u001b[" + n.to_string() + "C"
 }
 
 ///|
-pub fn ansi_move_left(n? : Int = 1) -> String {
+pub fn ansi_move_left(n~ : Int32 = 1) -> String {
   "\u001b[" + n.to_string() + "D"
 }
 
 ///|
 /// Move cursor to a 0-indexed row/column.
-pub fn ansi_move_to(row : Int, col : Int) -> String {
+pub fn ansi_move_to(row : Int32, col : Int32) -> String {
   "\u001b[" + (row + 1).to_string() + ";" + (col + 1).to_string() + "H"
 }
 
@@ -159,7 +159,7 @@ pub fn ansi_full_reset() -> String {
 }
 
 ///|
-pub fn rgb_to_256(r : Int, g : Int, b : Int) -> Int {
+pub fn rgb_to_256(r : Int32, g : Int32, b : Int32) -> Int32 {
   if r == g && g == b {
     if r < 8 {
       16

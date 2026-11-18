@@ -70,9 +70,9 @@ fn main {
 
   fn render_launcher_item(
     cmd : Command,
-    idx : Int,
-    selected_idx_val : Int,
-    _ : Int,
+    idx : Int32,
+    selected_idx_val : Int32,
+    _ : Int32,
   ) -> @vnode.TuiNode {
     let is_selected = idx == selected_idx_val
     let bg = if is_selected { "rgb(30,80,120)" } else { "rgb(40,40,50)" }

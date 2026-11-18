@@ -6,8 +6,8 @@
 /// Compute layout using layout tree with character-based viewport
 pub fn compute_layout(
   node : @node.Node,
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
 ) -> @ccore.Layout {
   let tree = @ltree.LayoutTree::from_node(
     node,
@@ -22,8 +22,8 @@ pub fn compute_layout(
 /// Useful for shrink-wrapped overlays/popups.
 pub fn compute_layout_max_content(
   node : @node.Node,
-  width : Int,
-  height : Int,
+  width : Int32,
+  height : Int32,
 ) -> @ccore.Layout {
   let viewport = @values.Size::new(width.to_double(), height.to_double())
   @lengine.compute_layout(node, viewport)

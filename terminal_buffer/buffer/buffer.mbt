@@ -95,12 +95,13 @@ pub impl Eq for CharCell with fn equal(self, other) {
 }
 
 ///|
+#derive(Debug, Eq)
 pub(all) struct Rect {
   x : Int32
   y : Int32
   w : Int32
   h : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Rect with Eq::{not_equal, equal}
@@ -150,10 +151,11 @@ pub fn clip_rect(
 }
 
 ///|
+#derive(Debug, Eq)
 pub(all) struct CellCoord {
   col : Int32
   row : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend CellCoord with Eq::{not_equal, equal}
@@ -223,11 +225,12 @@ pub fn plan_dirty_cells(
 }
 
 ///|
+#derive(Debug, Eq)
 pub(all) struct TextWriteCell {
   x : Int32
   y : Int32
   char : Char
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend TextWriteCell with Eq::{not_equal, equal}
@@ -236,11 +239,12 @@ pub extend TextWriteCell with Eq::{not_equal, equal}
 pub extend TextWriteCell with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub(all) struct TextWritePlan {
   columns : Int32
   lines : Int32
   cells : Array[TextWriteCell]
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend TextWritePlan with Eq::{not_equal, equal}
@@ -249,6 +253,7 @@ pub extend TextWritePlan with Eq::{not_equal, equal}
 pub extend TextWritePlan with @debug.Debug::{to_repr}
 
 ///|
+#derive(Debug, Eq)
 pub(all) struct BoxChars {
   top_left : Char
   top_right : Char
@@ -256,7 +261,7 @@ pub(all) struct BoxChars {
   bottom_right : Char
   horizontal : Char
   vertical : Char
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend BoxChars with Eq::{not_equal, equal}
@@ -378,12 +383,13 @@ pub fn plan_box(
 }
 
 ///|
+#derive(Debug, Eq)
 pub(all) struct ScrollbarCell {
   x : Int32
   y : Int32
   char : Char
   thumb : Bool
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ScrollbarCell with Eq::{not_equal, equal}

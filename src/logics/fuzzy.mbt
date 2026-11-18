@@ -4,8 +4,8 @@
 ///|
 /// Result of a fuzzy match
 pub(all) struct FuzzyMatch {
-  score : Int
-  positions : Array[Int]
+  score : Int32
+  positions : Array[Int32]
 }
 
 ///|
@@ -23,9 +23,14 @@ pub fn fuzzy_match(pattern : String, target : String) -> FuzzyMatch? {
   let target_lower = target.to_lower()
   let pattern_chars = pattern_lower.to_array()
   let target_chars = target_lower.to_array()
-  let best_positions : Array[Int] = []
-  let best_score : Ref[Int] = Ref(-1)
-  fn backtrack(pi : Int, ti : Int, positions : Array[Int], score : Int) {
+  let best_positions : Array[Int32] = []
+  let best_score : Ref[Int32] = Ref(-1)
+  fn backtrack(
+    pi : Int32,
+    ti : Int32,
+    positions : Array[Int32],
+    score : Int32,
+  ) {
     if pi == pattern_chars.length() {
       if best_score.val < 0 || score > best_score.val {
         best_score.val = score
@@ -93,21 +98,21 @@ pub fn fuzzy_match(pattern : String, target : String) -> FuzzyMatch? {
 /// Layout calculation for fuzzy result list.
 /// Ensures total row count is always exactly max_show.
 pub(all) struct FuzzyVisibleRows {
-  show : Int
+  show : Int32
   has_more : Bool
-  pad : Int
+  pad : Int32
 }
 
 ///|
 /// Total rows = show + (1 if has_more) + pad == max_show always
-pub fn FuzzyVisibleRows::rows(self : FuzzyVisibleRows) -> Int {
+pub fn FuzzyVisibleRows::rows(self : FuzzyVisibleRows) -> Int32 {
   self.show + (if self.has_more { 1 } else { 0 }) + self.pad
 }
 
 ///|
 /// Calculate how many items to show, whether to show "more" indicator,
 /// and how many padding rows to add, so total is always max_show.
-pub fn fuzzy_visible_rows(total : Int, max_show : Int) -> FuzzyVisibleRows {
+pub fn fuzzy_visible_rows(total : Int32, max_show : Int32) -> FuzzyVisibleRows {
   if total > max_show {
     // Reserve 1 row for "... and N more"
     { show: max_show - 1, has_more: true, pad: 0, }
@@ -122,8 +127,8 @@ pub fn fuzzy_visible_rows(total : Int, max_show : Int) -> FuzzyVisibleRows {
 pub fn fuzzy_sort(
   pattern : String,
   items : Array[String],
-) -> Array[(Int, FuzzyMatch)] {
-  let results : Array[(Int, FuzzyMatch)] = []
+) -> Array[(Int32, FuzzyMatch)] {
+  let results : Array[(Int32, FuzzyMatch)] = []
   for i, item in items {
     match fuzzy_match(pattern, item) {
       Some(m) => results.push((i, m))

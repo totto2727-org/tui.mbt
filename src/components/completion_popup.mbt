@@ -3,10 +3,10 @@
 
 ///|
 pub struct PopupRect {
-  row : Int
-  col : Int
-  width : Int
-  height : Int
+  row : Int32
+  col : Int32
+  width : Int32
+  height : Int32
 }
 
 ///|
@@ -38,7 +38,7 @@ pub fn CompletionPopupStyle::default() -> CompletionPopupStyle {
 }
 
 ///|
-fn clamp_min(value : Int, min_value : Int) -> Int {
+fn clamp_min(value : Int32, min_value : Int32) -> Int32 {
   if value < min_value {
     min_value
   } else {
@@ -47,7 +47,7 @@ fn clamp_min(value : Int, min_value : Int) -> Int {
 }
 
 ///|
-fn split_by_chars(text : String, count : Int) -> (String, String) {
+fn split_by_chars(text : String, count : Int32) -> (String, String) {
   let chars = text.to_array()
   let limit = if count < 0 {
     0
@@ -69,7 +69,7 @@ fn split_by_chars(text : String, count : Int) -> (String, String) {
 }
 
 ///|
-fn pad_to_width(text : String, width : Int) -> String {
+fn pad_to_width(text : String, width : Int32) -> String {
   if width <= 0 {
     ""
   } else {
@@ -83,7 +83,7 @@ fn pad_to_width(text : String, width : Int) -> String {
 }
 
 ///|
-fn take_display_width(text : String, max_width : Int) -> String {
+fn take_display_width(text : String, max_width : Int32) -> String {
   if max_width <= 0 {
     return ""
   }
@@ -103,13 +103,13 @@ fn take_display_width(text : String, max_width : Int) -> String {
 }
 
 ///|
-fn more_label(more_count : Int) -> String {
+fn more_label(more_count : Int32) -> String {
   "..." + more_count.to_string() + " more"
 }
 
 ///|
 /// Public helper for "more" row label
-pub fn completion_popup_more_label(more_count : Int) -> String {
+pub fn completion_popup_more_label(more_count : Int32) -> String {
   more_label(more_count)
 }
 
@@ -119,10 +119,10 @@ pub fn completion_popup_more_label(more_count : Int) -> String {
 pub fn[T] completion_popup_metrics(
   items : Array[T],
   label_fn : (T) -> String,
-  max_items? : Int = 6,
-  min_width? : Int = 4,
-  show_more? : Bool = false,
-) -> (Int, Int) {
+  max_items~ : Int32 = 6,
+  min_width~ : Int32 = 4,
+  show_more~ : Bool = false,
+) -> (Int32, Int32) {
   let len = items.length()
   if len == 0 {
     return (0, 0)
@@ -151,10 +151,10 @@ pub fn[T] completion_popup_metrics(
 
 ///|
 fn render_item(
-  idx : Int,
-  selected_idx : Int,
+  idx : Int32,
+  selected_idx : Int32,
   prefix : String,
-  width : Int,
+  width : Int32,
   label : String,
   item_id : String,
   item_role : String,
@@ -180,8 +180,8 @@ fn render_item(
 
 ///|
 fn render_more_row(
-  more_count : Int,
-  width : Int,
+  more_count : Int32,
+  width : Int32,
   style : CompletionPopupStyle,
   item_id : String,
   item_role : String,
@@ -198,12 +198,12 @@ fn render_more_row(
 /// Prefer completion_popup_node for standard popups.
 pub fn[T] completion_popup_list_nodes(
   items : Array[T],
-  selected_idx : Int,
-  width : Int,
-  render_item : (T, Int, Int, Int) -> @vnode.TuiNode,
-  max_items? : Int = 6,
-  show_more? : Bool = false,
-  render_more? : (Int, Int) -> @vnode.TuiNode = fn(_, _) { @vnode.text("") },
+  selected_idx : Int32,
+  width : Int32,
+  render_item : (T, Int32, Int32, Int32) -> @vnode.TuiNode,
+  max_items~ : Int32 = 6,
+  show_more~ : Bool = false,
+  render_more~ : (Int32, Int32) -> @vnode.TuiNode = fn(_, _) { @vnode.text("") },
 ) -> Array[@vnode.TuiNode] {
   if items.length() == 0 || width <= 0 {
     return []
@@ -242,16 +242,16 @@ pub fn[T] completion_popup_list_nodes(
 pub fn[T] completion_popup_node(
   items : Array[T],
   label_fn : (T) -> String,
-  selected_idx : Int,
+  selected_idx : Int32,
   prefix : String,
-  width : Int,
-  max_items? : Int = 6,
-  show_more? : Bool = false,
-  style? : CompletionPopupStyle = CompletionPopupStyle::default(),
-  item_id_prefix? : String = "",
-  item_role? : String = "option",
-  more_id? : String = "",
-  more_role? : String = "status",
+  width : Int32,
+  max_items~ : Int32 = 6,
+  show_more~ : Bool = false,
+  style~ : CompletionPopupStyle = CompletionPopupStyle::default(),
+  item_id_prefix~ : String = "",
+  item_role~ : String = "option",
+  more_id~ : String = "",
+  more_role~ : String = "status",
 ) -> @vnode.TuiNode {
   if items.length() == 0 || width <= 0 {
     return @vnode.text("")
@@ -296,14 +296,14 @@ pub(all) enum PopupDirection {
 
 ///|
 pub fn completion_popup_rect_directed(
-  anchor_row : Int,
-  anchor_col : Int,
-  anchor_height : Int,
-  viewport_width : Int,
-  viewport_height : Int,
-  popup_width : Int,
-  popup_height : Int,
-  direction? : PopupDirection = Auto,
+  anchor_row : Int32,
+  anchor_col : Int32,
+  anchor_height : Int32,
+  viewport_width : Int32,
+  viewport_height : Int32,
+  popup_width : Int32,
+  popup_height : Int32,
+  direction~ : PopupDirection = Auto,
 ) -> (PopupRect, PopupDirection) {
   let safe_width = if popup_width < 0 { 0 } else { popup_width }
   let safe_height = if popup_height < 0 { 0 } else { popup_height }
@@ -345,14 +345,14 @@ pub fn completion_popup_rect_directed(
 
 ///|
 pub fn completion_popup_rect(
-  anchor_row : Int,
-  anchor_col : Int,
-  anchor_height : Int,
-  viewport_width : Int,
-  viewport_height : Int,
-  popup_width : Int,
-  popup_height : Int,
-  prefer_below? : Bool = true,
+  anchor_row : Int32,
+  anchor_col : Int32,
+  anchor_height : Int32,
+  viewport_width : Int32,
+  viewport_height : Int32,
+  popup_width : Int32,
+  popup_height : Int32,
+  prefer_below~ : Bool = true,
 ) -> PopupRect {
   let safe_width = if popup_width < 0 { 0 } else { popup_width }
   let safe_height = if popup_height < 0 { 0 } else { popup_height }

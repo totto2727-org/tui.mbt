@@ -11,7 +11,7 @@ pub fn accordion_section(
   title : String,
   content : @vnode.TuiNode,
   expanded : Bool,
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let icon = if expanded { "[-]" } else { "[+]" }
   let header_bg = if expanded { "rgb(40,60,90)" } else { "rgb(50,50,60)" }

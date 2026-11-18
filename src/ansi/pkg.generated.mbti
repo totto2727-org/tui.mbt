@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "mizchi/tui/ansi"
+package "totto2727/tui/ansi"
 
 // Values
 pub fn ansi_bg_256(Int) -> String

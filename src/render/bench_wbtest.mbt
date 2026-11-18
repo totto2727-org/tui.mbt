@@ -6,7 +6,7 @@
 
 ///|
 /// Create a filled buffer for testing
-fn create_test_buffer(width : Int, height : Int) -> CharBuffer {
+fn create_test_buffer(width : Int32, height : Int32) -> CharBuffer {
   let buf = CharBuffer::new(width, height)
   let cell = CharCell::from_char('A')
   for row = 0; row < height; row = row + 1 {
@@ -19,7 +19,7 @@ fn create_test_buffer(width : Int, height : Int) -> CharBuffer {
 
 ///|
 /// Apply horizontal stripe change (change one row)
-fn apply_horizontal_change(buf : CharBuffer, row : Int, char : Char) -> Unit {
+fn apply_horizontal_change(buf : CharBuffer, row : Int32, char : Char) -> Unit {
   let cell = CharCell::from_char(char)
   for col = 0; col < buf.width; col = col + 1 {
     buf.set_cell(col, row, cell)
@@ -28,7 +28,7 @@ fn apply_horizontal_change(buf : CharBuffer, row : Int, char : Char) -> Unit {
 
 ///|
 /// Apply vertical stripe change (change one column)
-fn apply_vertical_change(buf : CharBuffer, col : Int, char : Char) -> Unit {
+fn apply_vertical_change(buf : CharBuffer, col : Int32, char : Char) -> Unit {
   let cell = CharCell::from_char(char)
   for row = 0; row < buf.height; row = row + 1 {
     buf.set_cell(col, row, cell)
@@ -242,10 +242,10 @@ test "bench_diff_full_change" (b : @bench.T) {
 fn apply_change_avoiding_region(
   buf : CharBuffer,
   char : Char,
-  avoid_x : Int,
-  avoid_y : Int,
-  avoid_w : Int,
-  avoid_h : Int,
+  avoid_x : Int32,
+  avoid_y : Int32,
+  avoid_w : Int32,
+  avoid_h : Int32,
 ) -> Unit {
   let cell = CharCell::from_char(char)
   for row = 0; row < buf.height; row = row + 1 {

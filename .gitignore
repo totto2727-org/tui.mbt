@@ -1,5 +1,6 @@
 .mooncakes/
 _build/
+/tmp/
 target
 
 .env

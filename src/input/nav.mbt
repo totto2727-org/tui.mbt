@@ -3,13 +3,13 @@
 
 ///|
 /// Get character display width from code point (ASCII=1, CJK/fullwidth=2)
-fn char_width_code(code : Int) -> Int {
+fn char_width_code(code : Int32) -> Int32 {
   @core.char_display_width(code.unsafe_to_char())
 }
 
 ///|
 /// Wrap text into lines (considering newlines and max_width)
-fn wrap_text_to_lines(buf : Array[Char], max_width : Int) -> Array[LineInfo] {
+fn wrap_text_to_lines(buf : Array[Char], max_width : Int32) -> Array[LineInfo] {
   let lines : Array[LineInfo] = []
   let mut current_chars : Array[Char] = []
   let mut current_width = 0
@@ -40,7 +40,7 @@ fn wrap_text_to_lines(buf : Array[Char], max_width : Int) -> Array[LineInfo] {
 
 ///|
 /// Find cursor line index and column offset
-fn find_cursor_line(lines : Array[LineInfo], cursor : Int) -> (Int, Int) {
+fn find_cursor_line(lines : Array[LineInfo], cursor : Int32) -> (Int32, Int32) {
   for line_idx, line in lines {
     let next_start = if line_idx + 1 < lines.length() {
       lines[line_idx + 1].start_idx
@@ -67,7 +67,7 @@ fn find_cursor_line(lines : Array[LineInfo], cursor : Int) -> (Int, Int) {
 
 ///|
 /// Move cursor to previous wrapped line (keeps column offset when possible)
-fn cursor_up(lines : Array[LineInfo], cursor : Int) -> Int {
+fn cursor_up(lines : Array[LineInfo], cursor : Int32) -> Int32 {
   let (line_idx, col_offset) = find_cursor_line(lines, cursor)
   if line_idx <= 0 {
     return cursor
@@ -93,7 +93,7 @@ fn cursor_up(lines : Array[LineInfo], cursor : Int) -> Int {
 
 ///|
 /// Move cursor to next wrapped line (keeps column offset when possible)
-fn cursor_down(lines : Array[LineInfo], cursor : Int) -> Int {
+fn cursor_down(lines : Array[LineInfo], cursor : Int32) -> Int32 {
   let (line_idx, col_offset) = find_cursor_line(lines, cursor)
   if line_idx + 1 >= lines.length() {
     return cursor
@@ -120,11 +120,11 @@ fn cursor_down(lines : Array[LineInfo], cursor : Int) -> Int {
 ///|
 /// Adjust scroll offset to keep cursor visible
 fn adjust_scroll_offset(
-  scroll_offset : Int,
-  cursor_line_idx : Int,
-  max_height : Int,
-  total_lines : Int,
-) -> Int {
+  scroll_offset : Int32,
+  cursor_line_idx : Int32,
+  max_height : Int32,
+  total_lines : Int32,
+) -> Int32 {
   if total_lines <= max_height {
     return 0
   }

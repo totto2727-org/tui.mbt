@@ -10,7 +10,7 @@ pub using @headless {type GridSelectState}
 pub fn grid_select_item(
   label : String,
   selected : Bool,
-  id? : String = "",
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let fg = if selected { "black" } else { "white" }
   let bg = if selected { "cyan" } else { "rgb(50,50,60)" }
@@ -24,8 +24,8 @@ pub fn grid_select_item(
 pub fn grid_select(
   items : Array[String],
   state : @headless.GridSelectState,
-  id? : String = "",
-  min_item_width? : Double = 10.0,
+  id~ : String = "",
+  min_item_width~ : Double = 10.0,
 ) -> @vnode.TuiNode {
   let columns : Array[Double] = []
   for _i = 0; _i < state.columns; _i = _i + 1 {

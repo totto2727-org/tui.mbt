@@ -323,7 +323,7 @@ test "parse_input: IME hiragana - returns first char only" {
   let event = @events.parse_input("こんにちは")
   match event {
     @events.InputEvent::Key(
-      @events.KeyEvent::Char(c, @events.KeyModifier::None)
+      @events.KeyEvent::Char(c, @events.KeyModifier::None),
     ) => assert_eq(c, 'こ')
     _ => fail("Expected Key(Char) event")
   }
@@ -334,7 +334,7 @@ test "parse_input: IME kanji - returns first char only" {
   let event = @events.parse_input("日本語")
   match event {
     @events.InputEvent::Key(
-      @events.KeyEvent::Char(c, @events.KeyModifier::None)
+      @events.KeyEvent::Char(c, @events.KeyModifier::None),
     ) => assert_eq(c, '日')
     _ => fail("Expected Key(Char) event")
   }
@@ -345,7 +345,7 @@ test "parse_input: IME mixed content - returns first char only" {
   let event = @events.parse_input("Hello世界")
   match event {
     @events.InputEvent::Key(
-      @events.KeyEvent::Char(c, @events.KeyModifier::None)
+      @events.KeyEvent::Char(c, @events.KeyModifier::None),
     ) => assert_eq(c, 'H')
     _ => fail("Expected Key(Char) event")
   }
@@ -357,7 +357,7 @@ test "parse_input: single CJK character" {
   let event = @events.parse_input("日")
   match event {
     @events.InputEvent::Key(
-      @events.KeyEvent::Char(c, @events.KeyModifier::None)
+      @events.KeyEvent::Char(c, @events.KeyModifier::None),
     ) => assert_eq(c, '日')
     _ => fail("Expected Key(Char) event")
   }
@@ -369,7 +369,7 @@ test "parse_input: single emoji" {
   let event = @events.parse_input("😀")
   match event {
     @events.InputEvent::Key(
-      @events.KeyEvent::Char(c, @events.KeyModifier::None)
+      @events.KeyEvent::Char(c, @events.KeyModifier::None),
     ) => assert_eq(c.to_string(), "😀")
     _ => fail("Expected Key(Char) event")
   }

@@ -6,9 +6,9 @@
 /// Shows required indicator (*) when required=true
 pub fn label(
   text : String,
-  for_id? : String = "",
-  required? : Bool = false,
-  id? : String = "",
+  for_id~ : String = "",
+  required~ : Bool = false,
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   let label_text = if required { text + " *" } else { text }
   let actual_id = if id == "" && for_id != "" { "label-" + for_id } else { id }
@@ -27,8 +27,8 @@ pub fn label(
 /// Renders as a bordered container with the legend in the top border
 pub fn fieldset(
   legend~ : String,
-  id? : String = "",
-  children? : Array[@vnode.TuiNode] = [],
+  id~ : String = "",
+  children~ : Array[@vnode.TuiNode] = [],
 ) -> @vnode.TuiNode {
   let all_children : Array[@vnode.TuiNode] = [
     @vnode.text(legend, fg="white", bold=true),
@@ -52,8 +52,8 @@ pub fn fieldset(
 /// Uses red color and error icon for visibility
 pub fn error_message(
   text : String,
-  visible? : Bool = true,
-  id? : String = "",
+  visible~ : Bool = true,
+  id~ : String = "",
 ) -> @vnode.TuiNode {
   if !visible || text == "" {
     @vnode.text("") // empty node when not visible
@@ -68,7 +68,7 @@ pub fn error_message(
 ///|
 /// Help text component - displays hint or description for a field
 /// Uses dimmed color to distinguish from main content
-pub fn help_text(text : String, id? : String = "") -> @vnode.TuiNode {
+pub fn help_text(text : String, id~ : String = "") -> @vnode.TuiNode {
   if text == "" {
     @vnode.text("")
   } else {
@@ -81,11 +81,11 @@ pub fn help_text(text : String, id? : String = "") -> @vnode.TuiNode {
 /// Provides consistent layout for form fields
 pub fn form_field(
   label_text~ : String,
-  for_id? : String = "",
-  required? : Bool = false,
-  help? : String = "",
-  error? : String = "",
-  id? : String = "",
+  for_id~ : String = "",
+  required~ : Bool = false,
+  help~ : String = "",
+  error~ : String = "",
+  id~ : String = "",
   child~ : @vnode.TuiNode,
 ) -> @vnode.TuiNode {
   let field_id = if id == "" && for_id != "" { "field-" + for_id } else { id }

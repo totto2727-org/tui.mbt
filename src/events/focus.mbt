@@ -146,6 +146,6 @@ pub fn FocusManager::get_mode(self : FocusManager) -> InputMode {
 
 ///|
 /// Get the number of focusable elements
-pub fn FocusManager::focusable_count(self : FocusManager) -> Int {
+pub fn FocusManager::focusable_count(self : FocusManager) -> Int32 {
   self.focusable_ids.length()
 }

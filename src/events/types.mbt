@@ -3,6 +3,7 @@
 
 ///|
 /// Key modifiers
+#derive(Debug)
 pub(all) enum KeyModifier {
   None
   Shift
@@ -12,7 +13,7 @@ pub(all) enum KeyModifier {
   CtrlAlt
   ShiftAlt
   CtrlShiftAlt
-} derive(Debug)
+}
 
 ///|
 fn[T : Debug] show_debug(value : T, logger : &Logger) -> Unit {
@@ -29,6 +30,7 @@ pub impl Show for KeyModifier with fn output(
 
 ///|
 /// Special keys
+#derive(Debug)
 pub(all) enum SpecialKey {
   Up
   Down
@@ -45,8 +47,8 @@ pub(all) enum SpecialKey {
   Backspace
   Enter
   Escape
-  F(Int)
-} derive(Debug)
+  F(Int32)
+}
 
 ///|
 pub impl Show for SpecialKey with fn output(self : SpecialKey, logger : &Logger) -> Unit {
@@ -55,10 +57,11 @@ pub impl Show for SpecialKey with fn output(self : SpecialKey, logger : &Logger)
 
 ///|
 /// Keyboard event
+#derive(Debug)
 pub(all) enum KeyEvent {
   Char(Char, KeyModifier)
   Special(SpecialKey, KeyModifier)
-} derive(Debug)
+}
 
 ///|
 pub impl Show for KeyEvent with fn output(self : KeyEvent, logger : &Logger) -> Unit {
@@ -67,6 +70,7 @@ pub impl Show for KeyEvent with fn output(self : KeyEvent, logger : &Logger) -> 
 
 ///|
 /// Mouse button
+#derive(Debug)
 pub(all) enum MouseButton {
   Left
   Middle
@@ -74,7 +78,7 @@ pub(all) enum MouseButton {
   ScrollUp
   ScrollDown
   None
-} derive(Debug)
+}
 
 ///|
 pub impl Show for MouseButton with fn output(
@@ -86,12 +90,13 @@ pub impl Show for MouseButton with fn output(
 
 ///|
 /// Mouse event type
+#derive(Debug)
 pub(all) enum MouseEventType {
   Press
   Release
   Move
   Drag
-} derive(Debug)
+}
 
 ///|
 pub impl Show for MouseEventType with fn output(
@@ -103,13 +108,14 @@ pub impl Show for MouseEventType with fn output(
 
 ///|
 /// Mouse event
+#derive(Debug)
 pub(all) struct MouseEvent {
   button : MouseButton
   event_type : MouseEventType
-  x : Int
-  y : Int
+  x : Int32
+  y : Int32
   modifier : KeyModifier
-} derive(Debug)
+}
 
 ///|
 pub impl Show for MouseEvent with fn output(self : MouseEvent, logger : &Logger) -> Unit {
@@ -118,12 +124,13 @@ pub impl Show for MouseEvent with fn output(self : MouseEvent, logger : &Logger)
 
 ///|
 /// Input event
+#derive(Debug)
 pub(all) enum InputEvent {
   Key(KeyEvent)
   Mouse(MouseEvent)
-  Resize(Int, Int)
+  Resize(Int32, Int32)
   Unknown(String)
-} derive(Debug)
+}
 
 ///|
 pub impl Show for InputEvent with fn output(self : InputEvent, logger : &Logger) -> Unit {
@@ -134,10 +141,10 @@ pub impl Show for InputEvent with fn output(self : InputEvent, logger : &Logger)
 /// Hit test result
 pub(all) struct HitTestResult {
   id : String
-  x : Int
-  y : Int
-  width : Int
-  height : Int
+  x : Int32
+  y : Int32
+  width : Int32
+  height : Int32
   role : @core.Role?
 }
 

@@ -1,23 +1,23 @@
 ///|
 struct Viewport {
-  mut top : Int
-  mut height : Int
+  mut top : Int32
+  mut height : Int32
 }
 
 ///|
-fn Viewport::new(height : Int) -> Viewport {
+fn Viewport::new(height : Int32) -> Viewport {
   let h = if height > 0 { height } else { 1 }
   { top: 0, height: h, }
 }
 
 ///|
-fn Viewport::set_height(self : Viewport, height : Int) -> Unit {
+fn Viewport::set_height(self : Viewport, height : Int32) -> Unit {
   let h = if height > 0 { height } else { 1 }
   self.height = h
 }
 
 ///|
-fn Viewport::clamp_top(self : Viewport, total_lines : Int) -> Unit {
+fn Viewport::clamp_top(self : Viewport, total_lines : Int32) -> Unit {
   let max_top = if total_lines > self.height {
     total_lines - self.height
   } else {
@@ -31,7 +31,7 @@ fn Viewport::clamp_top(self : Viewport, total_lines : Int) -> Unit {
 }
 
 ///|
-fn Viewport::range(self : Viewport, total_lines : Int) -> (Int, Int) {
+fn Viewport::range(self : Viewport, total_lines : Int32) -> (Int32, Int32) {
   let start = self.top
   let end = if total_lines < start + self.height {
     total_lines
@@ -44,8 +44,8 @@ fn Viewport::range(self : Viewport, total_lines : Int) -> (Int, Int) {
 ///|
 fn Viewport::ensure_visible(
   self : Viewport,
-  line : Int,
-  total_lines : Int,
+  line : Int32,
+  total_lines : Int32,
 ) -> Unit {
   if line < self.top {
     self.top = line
@@ -56,7 +56,11 @@ fn Viewport::ensure_visible(
 }
 
 ///|
-fn Viewport::scroll(self : Viewport, delta : Int, total_lines : Int) -> Unit {
+fn Viewport::scroll(
+  self : Viewport,
+  delta : Int32,
+  total_lines : Int32,
+) -> Unit {
   self.top = self.top + delta
   self.clamp_top(total_lines)
 }
