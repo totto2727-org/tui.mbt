@@ -6,12 +6,12 @@ import {
   "mizchi/layout@0.2.1",
   "mizchi/crater-core@0.19.2",
   "mizchi/crater-layout@0.19.2",
-  "mizchi/css@0.8.0",
+  "mizchi/css@0.8.2",
   "mizchi/signals@0.6.5",
   "mizchi/tui-terminal-buffer@0.1.4",
-  "moonbitlang/async@0.22.9",
+  "moonbitlang/async@0.22.10",
   "totto2727/syntree@0.2.4",
-  "moonbitlang/x@0.5.7",
+  "moonbitlang/x@0.5.8",
 }
 
 readme = "README.md"

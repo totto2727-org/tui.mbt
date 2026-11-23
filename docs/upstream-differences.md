@@ -13,11 +13,12 @@ FlakeHub publication is disabled.
 
 ## MoonBit compatibility
 
-- `moon.mod` sets dependency versions that MoonBit 20261117 can read and compile.
+- `moon.mod` maintains the fork's compatible `mizchi/css`, `moonbitlang/async`, and `moonbitlang/x` versions for stable MoonBit 0.10.22 from the locked official Nix overlay. Standalone example manifests retain their existing external dependency pins.
 - The library calls `Debug` and `Show` traits directly where the compiler no longer accepts the method form.
 - The library uses the current `#derive` syntax, string view method and buffer constructor argument.
 - Black-box tests import their package APIs explicitly to preserve strict compiler checks.
 - Standalone applications use current module manifests and build against the library from the same checkout.
+- Five JavaScript examples omit unused `moonbitlang/async` imports to pass strict checks on MoonBit 0.10.22. This does not change example behavior.
 - The API and terminal UI output do not change.
 
 ## Mooncakes identity
