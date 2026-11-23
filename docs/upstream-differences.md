@@ -18,6 +18,7 @@ FlakeHub publication is disabled.
 - The library uses the current `#derive` syntax, string view method and buffer constructor argument.
 - Black-box tests import their package APIs explicitly to preserve strict compiler checks.
 - Standalone applications use current module manifests and build against the library from the same checkout.
+- Five JavaScript examples omit unused `moonbitlang/async` imports to pass strict checks on MoonBit 0.10.22. This does not change example behavior.
 - The API and terminal UI output do not change.
 
 ## Mooncakes identity

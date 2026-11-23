@@ -2,7 +2,6 @@ import {
   "totto2727/tui",
   "totto2727/tui/vnode",
   "mizchi/signals",
-  "moonbitlang/async",
 }
 
 supported_targets = "js"

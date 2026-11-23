@@ -6,7 +6,6 @@ import {
   "totto2727/tui/headless",
   "totto2727/tui/render",
   "mizchi/signals",
-  "moonbitlang/async",
 }
 
 supported_targets = "js"
